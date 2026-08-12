@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavTab, AboutSubSection, ProgrammeId } from '../types';
+import { NavTab, AboutSubSection, ProgrammeId } from '@/types';
 
 interface Props {
   onNavigate: (tab: NavTab, extra?: { subSection?: AboutSubSection; programmeId?: ProgrammeId; filterCategory?: string }) => void;

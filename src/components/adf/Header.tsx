@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { NavTab, AboutSubSection, ProgrammeId } from '../types';
-import { RESOURCES_DATA, NEWS_DATA, EVENTS_DATA, PROGRAMMES_DATA } from '../data/mockData';
+import { NavTab, AboutSubSection, ProgrammeId } from '@/types';
+import { RESOURCES_DATA, NEWS_DATA, EVENTS_DATA, PROGRAMMES_DATA } from '@/data/mockData';
 
 interface Props {
   currentTab: NavTab;

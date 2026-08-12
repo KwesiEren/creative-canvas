@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { NEWS_DATA } from '../data/mockData';
-import { NewsItem, NavTab } from '../types';
+import { NEWS_DATA } from '@/data/mockData';
+import { NewsItem, NavTab } from '@/types';
 
 interface Props {
   onNavigate: (tab: NavTab) => void;

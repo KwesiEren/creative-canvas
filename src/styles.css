@@ -230,3 +230,46 @@
 @utility skip-link-focus {
   top: 1rem;
 }
+
+/* --- New visual direction: backdrop, motion and helper classes --- */
+.site-backdrop {
+  background-image: url("/src/assets/images/site_background_1786341362859.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid #126e0c;
+  outline-offset: 2px;
+}
+
+@keyframes adf-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.animate-fade-in {
+  animation: adf-fade-in 0.35s ease-out both;
+}
+
+.dyslexic body,
+.dyslexic {
+  font-family: "Comic Sans MS", "Verdana", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}

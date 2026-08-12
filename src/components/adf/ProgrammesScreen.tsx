@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ProgrammeId, NavTab } from '../types';
-import { PROGRAMMES_DATA } from '../data/mockData';
+import { ProgrammeId, NavTab } from '@/types';
+import { PROGRAMMES_DATA } from '@/data/mockData';
 
 interface Props {
   selectedProgrammeId?: ProgrammeId;
@@ -17,7 +17,7 @@ export const ProgrammesScreen: React.FC<Props> = ({ selectedProgrammeId = 'spadr
     }
   }, [selectedProgrammeId]);
 
-  const currentProgramme = PROGRAMMES_DATA.find(p => p.id === activeProgId) || PROGRAMMES_DATA[0];
+  const currentProgramme = PROGRAMMES_DATA.find(p => p.id === activeProgId) || PROGRAMMES_DATA[0]!;
 
   return (
     <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-10 animate-fade-in">

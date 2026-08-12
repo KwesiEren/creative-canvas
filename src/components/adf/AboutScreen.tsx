@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { AboutSubSection } from '../types';
-import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '../data/mockData';
+import { AboutSubSection } from '@/types';
+import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '@/data/mockData';
 
 interface Props {
   subSection?: AboutSubSection;
@@ -10,7 +10,7 @@ interface Props {
 
 export const AboutScreen: React.FC<Props> = ({ subSection = 'who', onOpenMembership, onOpenTakeAction }) => {
   const [activeTab, setActiveTab] = useState<AboutSubSection>(subSection);
-  const [activeCountry, setActiveCountry] = useState(OPD_COUNTRIES[0]);
+  const [activeCountry, setActiveCountry] = useState(OPD_COUNTRIES[0]!);
 
   useEffect(() => {
     if (subSection) {

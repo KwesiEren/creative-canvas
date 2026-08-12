@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '../data/mockData';
-import { ExecutiveMember, OpdCountry } from '../types';
+import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '@/data/mockData';
+import { ExecutiveMember, OpdCountry } from '@/types';
 
 interface Props {
   onOpenMembership: () => void;
@@ -8,7 +8,7 @@ interface Props {
 
 export const GovernanceScreen: React.FC<Props> = ({ onOpenMembership }) => {
   const [selectedExec, setSelectedExec] = useState<ExecutiveMember | null>(null);
-  const [activeCountry, setActiveCountry] = useState<OpdCountry>(OPD_COUNTRIES[0]);
+  const [activeCountry, setActiveCountry] = useState<OpdCountry>(OPD_COUNTRIES[0]!);
 
   return (
     <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-12 animate-fade-in">
