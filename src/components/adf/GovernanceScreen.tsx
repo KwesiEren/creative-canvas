@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '../data/mockData';
-import { ExecutiveMember, OpdCountry } from '../types';
+import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '@/data/mockData';
+import { ExecutiveMember, OpdCountry } from '@/types';
 
 interface Props {
   onOpenMembership: () => void;

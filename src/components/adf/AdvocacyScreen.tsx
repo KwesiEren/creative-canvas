@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { EVENTS_DATA } from '../data/mockData';
-import { EventItem, NavTab } from '../types';
+import { EVENTS_DATA } from '@/data/mockData';
+import { EventItem, NavTab } from '@/types';
 
 interface Props {
   onNavigate: (tab: NavTab) => void;

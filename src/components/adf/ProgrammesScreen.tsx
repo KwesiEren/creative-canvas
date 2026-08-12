@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ProgrammeId, NavTab } from '../types';
-import { PROGRAMMES_DATA } from '../data/mockData';
+import { ProgrammeId, NavTab } from '@/types';
+import { PROGRAMMES_DATA } from '@/data/mockData';
 
 interface Props {
   selectedProgrammeId?: ProgrammeId;

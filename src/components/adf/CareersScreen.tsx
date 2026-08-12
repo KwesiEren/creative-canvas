@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CAREERS_DATA } from '../data/mockData';
-import { CareerItem } from '../types';
+import { CAREERS_DATA } from '@/data/mockData';
+import { CareerItem } from '@/types';
 
 export const CareersScreen: React.FC = () => {
   const [selectedJob, setSelectedJob] = useState<CareerItem | null>(null);

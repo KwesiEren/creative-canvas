@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { AboutSubSection } from '../types';
-import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '../data/mockData';
+import { AboutSubSection } from '@/types';
+import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '@/data/mockData';
 
 interface Props {
   subSection?: AboutSubSection;

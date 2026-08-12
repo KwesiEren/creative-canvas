@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { RESOURCES_DATA } from '../data/mockData';
-import { ResourceItem } from '../types';
+import { RESOURCES_DATA } from '@/data/mockData';
+import { ResourceItem } from '@/types';
 
 interface Props {
   initialCategory?: string;

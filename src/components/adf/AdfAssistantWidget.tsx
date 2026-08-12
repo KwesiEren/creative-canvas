@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChatMessage, NavTab } from '../types';
+import { ChatMessage, NavTab } from '@/types';
 
 interface Props {
   onNavigate: (tab: NavTab) => void;

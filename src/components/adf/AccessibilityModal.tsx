@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccessibilitySettings } from '../types';
+import { AccessibilitySettings } from '@/types';
 
 interface Props {
   isOpen: boolean;
