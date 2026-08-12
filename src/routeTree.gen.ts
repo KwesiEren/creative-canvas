@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdvocacyRouteImport } from './routes/advocacy'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
 import { Route as ResourcesRouteImport } from './routes/resources'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdvocacyRoute = AdvocacyRouteImport.update({
+  id: '/advocacy',
+  path: '/advocacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgrammesRoute = ProgrammesRouteImport.update({
@@ -38,12 +44,14 @@ const ResourcesRoute = ResourcesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/advocacy': typeof AdvocacyRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/advocacy': typeof AdvocacyRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/advocacy': typeof AdvocacyRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/programmes' | '/resources'
+  fullPaths: '/' | '/about' | '/advocacy' | '/programmes' | '/resources'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/programmes' | '/resources'
-  id: '__root__' | '/' | '/about' | '/programmes' | '/resources'
+  to: '/' | '/about' | '/advocacy' | '/programmes' | '/resources'
+  id: '__root__' | '/' | '/about' | '/advocacy' | '/programmes' | '/resources'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdvocacyRoute: typeof AdvocacyRoute
   ProgrammesRoute: typeof ProgrammesRoute
   ResourcesRoute: typeof ResourcesRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/advocacy': {
+      id: '/advocacy'
+      path: '/advocacy'
+      fullPath: '/advocacy'
+      preLoaderRoute: typeof AdvocacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programmes': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdvocacyRoute: AdvocacyRoute,
   ProgrammesRoute: ProgrammesRoute,
   ResourcesRoute: ResourcesRoute,
 }
