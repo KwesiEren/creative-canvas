@@ -15,6 +15,7 @@ import { Route as AdvocacyRouteImport } from './routes/advocacy'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
 import { Route as ResourcesRouteImport } from './routes/resources'
 
@@ -48,6 +49,11 @@ const GovernanceRoute = GovernanceRouteImport.update({
   path: '/governance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgrammesRoute = ProgrammesRouteImport.update({
   id: '/programmes',
   path: '/programmes',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/governance': typeof GovernanceRoute
+  '/news': typeof NewsRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/governance': typeof GovernanceRoute
+  '/news': typeof NewsRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/governance': typeof GovernanceRoute
+  '/news': typeof NewsRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/contact'
     | '/governance'
+    | '/news'
     | '/programmes'
     | '/resources'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/contact'
     | '/governance'
+    | '/news'
     | '/programmes'
     | '/resources'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/contact'
     | '/governance'
+    | '/news'
     | '/programmes'
     | '/resources'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
   GovernanceRoute: typeof GovernanceRoute
+  NewsRoute: typeof NewsRoute
   ProgrammesRoute: typeof ProgrammesRoute
   ResourcesRoute: typeof ResourcesRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GovernanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programmes': {
       id: '/programmes'
       path: '/programmes'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
   GovernanceRoute: GovernanceRoute,
+  NewsRoute: NewsRoute,
   ProgrammesRoute: ProgrammesRoute,
   ResourcesRoute: ResourcesRoute,
 }
