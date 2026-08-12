@@ -10,7 +10,7 @@ interface Props {
 
 export const AboutScreen: React.FC<Props> = ({ subSection = 'who', onOpenMembership, onOpenTakeAction }) => {
   const [activeTab, setActiveTab] = useState<AboutSubSection>(subSection);
-  const [activeCountry, setActiveCountry] = useState(OPD_COUNTRIES[0]);
+  const [activeCountry, setActiveCountry] = useState(OPD_COUNTRIES[0]!);
 
   useEffect(() => {
     if (subSection) {
