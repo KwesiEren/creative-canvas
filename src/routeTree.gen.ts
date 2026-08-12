@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdvocacyRouteImport } from './routes/advocacy'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
 import { Route as ResourcesRouteImport } from './routes/resources'
 
@@ -42,6 +43,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GovernanceRoute = GovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgrammesRoute = ProgrammesRouteImport.update({
   id: '/programmes',
   path: '/programmes',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/advocacy': typeof AdvocacyRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/governance': typeof GovernanceRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/advocacy': typeof AdvocacyRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/governance': typeof GovernanceRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/advocacy': typeof AdvocacyRoute
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/governance': typeof GovernanceRoute
   '/programmes': typeof ProgrammesRoute
   '/resources': typeof ResourcesRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/advocacy'
     | '/careers'
     | '/contact'
+    | '/governance'
     | '/programmes'
     | '/resources'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/advocacy'
     | '/careers'
     | '/contact'
+    | '/governance'
     | '/programmes'
     | '/resources'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/advocacy'
     | '/careers'
     | '/contact'
+    | '/governance'
     | '/programmes'
     | '/resources'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   AdvocacyRoute: typeof AdvocacyRoute
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
+  GovernanceRoute: typeof GovernanceRoute
   ProgrammesRoute: typeof ProgrammesRoute
   ResourcesRoute: typeof ResourcesRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/governance': {
+      id: '/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programmes': {
       id: '/programmes'
       path: '/programmes'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdvocacyRoute: AdvocacyRoute,
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
+  GovernanceRoute: GovernanceRoute,
   ProgrammesRoute: ProgrammesRoute,
   ResourcesRoute: ResourcesRoute,
 }
