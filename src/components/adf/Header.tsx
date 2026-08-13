@@ -351,59 +351,18 @@ export const Header: React.FC<Props> = ({
           </button>
         </nav>
 
-        {/* Utility Elements (Top-Right, Separate from Nav) */}
-        <div className="flex items-center gap-2 md:gap-3">
-          {/* Search Trigger */}
-          <button
-            onClick={() => setSearchOpen(true)}
-            aria-label="Search ADF Website"
-            className="text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a] p-2 rounded-full focus-ring transition-colors flex items-center cursor-pointer"
-          >
-            <span className="material-symbols-outlined text-xl">search</span>
-          </button>
-
-          {/* Accessibility Settings Trigger */}
-          <button
-            onClick={onOpenAccessibility}
-            aria-label="Accessibility Settings"
-            className="text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a] p-2 rounded-full focus-ring transition-colors flex items-center cursor-pointer"
-          >
-            <span className="material-symbols-outlined text-xl">settings_accessibility</span>
-          </button>
-
-          {/* Language Toggle (EN / KIS) */}
-          <div className="hidden sm:flex items-center gap-1 text-xs font-bold text-[#0f1b3d] dark:text-[#c4c6cf] bg-[#e8edf3] dark:bg-[#152a4a] p-1 rounded-none">
-            <button
-              onClick={() => setLang('EN')}
-              className={`px-2 py-1 rounded transition-colors cursor-pointer ${
-                lang === 'EN' ? 'bg-[#0f1b3d] text-white' : 'hover:bg-[#cfe0f0]'
-              }`}
-            >
-              EN
-            </button>
-            <span>/</span>
-            <button
-              onClick={() => setLang('KIS')}
-              className={`px-2 py-1 rounded transition-colors cursor-pointer ${
-                lang === 'KIS' ? 'bg-[#0f1b3d] text-white' : 'hover:bg-[#cfe0f0]'
-              }`}
-            >
-              KIS
-            </button>
-          </div>
-
-          {/* Take Action Button */}
+        {/* Conversion actions */}
+        <div className="flex items-center gap-3">
           <button
             onClick={onOpenTakeAction}
-            className="hidden md:inline-flex items-center justify-center bg-[#e8edf3] text-[#245a86] font-bold text-xs xl:text-sm px-4 py-2 rounded-none border border-[#b7cbe0] hover:bg-[#d6e3f0] focus-ring transition-colors cursor-pointer"
+            className="hidden md:inline-flex items-center justify-center border-2 border-[#0f1b3d] text-[#0f1b3d] font-bold uppercase tracking-widest text-xs px-5 py-3 hover:bg-[#0f1b3d] hover:text-white focus-ring transition-colors cursor-pointer"
           >
             Take Action
           </button>
 
-          {/* Donate Button — Styled distinctly as primary conversion action */}
           <button
             onClick={onOpenDonate}
-            className="inline-flex items-center justify-center bg-[#245a86] hover:bg-[#0f1b3d] text-white font-extrabold text-xs xl:text-sm px-5 py-2.5 rounded-none shadow-md focus-ring cursor-pointer transition-all hover:scale-105"
+            className="inline-flex items-center justify-center bg-[#f5b301] text-[#0f1b3d] font-bold uppercase tracking-widest text-xs px-6 py-3 hover:bg-[#ffc933] focus-ring cursor-pointer transition-colors"
           >
             Donate
           </button>
@@ -412,12 +371,14 @@ export const Header: React.FC<Props> = ({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle mobile menu"
-            className="lg:hidden text-[#0f1b3d] dark:text-[#c4c6cf] p-2 rounded focus-ring cursor-pointer"
+            className="lg:hidden text-[#0f1b3d] dark:text-[#c4c6cf] p-2 focus-ring cursor-pointer"
           >
             <span className="material-symbols-outlined">{mobileMenuOpen ? 'close' : 'menu'}</span>
           </button>
         </div>
       </div>
+      </div>
+
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
