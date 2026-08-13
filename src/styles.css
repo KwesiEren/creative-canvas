@@ -14,8 +14,9 @@
  */
 
 @theme inline {
-  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hind", ui-sans-serif, system-ui, sans-serif;
+
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -65,51 +66,52 @@
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0rem;
   --text-scale: 1;
 
-  /* Deep continental green, warm ochre accent, paper-toned surfaces. */
-  --background: oklch(0.985 0.006 95);
-  --foreground: oklch(0.21 0.02 160);
-  --surface: oklch(0.955 0.012 95);
-  --surface-foreground: oklch(0.21 0.02 160);
+  /* Navy institutional palette. */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.06 265);
+  --surface: oklch(0.94 0.014 250);
+  --surface-foreground: oklch(0.22 0.06 265);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.02 160);
+  --card-foreground: oklch(0.22 0.06 265);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.02 160);
+  --popover-foreground: oklch(0.22 0.06 265);
 
-  --primary: oklch(0.38 0.075 165);
-  --primary-foreground: oklch(0.985 0.006 95);
-  --secondary: oklch(0.93 0.02 165);
-  --secondary-foreground: oklch(0.28 0.05 165);
-  --muted: oklch(0.94 0.008 95);
-  --muted-foreground: oklch(0.44 0.02 160);
-  --accent: oklch(0.55 0.14 55);
-  --accent-foreground: oklch(0.99 0.005 95);
-  --highlight: oklch(0.72 0.15 75);
-  --highlight-foreground: oklch(0.24 0.05 60);
+  --primary: oklch(0.22 0.07 268);
+  --primary-foreground: oklch(0.98 0.004 250);
+  --secondary: oklch(0.94 0.014 250);
+  --secondary-foreground: oklch(0.32 0.07 262);
+  --muted: oklch(0.94 0.014 250);
+  --muted-foreground: oklch(0.44 0.04 262);
+  --accent: oklch(0.45 0.08 250);
+  --accent-foreground: oklch(0.99 0.004 250);
+  --highlight: oklch(0.82 0.16 84);
+  --highlight-foreground: oklch(0.22 0.07 268);
 
   --destructive: oklch(0.5 0.19 27);
-  --destructive-foreground: oklch(0.99 0.005 95);
-  --border: oklch(0.88 0.012 120);
-  --input: oklch(0.84 0.014 120);
-  --ring: oklch(0.45 0.1 165);
+  --destructive-foreground: oklch(0.99 0.004 250);
+  --border: oklch(0.86 0.016 250);
+  --input: oklch(0.78 0.02 250);
+  --ring: oklch(0.45 0.1 255);
 
-  --chart-1: oklch(0.38 0.075 165);
-  --chart-2: oklch(0.55 0.14 55);
-  --chart-3: oklch(0.45 0.09 235);
-  --chart-4: oklch(0.62 0.11 135);
-  --chart-5: oklch(0.5 0.13 15);
+  --chart-1: oklch(0.22 0.07 268);
+  --chart-2: oklch(0.45 0.08 250);
+  --chart-3: oklch(0.62 0.07 245);
+  --chart-4: oklch(0.82 0.16 84);
+  --chart-5: oklch(0.5 0.12 25);
 
-  --sidebar: oklch(0.955 0.012 95);
-  --sidebar-foreground: oklch(0.21 0.02 160);
-  --sidebar-primary: oklch(0.38 0.075 165);
-  --sidebar-primary-foreground: oklch(0.985 0.006 95);
-  --sidebar-accent: oklch(0.93 0.02 165);
-  --sidebar-accent-foreground: oklch(0.28 0.05 165);
-  --sidebar-border: oklch(0.88 0.012 120);
-  --sidebar-ring: oklch(0.45 0.1 165);
+  --sidebar: oklch(0.94 0.014 250);
+  --sidebar-foreground: oklch(0.22 0.06 265);
+  --sidebar-primary: oklch(0.22 0.07 268);
+  --sidebar-primary-foreground: oklch(0.98 0.004 250);
+  --sidebar-accent: oklch(0.94 0.014 250);
+  --sidebar-accent-foreground: oklch(0.32 0.07 262);
+  --sidebar-border: oklch(0.86 0.016 250);
+  --sidebar-ring: oklch(0.45 0.1 255);
 }
+
 
 /* High-contrast mode toggled from the accessibility toolbar. */
 .hc {
@@ -160,11 +162,12 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.15;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
     text-wrap: balance;
   }
+
 
   :focus-visible {
     outline: 3px solid var(--color-ring);
@@ -231,19 +234,26 @@
   top: 1rem;
 }
 
-/* --- New visual direction: backdrop, motion and helper classes --- */
+/* --- Editorial helpers --- */
 .site-backdrop {
-  background-image: url("/src/assets/images/site_background_1786341362859.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-color: var(--color-background);
 }
 
 .focus-ring:focus-visible {
-  outline: 3px solid #126e0c;
+  outline: 3px solid #245a86;
   outline-offset: 2px;
 }
+
+/* Navy scrim used behind hero text over photography. */
+.hero-scrim {
+  background: linear-gradient(
+    90deg,
+    rgba(10, 17, 40, 0.95) 0%,
+    rgba(10, 17, 40, 0.88) 45%,
+    rgba(10, 17, 40, 0.55) 100%
+  );
+}
+
 
 @keyframes adf-fade-in {
   from { opacity: 0; transform: translateY(8px); }
