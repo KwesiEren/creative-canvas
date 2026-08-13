@@ -8,23 +8,35 @@ interface Props {
 
 export const Footer: React.FC<Props> = ({ onNavigate, onOpenAccessibility }) => {
   return (
-    <footer className="bg-[#0f1b3d] text-white w-full py-12 px-4 md:px-10 mt-auto border-t-4 border-[#245a86]">
-      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Brand & Copyright */}
+    <footer className="bg-[#0a1128] text-white w-full mt-auto">
+      {/* Mission line */}
+      <div className="border-b border-white/15">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-12">
+          <p className="font-display text-2xl md:text-4xl uppercase leading-tight max-w-4xl">
+            Nothing about us without us — a continental voice for the rights of persons with
+            disabilities in Africa.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* Brand */}
         <div className="flex flex-col gap-3 md:col-span-1">
-          <h2 className="text-lg md:text-xl font-bold flex items-center gap-2">
+          <h2 className="text-lg uppercase flex items-center gap-2">
             <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
               accessibility_new
             </span>
             <span>African Disability Forum</span>
           </h2>
           <p className="text-xs text-[#b7cbe0] leading-relaxed">
-            © 2025 African Disability Forum. The continental federation unifying national and regional Organizations of Persons with Disabilities.
+            The continental federation unifying national and regional Organizations of Persons with
+            Disabilities.
           </p>
-          <p className="text-[10px] text-[#b7cbe0] italic">
+          <p className="text-[11px] text-[#8fa8c4] italic">
             Operating in partnership with the African Union (AU) and United Nations (UN).
           </p>
         </div>
+
 
         {/* Column 2: Navigation */}
         <div className="flex flex-col gap-2 text-xs">
