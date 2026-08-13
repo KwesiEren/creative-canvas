@@ -126,7 +126,7 @@ export const Footer: React.FC<Props> = ({ onNavigate, onOpenAccessibility }) => 
             </button>
             <button
               onClick={onOpenAccessibility}
-              className="px-3 py-1.5 bg-[#1e3a5f] hover:bg-[#1e3a5f] text-white rounded font-bold text-[11px] w-max flex items-center gap-1"
+              className="px-3 py-2 border border-white/40 text-white font-bold uppercase tracking-widest text-[11px] w-max flex items-center gap-1 hover:bg-white hover:text-[#0a1128] transition-colors cursor-pointer focus-ring"
             >
               <span className="material-symbols-outlined text-sm">settings_accessibility</span>
               <span>Accessibility Options</span>
@@ -134,6 +134,15 @@ export const Footer: React.FC<Props> = ({ onNavigate, onOpenAccessibility }) => 
           </div>
         </div>
       </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-white/15">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[11px] uppercase tracking-widest text-[#8fa8c4]">
+          <span>© {new Date().getFullYear()} African Disability Forum. All rights reserved.</span>
+          <span>Built to WCAG 2.2 AA standards</span>
+        </div>
+      </div>
     </footer>
+
   );
 };
