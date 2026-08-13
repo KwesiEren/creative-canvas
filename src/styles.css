@@ -162,11 +162,12 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.15;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
     text-wrap: balance;
   }
+
 
   :focus-visible {
     outline: 3px solid var(--color-ring);
