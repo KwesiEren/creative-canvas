@@ -84,22 +84,22 @@ export const Header: React.FC<Props> = ({
   }, [searchQuery]);
 
   return (
-    <header className="bg-white/90 dark:bg-[#1a1c1c]/90 backdrop-blur-md border-b-2 border-[#002045] shadow-sm w-full sticky top-0 z-40">
+    <header className="bg-white dark:bg-[#0a1128]/90 border-b-2 border-[#0f1b3d] shadow-sm w-full sticky top-0 z-40">
       <div className="flex justify-between items-center w-full px-4 md:px-10 max-w-[1280px] mx-auto h-20">
         {/* Brand Logo */}
         <button
           onClick={() => handleNavClick('home')}
           aria-label="African Disability Forum Home"
-          className="font-bold text-xl md:text-2xl text-[#002045] dark:text-[#d6e3ff] focus-ring flex items-center gap-2.5 cursor-pointer text-left"
+          className="font-bold text-xl md:text-2xl text-[#0f1b3d] dark:text-[#dbe6f2] focus-ring flex items-center gap-2.5 cursor-pointer text-left"
         >
-          <div className="w-10 h-10 rounded-full bg-[#002045] text-white flex items-center justify-center shadow-sm">
+          <div className="w-10 h-10 rounded-full bg-[#0f1b3d] text-white flex items-center justify-center shadow-sm">
             <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
               accessibility_new
             </span>
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold tracking-tight text-lg md:text-xl leading-none">African Disability Forum</span>
-            <span className="text-[10px] uppercase font-bold text-[#126e0c] tracking-widest mt-0.5">Forum Africain des Personnes Handicapées</span>
+            <span className="text-[10px] uppercase font-bold text-[#245a86] tracking-widest mt-0.5">Forum Africain des Personnes Handicapées</span>
           </div>
         </button>
 
@@ -110,10 +110,10 @@ export const Header: React.FC<Props> = ({
             <button
               onClick={() => setOpenDropdown(openDropdown === 'about' ? null : 'about')}
               onMouseEnter={() => setOpenDropdown('about')}
-              className={`font-bold text-sm xl:text-base px-3 py-2 rounded-lg transition-colors focus-ring flex items-center gap-1 cursor-pointer ${
+              className={`font-bold text-sm xl:text-base px-3 py-2 rounded-none transition-colors focus-ring flex items-center gap-1 cursor-pointer ${
                 currentTab === 'about'
-                  ? 'text-[#126e0c] bg-[#e8f5e9] dark:bg-[#1f3a22]'
-                  : 'text-[#002045] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] dark:hover:bg-[#2f3131]'
+                  ? 'text-[#245a86] bg-[#e8edf3] dark:bg-[#152a4a]'
+                  : 'text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
               }`}
             >
               <span>About</span>
@@ -123,41 +123,41 @@ export const Header: React.FC<Props> = ({
             {openDropdown === 'about' && (
               <div
                 onMouseLeave={() => setOpenDropdown(null)}
-                className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-[#252828] border-2 border-[#002045] rounded-xl shadow-xl p-2 z-50 animate-fade-in space-y-1"
+                className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-[#0f1b3d] border-2 border-[#0f1b3d] rounded-none shadow-none p-2 z-50 animate-fade-in space-y-1"
               >
                 <button
                   onClick={() => handleNavClick('about', { subSection: 'who' })}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">info</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">info</span>
                   <span>Who We Are</span>
                 </button>
                 <button
                   onClick={() => handleNavClick('about', { subSection: 'history' })}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">history</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">history</span>
                   <span>Our History</span>
                 </button>
                 <button
                   onClick={() => handleNavClick('about', { subSection: 'vision' })}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">visibility</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">visibility</span>
                   <span>Vision & Mission</span>
                 </button>
                 <button
                   onClick={() => handleNavClick('about', { subSection: 'leadership' })}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">groups</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">groups</span>
                   <span>Leadership</span>
                 </button>
                 <button
                   onClick={() => handleNavClick('about', { subSection: 'membership' })}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">how_to_reg</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">how_to_reg</span>
                   <span>Membership (+PANPPD)</span>
                 </button>
               </div>
@@ -169,10 +169,10 @@ export const Header: React.FC<Props> = ({
             <button
               onClick={() => setOpenDropdown(openDropdown === 'programmes' ? null : 'programmes')}
               onMouseEnter={() => setOpenDropdown('programmes')}
-              className={`font-bold text-sm xl:text-base px-3 py-2 rounded-lg transition-colors focus-ring flex items-center gap-1 cursor-pointer ${
+              className={`font-bold text-sm xl:text-base px-3 py-2 rounded-none transition-colors focus-ring flex items-center gap-1 cursor-pointer ${
                 currentTab === 'programmes'
-                  ? 'text-[#126e0c] bg-[#e8f5e9] dark:bg-[#1f3a22]'
-                  : 'text-[#002045] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] dark:hover:bg-[#2f3131]'
+                  ? 'text-[#245a86] bg-[#e8edf3] dark:bg-[#152a4a]'
+                  : 'text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
               }`}
             >
               <span>Programmes</span>
@@ -182,16 +182,16 @@ export const Header: React.FC<Props> = ({
             {openDropdown === 'programmes' && (
               <div
                 onMouseLeave={() => setOpenDropdown(null)}
-                className="absolute left-0 top-full mt-1 w-72 bg-white dark:bg-[#252828] border-2 border-[#002045] rounded-xl shadow-xl p-2 z-50 animate-fade-in space-y-1"
+                className="absolute left-0 top-full mt-1 w-72 bg-white dark:bg-[#0f1b3d] border-2 border-[#0f1b3d] rounded-none shadow-none p-2 z-50 animate-fade-in space-y-1"
               >
                 {PROGRAMMES_DATA.map(prog => (
                   <button
                     key={prog.id}
                     onClick={() => handleNavClick('programmes', { programmeId: prog.id })}
-                    className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center justify-between"
+                    className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center justify-between"
                   >
-                    <span className="font-extrabold text-[#126e0c]">{prog.acronym}</span>
-                    <span className="truncate max-w-[170px] text-[#43474e] dark:text-[#c4c6cf] font-medium">{prog.name}</span>
+                    <span className="font-extrabold text-[#245a86]">{prog.acronym}</span>
+                    <span className="truncate max-w-[170px] text-[#33415c] dark:text-[#c4c6cf] font-medium">{prog.name}</span>
                   </button>
                 ))}
               </div>
@@ -203,10 +203,10 @@ export const Header: React.FC<Props> = ({
             <button
               onClick={() => setOpenDropdown(openDropdown === 'news' ? null : 'news')}
               onMouseEnter={() => setOpenDropdown('news')}
-              className={`font-bold text-sm xl:text-base px-3 py-2 rounded-lg transition-colors focus-ring flex items-center gap-1 cursor-pointer ${
+              className={`font-bold text-sm xl:text-base px-3 py-2 rounded-none transition-colors focus-ring flex items-center gap-1 cursor-pointer ${
                 currentTab === 'news' || currentTab === 'advocacy'
-                  ? 'text-[#126e0c] bg-[#e8f5e9] dark:bg-[#1f3a22]'
-                  : 'text-[#002045] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] dark:hover:bg-[#2f3131]'
+                  ? 'text-[#245a86] bg-[#e8edf3] dark:bg-[#152a4a]'
+                  : 'text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
               }`}
             >
               <span>News & Events</span>
@@ -216,20 +216,20 @@ export const Header: React.FC<Props> = ({
             {openDropdown === 'news' && (
               <div
                 onMouseLeave={() => setOpenDropdown(null)}
-                className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-[#252828] border-2 border-[#002045] rounded-xl shadow-xl p-2 z-50 animate-fade-in space-y-1"
+                className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-[#0f1b3d] border-2 border-[#0f1b3d] rounded-none shadow-none p-2 z-50 animate-fade-in space-y-1"
               >
                 <button
                   onClick={() => handleNavClick('news')}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">newspaper</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">newspaper</span>
                   <span>News & Articles</span>
                 </button>
                 <button
                   onClick={() => handleNavClick('advocacy')}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">event</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">event</span>
                   <span>Events Calendar</span>
                 </button>
               </div>
@@ -241,10 +241,10 @@ export const Header: React.FC<Props> = ({
             <button
               onClick={() => setOpenDropdown(openDropdown === 'resources' ? null : 'resources')}
               onMouseEnter={() => setOpenDropdown('resources')}
-              className={`font-bold text-sm xl:text-base px-3 py-2 rounded-lg transition-colors focus-ring flex items-center gap-1 cursor-pointer ${
+              className={`font-bold text-sm xl:text-base px-3 py-2 rounded-none transition-colors focus-ring flex items-center gap-1 cursor-pointer ${
                 currentTab === 'resources'
-                  ? 'text-[#126e0c] bg-[#e8f5e9] dark:bg-[#1f3a22]'
-                  : 'text-[#002045] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] dark:hover:bg-[#2f3131]'
+                  ? 'text-[#245a86] bg-[#e8edf3] dark:bg-[#152a4a]'
+                  : 'text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
               }`}
             >
               <span>Resources</span>
@@ -254,27 +254,27 @@ export const Header: React.FC<Props> = ({
             {openDropdown === 'resources' && (
               <div
                 onMouseLeave={() => setOpenDropdown(null)}
-                className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-[#252828] border-2 border-[#002045] rounded-xl shadow-xl p-2 z-50 animate-fade-in space-y-1"
+                className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-[#0f1b3d] border-2 border-[#0f1b3d] rounded-none shadow-none p-2 z-50 animate-fade-in space-y-1"
               >
                 <button
                   onClick={() => handleNavClick('resources', { filterCategory: 'All' })}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">folder</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">folder</span>
                   <span>Publications Repository</span>
                 </button>
                 <button
                   onClick={() => handleNavClick('resources', { filterCategory: 'Policy Brief' })}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">gavel</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">gavel</span>
                   <span>Policy Briefs</span>
                 </button>
                 <button
                   onClick={() => handleNavClick('resources', { filterCategory: 'Research Paper' })}
-                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#002045] dark:text-white hover:bg-[#e8f5e9] dark:hover:bg-[#3a3d3d] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-none text-xs font-bold text-[#0f1b3d] dark:text-white hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] flex items-center gap-2"
                 >
-                  <span className="material-symbols-outlined text-base text-[#126e0c]">menu_book</span>
+                  <span className="material-symbols-outlined text-base text-[#245a86]">menu_book</span>
                   <span>Knowledge Hub</span>
                 </button>
               </div>
@@ -284,10 +284,10 @@ export const Header: React.FC<Props> = ({
           {/* CAREERS (Single Link) */}
           <button
             onClick={() => handleNavClick('careers')}
-            className={`font-bold text-sm xl:text-base px-3 py-2 rounded-lg transition-colors focus-ring cursor-pointer ${
+            className={`font-bold text-sm xl:text-base px-3 py-2 rounded-none transition-colors focus-ring cursor-pointer ${
               currentTab === 'careers'
-                ? 'text-[#126e0c] bg-[#e8f5e9] dark:bg-[#1f3a22]'
-                : 'text-[#002045] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] dark:hover:bg-[#2f3131]'
+                ? 'text-[#245a86] bg-[#e8edf3] dark:bg-[#152a4a]'
+                : 'text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
             }`}
           >
             Careers
@@ -296,10 +296,10 @@ export const Header: React.FC<Props> = ({
           {/* CONTACT (Single Link) */}
           <button
             onClick={() => handleNavClick('contact')}
-            className={`font-bold text-sm xl:text-base px-3 py-2 rounded-lg transition-colors focus-ring cursor-pointer ${
+            className={`font-bold text-sm xl:text-base px-3 py-2 rounded-none transition-colors focus-ring cursor-pointer ${
               currentTab === 'contact'
-                ? 'text-[#126e0c] bg-[#e8f5e9] dark:bg-[#1f3a22]'
-                : 'text-[#002045] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] dark:hover:bg-[#2f3131]'
+                ? 'text-[#245a86] bg-[#e8edf3] dark:bg-[#152a4a]'
+                : 'text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
             }`}
           >
             Contact
@@ -312,7 +312,7 @@ export const Header: React.FC<Props> = ({
           <button
             onClick={() => setSearchOpen(true)}
             aria-label="Search ADF Website"
-            className="text-[#002045] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] dark:hover:bg-[#2f3131] p-2 rounded-full focus-ring transition-colors flex items-center cursor-pointer"
+            className="text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a] p-2 rounded-full focus-ring transition-colors flex items-center cursor-pointer"
           >
             <span className="material-symbols-outlined text-xl">search</span>
           </button>
@@ -321,17 +321,17 @@ export const Header: React.FC<Props> = ({
           <button
             onClick={onOpenAccessibility}
             aria-label="Accessibility Settings"
-            className="text-[#002045] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] dark:hover:bg-[#2f3131] p-2 rounded-full focus-ring transition-colors flex items-center cursor-pointer"
+            className="text-[#0f1b3d] dark:text-[#c4c6cf] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a] p-2 rounded-full focus-ring transition-colors flex items-center cursor-pointer"
           >
             <span className="material-symbols-outlined text-xl">settings_accessibility</span>
           </button>
 
           {/* Language Toggle (EN / KIS) */}
-          <div className="hidden sm:flex items-center gap-1 text-xs font-bold text-[#002045] dark:text-[#c4c6cf] bg-[#e2e2e2] dark:bg-[#2f3131] p-1 rounded-lg">
+          <div className="hidden sm:flex items-center gap-1 text-xs font-bold text-[#0f1b3d] dark:text-[#c4c6cf] bg-[#e8edf3] dark:bg-[#152a4a] p-1 rounded-none">
             <button
               onClick={() => setLang('EN')}
               className={`px-2 py-1 rounded transition-colors cursor-pointer ${
-                lang === 'EN' ? 'bg-[#002045] text-white' : 'hover:bg-[#d0d0d0]'
+                lang === 'EN' ? 'bg-[#0f1b3d] text-white' : 'hover:bg-[#cfe0f0]'
               }`}
             >
               EN
@@ -340,7 +340,7 @@ export const Header: React.FC<Props> = ({
             <button
               onClick={() => setLang('KIS')}
               className={`px-2 py-1 rounded transition-colors cursor-pointer ${
-                lang === 'KIS' ? 'bg-[#002045] text-white' : 'hover:bg-[#d0d0d0]'
+                lang === 'KIS' ? 'bg-[#0f1b3d] text-white' : 'hover:bg-[#cfe0f0]'
               }`}
             >
               KIS
@@ -350,7 +350,7 @@ export const Header: React.FC<Props> = ({
           {/* Take Action Button */}
           <button
             onClick={onOpenTakeAction}
-            className="hidden md:inline-flex items-center justify-center bg-[#e8f5e9] text-[#126e0c] font-bold text-xs xl:text-sm px-4 py-2 rounded-lg border border-[#a5d6a7] hover:bg-[#c8e6c9] focus-ring transition-colors cursor-pointer"
+            className="hidden md:inline-flex items-center justify-center bg-[#e8edf3] text-[#245a86] font-bold text-xs xl:text-sm px-4 py-2 rounded-none border border-[#b7cbe0] hover:bg-[#d6e3f0] focus-ring transition-colors cursor-pointer"
           >
             Take Action
           </button>
@@ -358,7 +358,7 @@ export const Header: React.FC<Props> = ({
           {/* Donate Button — Styled distinctly as primary conversion action */}
           <button
             onClick={onOpenDonate}
-            className="inline-flex items-center justify-center bg-[#126e0c] hover:bg-[#005300] text-white font-extrabold text-xs xl:text-sm px-5 py-2.5 rounded-lg shadow-md focus-ring cursor-pointer transition-all hover:scale-105"
+            className="inline-flex items-center justify-center bg-[#245a86] hover:bg-[#0f1b3d] text-white font-extrabold text-xs xl:text-sm px-5 py-2.5 rounded-none shadow-md focus-ring cursor-pointer transition-all hover:scale-105"
           >
             Donate
           </button>
@@ -367,7 +367,7 @@ export const Header: React.FC<Props> = ({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle mobile menu"
-            className="lg:hidden text-[#002045] dark:text-[#c4c6cf] p-2 rounded focus-ring cursor-pointer"
+            className="lg:hidden text-[#0f1b3d] dark:text-[#c4c6cf] p-2 rounded focus-ring cursor-pointer"
           >
             <span className="material-symbols-outlined">{mobileMenuOpen ? 'close' : 'menu'}</span>
           </button>
@@ -376,25 +376,25 @@ export const Header: React.FC<Props> = ({
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white dark:bg-[#1a1c1c] border-b-2 border-[#002045] px-4 py-4 space-y-3 animate-fade-in max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden bg-white dark:bg-[#0a1128] border-b-2 border-[#0f1b3d] px-4 py-4 space-y-3 animate-fade-in max-h-[80vh] overflow-y-auto">
           {/* About Group */}
           <div className="space-y-1">
-            <div className="text-xs font-bold text-[#126e0c] uppercase">About ADF</div>
-            <div className="pl-2 space-y-1 border-l-2 border-[#126e0c]">
-              <button onClick={() => handleNavClick('about', { subSection: 'who' })} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">Who We Are</button>
-              <button onClick={() => handleNavClick('about', { subSection: 'history' })} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">Our History</button>
-              <button onClick={() => handleNavClick('about', { subSection: 'vision' })} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">Vision & Mission</button>
-              <button onClick={() => handleNavClick('about', { subSection: 'leadership' })} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">Leadership</button>
-              <button onClick={() => handleNavClick('about', { subSection: 'membership' })} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">Membership (+PANPPD)</button>
+            <div className="text-xs font-bold text-[#245a86] uppercase">About ADF</div>
+            <div className="pl-2 space-y-1 border-l-2 border-[#245a86]">
+              <button onClick={() => handleNavClick('about', { subSection: 'who' })} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">Who We Are</button>
+              <button onClick={() => handleNavClick('about', { subSection: 'history' })} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">Our History</button>
+              <button onClick={() => handleNavClick('about', { subSection: 'vision' })} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">Vision & Mission</button>
+              <button onClick={() => handleNavClick('about', { subSection: 'leadership' })} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">Leadership</button>
+              <button onClick={() => handleNavClick('about', { subSection: 'membership' })} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">Membership (+PANPPD)</button>
             </div>
           </div>
 
           {/* Programmes Group */}
-          <div className="space-y-1 pt-2 border-t border-[#e2e2e2]">
-            <div className="text-xs font-bold text-[#126e0c] uppercase">Programmes</div>
-            <div className="pl-2 space-y-1 border-l-2 border-[#126e0c]">
+          <div className="space-y-1 pt-2 border-t border-[#e8edf3]">
+            <div className="text-xs font-bold text-[#245a86] uppercase">Programmes</div>
+            <div className="pl-2 space-y-1 border-l-2 border-[#245a86]">
               {PROGRAMMES_DATA.map(p => (
-                <button key={p.id} onClick={() => handleNavClick('programmes', { programmeId: p.id })} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">
+                <button key={p.id} onClick={() => handleNavClick('programmes', { programmeId: p.id })} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">
                   {p.acronym} - {p.name}
                 </button>
               ))}
@@ -402,33 +402,33 @@ export const Header: React.FC<Props> = ({
           </div>
 
           {/* News & Events */}
-          <div className="space-y-1 pt-2 border-t border-[#e2e2e2]">
-            <div className="text-xs font-bold text-[#126e0c] uppercase">News & Events</div>
-            <div className="pl-2 space-y-1 border-l-2 border-[#126e0c]">
-              <button onClick={() => handleNavClick('news')} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">News & Articles</button>
-              <button onClick={() => handleNavClick('advocacy')} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">Events Calendar</button>
+          <div className="space-y-1 pt-2 border-t border-[#e8edf3]">
+            <div className="text-xs font-bold text-[#245a86] uppercase">News & Events</div>
+            <div className="pl-2 space-y-1 border-l-2 border-[#245a86]">
+              <button onClick={() => handleNavClick('news')} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">News & Articles</button>
+              <button onClick={() => handleNavClick('advocacy')} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">Events Calendar</button>
             </div>
           </div>
 
           {/* Resources */}
-          <div className="space-y-1 pt-2 border-t border-[#e2e2e2]">
-            <div className="text-xs font-bold text-[#126e0c] uppercase">Resources</div>
-            <div className="pl-2 space-y-1 border-l-2 border-[#126e0c]">
-              <button onClick={() => handleNavClick('resources')} className="block text-sm font-bold py-1 text-[#002045] dark:text-white">Publications Repository</button>
+          <div className="space-y-1 pt-2 border-t border-[#e8edf3]">
+            <div className="text-xs font-bold text-[#245a86] uppercase">Resources</div>
+            <div className="pl-2 space-y-1 border-l-2 border-[#245a86]">
+              <button onClick={() => handleNavClick('resources')} className="block text-sm font-bold py-1 text-[#0f1b3d] dark:text-white">Publications Repository</button>
             </div>
           </div>
 
           {/* Direct Links */}
-          <div className="pt-2 border-t border-[#e2e2e2] flex justify-between">
-            <button onClick={() => handleNavClick('careers')} className="text-sm font-bold text-[#002045] dark:text-white">Careers</button>
-            <button onClick={() => handleNavClick('contact')} className="text-sm font-bold text-[#002045] dark:text-white">Contact</button>
+          <div className="pt-2 border-t border-[#e8edf3] flex justify-between">
+            <button onClick={() => handleNavClick('careers')} className="text-sm font-bold text-[#0f1b3d] dark:text-white">Careers</button>
+            <button onClick={() => handleNavClick('contact')} className="text-sm font-bold text-[#0f1b3d] dark:text-white">Contact</button>
           </div>
 
           <div className="pt-2 flex gap-2">
-            <button onClick={() => { setMobileMenuOpen(false); onOpenTakeAction(); }} className="flex-1 py-2 bg-[#e8f5e9] text-[#126e0c] font-bold text-xs rounded-lg border border-[#a5d6a7]">
+            <button onClick={() => { setMobileMenuOpen(false); onOpenTakeAction(); }} className="flex-1 py-2 bg-[#e8edf3] text-[#245a86] font-bold text-xs rounded-none border border-[#b7cbe0]">
               Take Action
             </button>
-            <button onClick={() => { setMobileMenuOpen(false); onOpenDonate(); }} className="flex-1 py-2 bg-[#126e0c] text-white font-bold text-xs rounded-lg">
+            <button onClick={() => { setMobileMenuOpen(false); onOpenDonate(); }} className="flex-1 py-2 bg-[#245a86] text-white font-bold text-xs rounded-none">
               Donate
             </button>
           </div>
@@ -438,13 +438,13 @@ export const Header: React.FC<Props> = ({
       {/* Site-Wide Search Overlay Modal */}
       {searchOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 pt-20 p-4">
-          <div className="bg-white dark:bg-[#252828] rounded-2xl max-w-2xl w-full p-6 border-2 border-[#002045] shadow-2xl space-y-4 animate-fade-in">
+          <div className="bg-white dark:bg-[#0f1b3d] rounded-none max-w-2xl w-full p-6 border-2 border-[#0f1b3d] shadow-lg space-y-4 animate-fade-in">
             <div className="flex justify-between items-center border-b border-[#c4c6cf] pb-3">
-              <div className="flex items-center gap-2 text-[#002045] dark:text-white font-bold text-lg">
-                <span className="material-symbols-outlined text-[#126e0c]">search</span>
+              <div className="flex items-center gap-2 text-[#0f1b3d] dark:text-white font-bold text-lg">
+                <span className="material-symbols-outlined text-[#245a86]">search</span>
                 <span>Search ADF Website & Publications</span>
               </div>
-              <button onClick={() => setSearchOpen(false)} className="p-1 text-[#43474e] dark:text-[#c4c6cf] hover:bg-[#e8e8e8] rounded-full">
+              <button onClick={() => setSearchOpen(false)} className="p-1 text-[#33415c] dark:text-[#c4c6cf] hover:bg-[#e8edf3] rounded-full">
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
@@ -456,19 +456,19 @@ export const Header: React.FC<Props> = ({
                 placeholder="Search policy briefs, events, programmes, news..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full p-3 pl-10 bg-[#f9f9f9] dark:bg-[#2f3131] border-2 border-[#002045] rounded-xl text-sm font-bold text-[#1a1c1c] dark:text-white focus:outline-none"
+                className="w-full p-3 pl-10 bg-[#f4f7fa] dark:bg-[#152a4a] border-2 border-[#0f1b3d] rounded-none text-sm font-bold text-[#0a1128] dark:text-white focus:outline-none"
               />
-              <span className="material-symbols-outlined absolute left-3 top-3 text-[#74777f]">search</span>
+              <span className="material-symbols-outlined absolute left-3 top-3 text-[#5b6b85]">search</span>
             </div>
 
             {/* Results list */}
             <div className="max-h-80 overflow-y-auto space-y-2">
               {searchQuery.trim() === '' ? (
-                <div className="text-xs text-[#74777f] italic py-4 text-center">
+                <div className="text-xs text-[#5b6b85] italic py-4 text-center">
                   Type keywords to search across resources, events, programmes, and articles.
                 </div>
               ) : searchResults.length === 0 ? (
-                <div className="text-xs text-[#74777f] py-4 text-center">
+                <div className="text-xs text-[#5b6b85] py-4 text-center">
                   No matching items found for "{searchQuery}".
                 </div>
               ) : (
@@ -476,14 +476,14 @@ export const Header: React.FC<Props> = ({
                   <button
                     key={idx}
                     onClick={res.action}
-                    className="w-full text-left p-3 rounded-lg hover:bg-[#f3f3f3] dark:hover:bg-[#3a3d3d] border border-[#c4c6cf] flex items-center justify-between transition-colors"
+                    className="w-full text-left p-3 rounded-none hover:bg-[#e8edf3] dark:hover:bg-[#1e3a5f] border border-[#c4c6cf] flex items-center justify-between transition-colors"
                   >
                     <div>
-                      <div className="text-xs font-bold text-[#126e0c] uppercase">{res.type}</div>
-                      <div className="text-sm font-bold text-[#002045] dark:text-white">{res.title}</div>
-                      <div className="text-xs text-[#74777f]">{res.sub}</div>
+                      <div className="text-xs font-bold text-[#245a86] uppercase">{res.type}</div>
+                      <div className="text-sm font-bold text-[#0f1b3d] dark:text-white">{res.title}</div>
+                      <div className="text-xs text-[#5b6b85]">{res.sub}</div>
                     </div>
-                    <span className="material-symbols-outlined text-sm text-[#002045] dark:text-[#86a0cd]">chevron_right</span>
+                    <span className="material-symbols-outlined text-sm text-[#0f1b3d] dark:text-[#b7cbe0]">chevron_right</span>
                   </button>
                 ))
               )}
