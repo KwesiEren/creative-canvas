@@ -233,19 +233,26 @@
   top: 1rem;
 }
 
-/* --- New visual direction: backdrop, motion and helper classes --- */
+/* --- Editorial helpers --- */
 .site-backdrop {
-  background-image: url("/src/assets/images/site_background_1786341362859.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-color: var(--color-background);
 }
 
 .focus-ring:focus-visible {
-  outline: 3px solid #126e0c;
+  outline: 3px solid #245a86;
   outline-offset: 2px;
 }
+
+/* Navy scrim used behind hero text over photography. */
+.hero-scrim {
+  background: linear-gradient(
+    90deg,
+    rgba(10, 17, 40, 0.95) 0%,
+    rgba(10, 17, 40, 0.88) 45%,
+    rgba(10, 17, 40, 0.55) 100%
+  );
+}
+
 
 @keyframes adf-fade-in {
   from { opacity: 0; transform: translateY(8px); }
