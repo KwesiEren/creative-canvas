@@ -84,8 +84,53 @@ export const Header: React.FC<Props> = ({
   }, [searchQuery]);
 
   return (
-    <header className="bg-white dark:bg-[#0a1128]/90 border-b-2 border-[#0f1b3d] shadow-sm w-full sticky top-0 z-40">
+    <header className="w-full sticky top-0 z-40">
+      {/* Navy utility bar */}
+      <div className="bg-[#0f1b3d] text-[#dbe6f2]">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-10 h-9 flex items-center justify-between text-xs">
+          <div className="hidden sm:flex items-center gap-6">
+            <a href="mailto:info@africandisabilityforum.org" className="hover:text-white focus-ring">
+              info@africandisabilityforum.org
+            </a>
+            <span className="hidden md:inline text-[#8fa8c4]">Addis Ababa, Ethiopia</span>
+          </div>
+          <div className="flex items-center gap-4 ml-auto">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="flex items-center gap-1 hover:text-white focus-ring cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-base">search</span>
+              <span className="hidden sm:inline uppercase tracking-widest font-bold">Search</span>
+            </button>
+            <button
+              onClick={onOpenAccessibility}
+              className="flex items-center gap-1 hover:text-white focus-ring cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-base">settings_accessibility</span>
+              <span className="hidden sm:inline uppercase tracking-widest font-bold">Accessibility</span>
+            </button>
+            <div className="flex items-center gap-1 font-bold uppercase tracking-widest">
+              <button
+                onClick={() => setLang('EN')}
+                className={`px-1 cursor-pointer focus-ring ${lang === 'EN' ? 'text-[#f5b301]' : 'hover:text-white'}`}
+              >
+                EN
+              </button>
+              <span className="text-[#5b7ba4]">/</span>
+              <button
+                onClick={() => setLang('KIS')}
+                className={`px-1 cursor-pointer focus-ring ${lang === 'KIS' ? 'text-[#f5b301]' : 'hover:text-white'}`}
+              >
+                KIS
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-[#0a1128] border-b border-[#0f1b3d]/20">
       <div className="flex justify-between items-center w-full px-4 md:px-10 max-w-[1280px] mx-auto h-20">
+
         {/* Brand Logo */}
         <button
           onClick={() => handleNavClick('home')}
