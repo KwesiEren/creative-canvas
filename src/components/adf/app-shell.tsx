@@ -69,7 +69,10 @@ const DEFAULT_SETTINGS: AccessibilitySettings = {
 export function AppShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const currentTab: NavTab = PATH_TO_TAB[pathname] ?? "home";
+  const currentTab: NavTab =
+    PATH_TO_TAB[pathname] ??
+    PATH_TO_TAB[`/${pathname.split("/").filter(Boolean)[0] ?? ""}`] ??
+    "home";
 
   const [extra, setExtra] = useState<NavExtra>({});
   const [takeActionOpen, setTakeActionOpen] = useState(false);
