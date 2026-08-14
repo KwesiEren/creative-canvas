@@ -7,7 +7,17 @@ export type NavTab =
   | "news"
   | "careers"
   | "contact"
-  | "governance";
+  | "governance"
+  | "events"
+  | "knowledge-hub"
+  | "youth"
+  | "membership"
+  | "partners"
+  | "get-involved"
+  | "spadra"
+  | "search"
+  | "accessibility"
+  | "privacy";
 
 export type AboutSubSection =
   | "who"
