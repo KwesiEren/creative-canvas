@@ -72,7 +72,7 @@ function buildMockEmbedding(text: string): number[] {
 }
 
 function cosineSimilarity(left: number[], right: number[]): number {
-  const dotProduct = left.reduce((sum, value, index) => sum + value * right[index], 0);
+  const dotProduct = left.reduce((sum, value, index) => sum + value * (right[index] ?? 0), 0);
   const leftNorm = Math.sqrt(left.reduce((sum, value) => sum + value * value, 0));
   const rightNorm = Math.sqrt(right.reduce((sum, value) => sum + value * value, 0));
 
