@@ -135,3 +135,78 @@ export interface OpdCountry {
   coordinates: { x: number; y: number };
   membersCount: number;
 }
+
+export type KnowledgeFormat = "Report" | "Toolkit" | "Video" | "Audio" | "Easy Read" | "Infographic";
+
+export interface KnowledgeItem {
+  id: string;
+  title: string;
+  theme: string;
+  format: KnowledgeFormat;
+  language: string;
+  year: number;
+  duration?: string;
+  summary: string;
+  accessibleFormats: string[];
+}
+
+export interface YouthOpportunity {
+  id: string;
+  title: string;
+  kind: "Internship" | "Fellowship" | "Volunteering" | "Grant";
+  location: string;
+  deadline: string;
+  summary: string;
+}
+
+export interface YouthStory {
+  id: string;
+  title: string;
+  name: string;
+  country: string;
+  image: string;
+  quote: string;
+  body: string;
+}
+
+export interface PollOption {
+  id: string;
+  label: string;
+  votes: number;
+}
+
+export interface PollItem {
+  id: string;
+  question: string;
+  options: PollOption[];
+}
+
+export interface PartnerItem {
+  id: string;
+  name: string;
+  type: "Donor" | "Implementing Partner" | "Institutional" | "Network";
+  country: string;
+  description: string;
+}
+
+export interface PolicyTrackerRow {
+  country: string;
+  code: string;
+  crpdRatified: boolean;
+  protocolSigned: boolean;
+  protocolRatified: boolean;
+  nationalLaw: string;
+  lastUpdated: string;
+}
+
+export interface CountryProfile {
+  code: string;
+  country: string;
+  region: string;
+  population: string;
+  prevalence: string;
+  focalOpd: string;
+  summary: string;
+  indicators: { label: string; value: number }[];
+  milestones: { year: string; event: string }[];
+}
