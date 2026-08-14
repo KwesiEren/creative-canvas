@@ -65,14 +65,14 @@ function buildMockEmbedding(text: string): number[] {
       hash = (hash * 31 + token.charCodeAt(i)) >>> 0;
     }
     const index = hash % EMBEDDING_DIMENSIONS;
-    vector[index] += 1 + token.length / 10;
+    vector[index] = (vector[index] ?? 0) + 1 + token.length / 10;
   }
 
   return vector;
 }
 
 function cosineSimilarity(left: number[], right: number[]): number {
-  const dotProduct = left.reduce((sum, value, index) => sum + value * right[index], 0);
+  const dotProduct = left.reduce((sum, value, index) => sum + value * (right[index] ?? 0), 0);
   const leftNorm = Math.sqrt(left.reduce((sum, value) => sum + value * value, 0));
   const rightNorm = Math.sqrt(right.reduce((sum, value) => sum + value * value, 0));
 

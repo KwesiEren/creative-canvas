@@ -26,19 +26,21 @@ const TAB_TO_PATH: Record<NavTab, string> = {
   careers: "/careers",
   contact: "/contact",
   governance: "/governance",
+  events: "/events",
+  "knowledge-hub": "/knowledge-hub",
+  youth: "/youth",
+  membership: "/membership",
+  partners: "/partners",
+  "get-involved": "/get-involved",
+  spadra: "/spadra",
+  search: "/search",
+  accessibility: "/accessibility",
+  privacy: "/privacy",
 };
 
-const PATH_TO_TAB: Record<string, NavTab> = {
-  "/": "home",
-  "/about": "about",
-  "/programmes": "programmes",
-  "/resources": "resources",
-  "/advocacy": "advocacy",
-  "/news": "news",
-  "/careers": "careers",
-  "/contact": "contact",
-  "/governance": "governance",
-};
+const PATH_TO_TAB: Record<string, NavTab> = Object.fromEntries(
+  Object.entries(TAB_TO_PATH).map(([tab, path]) => [path, tab as NavTab]),
+) as Record<string, NavTab>;
 
 interface AdfContextValue {
   extra: NavExtra;
@@ -67,7 +69,10 @@ const DEFAULT_SETTINGS: AccessibilitySettings = {
 export function AppShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const currentTab: NavTab = PATH_TO_TAB[pathname] ?? "home";
+  const currentTab: NavTab =
+    PATH_TO_TAB[pathname] ??
+    PATH_TO_TAB[`/${pathname.split("/").filter(Boolean)[0] ?? ""}`] ??
+    "home";
 
   const [extra, setExtra] = useState<NavExtra>({});
   const [takeActionOpen, setTakeActionOpen] = useState(false);
