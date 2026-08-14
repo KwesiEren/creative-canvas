@@ -65,7 +65,7 @@ function buildMockEmbedding(text: string): number[] {
       hash = (hash * 31 + token.charCodeAt(i)) >>> 0;
     }
     const index = hash % EMBEDDING_DIMENSIONS;
-    vector[index] += 1 + token.length / 10;
+    vector[index] = (vector[index] ?? 0) + 1 + token.length / 10;
   }
 
   return vector;
