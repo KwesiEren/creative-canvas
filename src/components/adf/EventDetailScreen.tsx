@@ -109,7 +109,7 @@ export const EventDetailScreen: React.FC<Props> = ({ slug }) => {
         eyebrow={`${item.type} — ${item.status}`}
         title={item.title}
         intro={paragraphs[0] ?? ''}
-        image="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=60"
+        image="/images/adf-event-3.jpg"
         imageAlt={`${item.type} conference event`}
       />
 

@@ -16,7 +16,7 @@ const FORMATS: Array<{ value: 'All' | KnowledgeFormat; icon: string }> = [
 ];
 
 const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1600&q=60';
+  '/images/adf-event-5.png';
 
 const ITEMS_PER_PAGE = 9;
 

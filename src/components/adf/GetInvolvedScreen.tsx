@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { PageHero, SectionHeading, btnPrimary } from "./ui";
 
 const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1600&q=60";
+  "/images/adf-event-1.jpg";
 
 const inputBase =
   "h-auto px-4 py-3 rounded-none border-2 border-[#0f1b3d]/30 bg-white text-[#0f1b3d] focus-visible:ring-1 focus-visible:ring-[#245a86] focus-visible:border-[#245a86] text-base font-medium w-full";

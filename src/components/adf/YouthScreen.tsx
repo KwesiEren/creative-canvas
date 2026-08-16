@@ -121,7 +121,7 @@ export const YouthScreen: React.FC = () => {
         eyebrow="Youth Empowerment"
         title="Youth Hub"
         intro="Young leaders with disabilities driving change across Africa. Stories, opportunities, surveys, challenges and action."
-        image="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=60"
+        image="/images/adf-event-2.jpg"
         imageAlt="Group of diverse young people collaborating together"
       />
 

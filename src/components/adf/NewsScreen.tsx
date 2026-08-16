@@ -7,7 +7,7 @@ import { PageHero, SectionHeading } from "./ui";
 import { FilterChips, Pagination, EmptyState } from "./ui-extra";
 
 const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1600&q=60";
+  "/images/adf-event-6.png";
 
 const ITEMS_PER_PAGE = 9;
 

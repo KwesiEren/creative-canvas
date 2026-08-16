@@ -2,7 +2,7 @@ import React from "react";
 import { PageHero, SectionHeading } from "./ui";
 
 const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=1600&q=60";
+  "/images/adf-event-6.png";
 
 export const PrivacyScreen: React.FC = () => (
   <div className="animate-fade-in">
