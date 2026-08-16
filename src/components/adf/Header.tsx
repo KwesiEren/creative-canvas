@@ -3,6 +3,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { NavTab, AboutSubSection, ProgrammeId } from "@/types";
 import { RESOURCES_DATA, NEWS_DATA, EVENTS_DATA, PROGRAMMES_DATA } from "@/data/mockData";
 import { t, type Locale } from "@/lib/i18n";
+import adfLogo from "@/assets/adf-logo.png.asset.json";
+
 
 interface Props {
   currentTab: NavTab;
