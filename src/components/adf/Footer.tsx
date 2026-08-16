@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
 import { NavTab, AboutSubSection, ProgrammeId } from "@/types";
+import adfLogo from "@/assets/adf-logo.png.asset.json";
+
 
 interface Props {
   onNavigate: (
