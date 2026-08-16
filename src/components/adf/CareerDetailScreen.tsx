@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { CAREERS_DATA } from "@/data/mockData";
@@ -103,17 +103,14 @@ export const CareerDetailScreen: React.FC<CareerDetailScreenProps> = ({
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ApplicationFormValues>({
-    resolver: zodResolver(applicationSchema),
+    resolver: zodResolver(applicationSchema) as unknown as Resolver<ApplicationFormValues>,
     mode: "onTouched",
     defaultValues: {
       fullName: "",
       email: "",
       phone: "",
       organization: "",
-      cvAttached: undefined,
       coverLetter: "",
-      hearAbout: undefined,
-      consent: undefined,
     },
   });
 

@@ -217,7 +217,7 @@ export const ProgrammeDetailScreen: React.FC<ProgrammeDetailScreenProps> = ({ pr
                 {relatedNews.map((news) => (
                   <Link
                     key={news.id}
-                    to={`/news/${slugify(news.title)}`}
+                    to="/news/$slug" params={{ slug: slugify(news.title) }}
                     className="block group border-2 border-[#0f1b3d]/20 hover:border-[#0f1b3d] bg-white p-5 transition-colors focus-ring"
                   >
                     <div className="flex gap-4">

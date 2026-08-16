@@ -205,10 +205,10 @@ const EventCard: React.FC<{ event: EventItem }> = ({ event }) => {
         </div>
 
         <div className="mt-auto pt-4 border-t border-[#0f1b3d]/15 flex flex-wrap gap-3">
-          <Link to={`/events/${slugify(event.title)}`} className={btnPrimarySmall}>
+          <Link to="/events/$slug" params={{ slug: slugify(event.title) }} className={btnPrimarySmall}>
             Register
           </Link>
-          <Link to={`/events/${slugify(event.title)}`} className={btnGhostSmall}>
+          <Link to="/events/$slug" params={{ slug: slugify(event.title) }} className={btnGhostSmall}>
             Details
           </Link>
         </div>

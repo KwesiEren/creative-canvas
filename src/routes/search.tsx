@@ -4,18 +4,17 @@ import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/search")({
   validateSearch: (search: Record<string, unknown>) => ({
-    q: typeof search.q === "string" ? search.q : "",
+    q: typeof search['q'] === "string" ? (search['q'] as string) : "",
   }),
-  head: ({ search }) =>
+  head: () =>
     buildMeta({
-      title: search.q
-        ? `Search: ${search.q} | African Disability Forum`
-        : "Search | African Disability Forum",
+      title: "Search | African Disability Forum",
       description:
         "Search news, events, resources, programmes, careers and knowledge hub content across the African Disability Forum website.",
       path: "/search",
       keywords: "search, ADF, African Disability Forum, news, resources, events",
     }),
+
   component: SearchPage,
 });
 

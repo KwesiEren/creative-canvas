@@ -91,7 +91,7 @@ const NewsCard: React.FC<{ item: NewsItem }> = ({ item }) => {
   const slug = slugify(item.title);
   return (
     <article className="relative bg-white border-2 border-[#0f1b3d] flex flex-col overflow-hidden">
-      <Link to={`/news/${slug}`} className="focus-ring block overflow-hidden">
+      <Link to="/news/$slug" params={{ slug: slug }} className="focus-ring block overflow-hidden">
         <img src={item.image} alt={item.title} className="h-48 w-full object-cover" />
       </Link>
       <div className="p-6 flex flex-col gap-3 flex-1">
@@ -104,14 +104,14 @@ const NewsCard: React.FC<{ item: NewsItem }> = ({ item }) => {
           </time>
         </div>
         <h2 className="text-lg font-extrabold text-[#0f1b3d] leading-snug">
-          <Link to={`/news/${slug}`} className="hover:text-[#245a86] focus-ring">
+          <Link to="/news/$slug" params={{ slug: slug }} className="hover:text-[#245a86] focus-ring">
             {item.title}
           </Link>
         </h2>
         <p className="text-sm text-[#33415c] leading-relaxed flex-1 line-clamp-3">{item.summary}</p>
         <div className="mt-auto pt-4 border-t border-[#0f1b3d]/15">
           <Link
-            to={`/news/${slug}`}
+            to="/news/$slug" params={{ slug: slug }}
             className="inline-flex items-center gap-1.5 text-sm font-bold text-[#245a86] hover:underline focus-ring"
           >
             Read full story

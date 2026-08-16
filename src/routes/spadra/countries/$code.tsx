@@ -11,6 +11,7 @@ export const Route = createFileRoute("/spadra/countries/$code")({
     return { code: params.code };
   },
   head: ({ loaderData }) => {
+    if (!loaderData) return { meta: [{ title: "Not found" }, { name: "robots", content: "noindex" }] };
     const profile = findByCustomSlug(COUNTRY_PROFILES, loaderData.code, (p) => p.code)!;
     const path = `/spadra/countries/${loaderData.code}`;
     return buildMeta({

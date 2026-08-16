@@ -115,7 +115,7 @@ const CareerCard: React.FC<{ job: CareerItem }> = ({ job }) => {
         </div>
 
         <h3 className="text-xl font-bold text-[#0f1b3d] dark:text-white leading-snug">
-          <Link to={`/careers/${slug}`} className="hover:text-[#245a86] focus-ring">
+          <Link to="/careers/$slug" params={{ slug: slug }} className="hover:text-[#245a86] focus-ring">
             {job.title}
           </Link>
         </h3>
@@ -136,13 +136,13 @@ const CareerCard: React.FC<{ job: CareerItem }> = ({ job }) => {
 
       <div className="pt-4 mt-4 border-t border-[#c4c6cf] dark:border-[#1e3a5f] flex items-center justify-between">
         <Link
-          to={`/careers/${slug}`}
+          to="/careers/$slug" params={{ slug: slug }}
           className="text-xs font-bold text-[#0f1b3d] dark:text-[#b7cbe0] hover:underline focus-ring"
         >
           View Requirements
         </Link>
         <Link
-          to={`/careers/${slug}`}
+          to="/careers/$slug" params={{ slug: slug }}
           className="px-4 py-2 bg-[#245a86] hover:bg-[#0f1b3d] text-white text-xs font-bold rounded-none cursor-pointer transition-colors"
         >
           Apply Now

@@ -11,6 +11,7 @@ export const Route = createFileRoute("/events/$slug")({
     return { slug: params.slug };
   },
   head: ({ loaderData }) => {
+    if (!loaderData) return { meta: [{ title: "Not found" }, { name: "robots", content: "noindex" }] };
     const item = findByTitleSlug(EVENTS_DATA, loaderData.slug)!;
     const path = `/events/${loaderData.slug}`;
     return buildMeta({

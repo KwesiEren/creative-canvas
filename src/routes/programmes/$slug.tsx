@@ -12,6 +12,7 @@ export const Route = createFileRoute('/programmes/$slug')({
     return { programmeId: params.slug as ProgrammeId };
   },
   head: ({ loaderData }) => {
+    if (!loaderData) return { meta: [{ title: "Not found" }, { name: "robots", content: "noindex" }] };
     const item = findByIdSlug(PROGRAMMES_DATA, loaderData.programmeId)!;
     const path = `/programmes/${loaderData.programmeId}`;
     return buildMeta({
