@@ -3,7 +3,7 @@ import {
   Outlet,
   Scripts,
   createRootRouteWithContext,
-  useRouterState,
+  useLocation,
 } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
@@ -40,7 +40,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function MaybeShell() {
-  const pathname = useRouterState({ selector: (s) => s.location.pathname });
+  const { pathname } = useLocation();
   const isSpadra = pathname.startsWith("/spadra");
 
   if (isSpadra) {
