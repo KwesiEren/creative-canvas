@@ -166,7 +166,7 @@ export const Header: React.FC<Props> = ({
       </div>
 
       <div className="bg-white dark:bg-[#0a1128] border-b border-[#0f1b3d]/20">
-        <div className="flex justify-between items-center w-full px-4 md:px-10 max-w-[1280px] mx-auto h-20">
+        <div className="flex justify-between items-center w-full px-3 md:px-5 max-w-[1280px] mx-auto h-20">
           {/* Brand Logo */}
           <button
             onClick={() => handleNavClick("home")}
