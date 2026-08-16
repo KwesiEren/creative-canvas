@@ -27,14 +27,14 @@ export const Footer: React.FC<Props> = ({ onNavigate, onOpenAccessibility }) => 
         {/* Brand */}
         <div className="flex flex-col gap-3 md:col-span-1">
           <h2 className="text-lg uppercase flex items-center gap-2">
-            <span
-              className="material-symbols-outlined text-2xl"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              accessibility_new
-            </span>
-            <span>African Disability Forum</span>
+            <img
+              src={adfLogo.url}
+              alt="African Disability Forum logo"
+              className="h-12 w-auto invert"
+            />
+            <span className="sr-only">African Disability Forum</span>
           </h2>
+
           <p className="text-xs text-[#b7cbe0] leading-relaxed">
             The continental federation unifying national and regional Organizations of Persons with
             Disabilities.
