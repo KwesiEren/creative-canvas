@@ -171,22 +171,13 @@ export const Header: React.FC<Props> = ({
           <button
             onClick={() => handleNavClick("home")}
             aria-label="African Disability Forum Home"
-            className="font-bold text-xl md:text-2xl text-[#0f1b3d] dark:text-[#dbe6f2] focus-ring flex items-center gap-2.5 cursor-pointer text-left"
+            className="focus-ring cursor-pointer text-left"
           >
             <img
               src={adfLogo.url}
               alt="African Disability Forum logo"
               className="h-10 w-auto dark:invert"
             />
-
-            <div className="flex flex-col">
-              <span className="font-extrabold tracking-tight text-lg md:text-xl leading-none">
-                African Disability Forum
-              </span>
-              <span className="text-[10px] uppercase font-bold text-[#245a86] tracking-widest mt-0.5">
-                Forum Africain des Personnes Handicapées
-              </span>
-            </div>
           </button>
 
           {/* Primary Navigation Links (Desktop) */}
