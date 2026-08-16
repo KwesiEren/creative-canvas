@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { EVENTS_DATA } from '@/data/mockData.generated';
@@ -44,7 +44,7 @@ export const EventDetailScreen: React.FC<Props> = ({ slug }) => {
     watch,
     formState: { errors },
   } = useForm<RegistrationFormValues>({
-    resolver: zodResolver(registrationSchema),
+    resolver: zodResolver(registrationSchema) as unknown as Resolver<RegistrationFormValues>,
     defaultValues: {
       attendanceMode: 'Virtual' as const,
     },
