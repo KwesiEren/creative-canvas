@@ -163,7 +163,7 @@ function retrieveKnowledgeAnswer(query: string): {
   const answer = rankedChunks.map((chunk) => chunk.text).join("\n\n");
   const sources = rankedChunks
     .filter((chunk) => CHUNK_PATH[chunk.id])
-    .map((chunk) => ({ label: chunk.title, path: CHUNK_PATH[chunk.id] }));
+    .map((chunk) => ({ label: chunk.title, path: CHUNK_PATH[chunk.id] as string }));
 
   return {
     text: answer.length > 600 ? answer.slice(0, 600) + "…" : answer,

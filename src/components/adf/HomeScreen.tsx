@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NEWS_DATA, PROGRAMMES_DATA } from "@/data/mockData";
-import { NewsItem, NavTab } from "@/types";
+import { NewsItem, NavTab, ProgrammeId } from "@/types";
 import {
   PageHero,
   SectionHeading,
@@ -12,7 +12,7 @@ import {
 } from "./ui";
 
 interface Props {
-  onNavigate: (tab: NavTab) => void;
+  onNavigate: (tab: NavTab, extra?: { programmeId?: ProgrammeId }) => void;
   onOpenTakeAction: () => void;
   onOpenDonate: () => void;
 }

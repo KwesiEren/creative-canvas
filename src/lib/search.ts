@@ -153,6 +153,6 @@ export function searchCounts(q: string): Record<SearchKind | "all", number> {
   const kinds: SearchKind[] = ["news", "programmes", "resources", "events", "careers", "knowledge"];
   const out: Record<string, number> = { all: 0 };
   for (const k of kinds) out[k] = runSearch({ q, kind: k }).length;
-  out.all = Object.values(out).reduce((a, b) => a + b, 0) - (out.all as number);
+  out['all'] = Object.values(out).reduce((a, b) => a + b, 0) - (out['all'] as number);
   return out as Record<SearchKind | "all", number>;
 }

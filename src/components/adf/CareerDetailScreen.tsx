@@ -110,10 +110,7 @@ export const CareerDetailScreen: React.FC<CareerDetailScreenProps> = ({
       email: "",
       phone: "",
       organization: "",
-      cvAttached: undefined,
       coverLetter: "",
-      hearAbout: undefined,
-      consent: undefined,
     },
   });
 
