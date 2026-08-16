@@ -11,13 +11,29 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as AdvocacyRouteImport } from './routes/advocacy'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as GetInvolvedRouteImport } from './routes/get-involved'
 import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as KnowledgeHubRouteImport } from './routes/knowledge-hub'
+import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as SpadraRouteImport } from './routes/spadra'
+import { Route as YouthRouteImport } from './routes/youth'
+import { Route as CareersSlugRouteImport } from './routes/careers/$slug'
+import { Route as EventsSlugRouteImport } from './routes/events/$slug'
+import { Route as NewsSlugRouteImport } from './routes/news/$slug'
+import { Route as ProgrammesSlugRouteImport } from './routes/programmes/$slug'
+import { Route as ResourcesSlugRouteImport } from './routes/resources/$slug'
+import { Route as SpadraCountriesCodeRouteImport } from './routes/spadra/countries/$code'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -27,6 +43,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessibilityRoute = AccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdvocacyRoute = AdvocacyRouteImport.update({
@@ -44,14 +65,44 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetInvolvedRoute = GetInvolvedRouteImport.update({
+  id: '/get-involved',
+  path: '/get-involved',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GovernanceRoute = GovernanceRouteImport.update({
   id: '/governance',
   path: '/governance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KnowledgeHubRoute = KnowledgeHubRouteImport.update({
+  id: '/knowledge-hub',
+  path: '/knowledge-hub',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MembershipRoute = MembershipRouteImport.update({
+  id: '/membership',
+  path: '/membership',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgrammesRoute = ProgrammesRouteImport.update({
@@ -64,87 +115,238 @@ const ResourcesRoute = ResourcesRouteImport.update({
   path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpadraRoute = SpadraRouteImport.update({
+  id: '/spadra',
+  path: '/spadra',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YouthRoute = YouthRouteImport.update({
+  id: '/youth',
+  path: '/youth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersSlugRoute = CareersSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CareersRoute,
+} as any)
+const EventsSlugRoute = EventsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => EventsRoute,
+} as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NewsRoute,
+} as any)
+const ProgrammesSlugRoute = ProgrammesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProgrammesRoute,
+} as any)
+const ResourcesSlugRoute = ResourcesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ResourcesRoute,
+} as any)
+const SpadraCountriesCodeRoute = SpadraCountriesCodeRouteImport.update({
+  id: '/countries/$code',
+  path: '/countries/$code',
+  getParentRoute: () => SpadraRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accessibility': typeof AccessibilityRoute
   '/advocacy': typeof AdvocacyRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
   '/contact': typeof ContactRoute
+  '/events': typeof EventsRouteWithChildren
+  '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRoute
-  '/news': typeof NewsRoute
-  '/programmes': typeof ProgrammesRoute
-  '/resources': typeof ResourcesRoute
+  '/knowledge-hub': typeof KnowledgeHubRoute
+  '/membership': typeof MembershipRoute
+  '/news': typeof NewsRouteWithChildren
+  '/partners': typeof PartnersRoute
+  '/privacy': typeof PrivacyRoute
+  '/programmes': typeof ProgrammesRouteWithChildren
+  '/resources': typeof ResourcesRouteWithChildren
+  '/search': typeof SearchRoute
+  '/spadra': typeof SpadraRouteWithChildren
+  '/youth': typeof YouthRoute
+  '/careers/$slug': typeof CareersSlugRoute
+  '/events/$slug': typeof EventsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/resources/$slug': typeof ResourcesSlugRoute
+  '/spadra/countries/$code': typeof SpadraCountriesCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accessibility': typeof AccessibilityRoute
   '/advocacy': typeof AdvocacyRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
   '/contact': typeof ContactRoute
+  '/events': typeof EventsRouteWithChildren
+  '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRoute
-  '/news': typeof NewsRoute
-  '/programmes': typeof ProgrammesRoute
-  '/resources': typeof ResourcesRoute
+  '/knowledge-hub': typeof KnowledgeHubRoute
+  '/membership': typeof MembershipRoute
+  '/news': typeof NewsRouteWithChildren
+  '/partners': typeof PartnersRoute
+  '/privacy': typeof PrivacyRoute
+  '/programmes': typeof ProgrammesRouteWithChildren
+  '/resources': typeof ResourcesRouteWithChildren
+  '/search': typeof SearchRoute
+  '/spadra': typeof SpadraRouteWithChildren
+  '/youth': typeof YouthRoute
+  '/careers/$slug': typeof CareersSlugRoute
+  '/events/$slug': typeof EventsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/resources/$slug': typeof ResourcesSlugRoute
+  '/spadra/countries/$code': typeof SpadraCountriesCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accessibility': typeof AccessibilityRoute
   '/advocacy': typeof AdvocacyRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
   '/contact': typeof ContactRoute
+  '/events': typeof EventsRouteWithChildren
+  '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRoute
-  '/news': typeof NewsRoute
-  '/programmes': typeof ProgrammesRoute
-  '/resources': typeof ResourcesRoute
+  '/knowledge-hub': typeof KnowledgeHubRoute
+  '/membership': typeof MembershipRoute
+  '/news': typeof NewsRouteWithChildren
+  '/partners': typeof PartnersRoute
+  '/privacy': typeof PrivacyRoute
+  '/programmes': typeof ProgrammesRouteWithChildren
+  '/resources': typeof ResourcesRouteWithChildren
+  '/search': typeof SearchRoute
+  '/spadra': typeof SpadraRouteWithChildren
+  '/youth': typeof YouthRoute
+  '/careers/$slug': typeof CareersSlugRoute
+  '/events/$slug': typeof EventsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/resources/$slug': typeof ResourcesSlugRoute
+  '/spadra/countries/$code': typeof SpadraCountriesCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/accessibility'
     | '/advocacy'
     | '/careers'
     | '/contact'
+    | '/events'
+    | '/get-involved'
     | '/governance'
+    | '/knowledge-hub'
+    | '/membership'
     | '/news'
+    | '/partners'
+    | '/privacy'
     | '/programmes'
     | '/resources'
+    | '/search'
+    | '/spadra'
+    | '/youth'
+    | '/careers/$slug'
+    | '/events/$slug'
+    | '/news/$slug'
+    | '/programmes/$slug'
+    | '/resources/$slug'
+    | '/spadra/countries/$code'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/accessibility'
     | '/advocacy'
     | '/careers'
     | '/contact'
+    | '/events'
+    | '/get-involved'
     | '/governance'
+    | '/knowledge-hub'
+    | '/membership'
     | '/news'
+    | '/partners'
+    | '/privacy'
     | '/programmes'
     | '/resources'
+    | '/search'
+    | '/spadra'
+    | '/youth'
+    | '/careers/$slug'
+    | '/events/$slug'
+    | '/news/$slug'
+    | '/programmes/$slug'
+    | '/resources/$slug'
+    | '/spadra/countries/$code'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/accessibility'
     | '/advocacy'
     | '/careers'
     | '/contact'
+    | '/events'
+    | '/get-involved'
     | '/governance'
+    | '/knowledge-hub'
+    | '/membership'
     | '/news'
+    | '/partners'
+    | '/privacy'
     | '/programmes'
     | '/resources'
+    | '/search'
+    | '/spadra'
+    | '/youth'
+    | '/careers/$slug'
+    | '/events/$slug'
+    | '/news/$slug'
+    | '/programmes/$slug'
+    | '/resources/$slug'
+    | '/spadra/countries/$code'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AccessibilityRoute: typeof AccessibilityRoute
   AdvocacyRoute: typeof AdvocacyRoute
-  CareersRoute: typeof CareersRoute
+  CareersRoute: typeof CareersRouteWithChildren
   ContactRoute: typeof ContactRoute
+  EventsRoute: typeof EventsRouteWithChildren
+  GetInvolvedRoute: typeof GetInvolvedRoute
   GovernanceRoute: typeof GovernanceRoute
-  NewsRoute: typeof NewsRoute
-  ProgrammesRoute: typeof ProgrammesRoute
-  ResourcesRoute: typeof ResourcesRoute
+  KnowledgeHubRoute: typeof KnowledgeHubRoute
+  MembershipRoute: typeof MembershipRoute
+  NewsRoute: typeof NewsRouteWithChildren
+  PartnersRoute: typeof PartnersRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ProgrammesRoute: typeof ProgrammesRouteWithChildren
+  ResourcesRoute: typeof ResourcesRouteWithChildren
+  SearchRoute: typeof SearchRoute
+  SpadraRoute: typeof SpadraRouteWithChildren
+  YouthRoute: typeof YouthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -161,6 +363,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accessibility': {
+      id: '/accessibility'
+      path: '/accessibility'
+      fullPath: '/accessibility'
+      preLoaderRoute: typeof AccessibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/advocacy': {
@@ -184,6 +393,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-involved': {
+      id: '/get-involved'
+      path: '/get-involved'
+      fullPath: '/get-involved'
+      preLoaderRoute: typeof GetInvolvedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/governance': {
       id: '/governance'
       path: '/governance'
@@ -191,11 +414,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GovernanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/knowledge-hub': {
+      id: '/knowledge-hub'
+      path: '/knowledge-hub'
+      fullPath: '/knowledge-hub'
+      preLoaderRoute: typeof KnowledgeHubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/membership': {
+      id: '/membership'
+      path: '/membership'
+      fullPath: '/membership'
+      preLoaderRoute: typeof MembershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news': {
       id: '/news'
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programmes': {
@@ -212,19 +463,159 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spadra': {
+      id: '/spadra'
+      path: '/spadra'
+      fullPath: '/spadra'
+      preLoaderRoute: typeof SpadraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/youth': {
+      id: '/youth'
+      path: '/youth'
+      fullPath: '/youth'
+      preLoaderRoute: typeof YouthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers/$slug': {
+      id: '/careers/$slug'
+      path: '/$slug'
+      fullPath: '/careers/$slug'
+      preLoaderRoute: typeof CareersSlugRouteImport
+      parentRoute: typeof CareersRoute
+    }
+    '/events/$slug': {
+      id: '/events/$slug'
+      path: '/$slug'
+      fullPath: '/events/$slug'
+      preLoaderRoute: typeof EventsSlugRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
+      parentRoute: typeof NewsRoute
+    }
+    '/programmes/$slug': {
+      id: '/programmes/$slug'
+      path: '/$slug'
+      fullPath: '/programmes/$slug'
+      preLoaderRoute: typeof ProgrammesSlugRouteImport
+      parentRoute: typeof ProgrammesRoute
+    }
+    '/resources/$slug': {
+      id: '/resources/$slug'
+      path: '/$slug'
+      fullPath: '/resources/$slug'
+      preLoaderRoute: typeof ResourcesSlugRouteImport
+      parentRoute: typeof ResourcesRoute
+    }
+    '/spadra/countries/$code': {
+      id: '/spadra/countries/$code'
+      path: '/countries/$code'
+      fullPath: '/spadra/countries/$code'
+      preLoaderRoute: typeof SpadraCountriesCodeRouteImport
+      parentRoute: typeof SpadraRoute
+    }
   }
 }
+
+interface CareersRouteChildren {
+  CareersSlugRoute: typeof CareersSlugRoute
+}
+
+const CareersRouteChildren: CareersRouteChildren = {
+  CareersSlugRoute: CareersSlugRoute,
+}
+
+const CareersRouteWithChildren =
+  CareersRoute._addFileChildren(CareersRouteChildren)
+
+interface EventsRouteChildren {
+  EventsSlugRoute: typeof EventsSlugRoute
+}
+
+const EventsRouteChildren: EventsRouteChildren = {
+  EventsSlugRoute: EventsSlugRoute,
+}
+
+const EventsRouteWithChildren =
+  EventsRoute._addFileChildren(EventsRouteChildren)
+
+interface NewsRouteChildren {
+  NewsSlugRoute: typeof NewsSlugRoute
+}
+
+const NewsRouteChildren: NewsRouteChildren = {
+  NewsSlugRoute: NewsSlugRoute,
+}
+
+const NewsRouteWithChildren = NewsRoute._addFileChildren(NewsRouteChildren)
+
+interface ProgrammesRouteChildren {
+  ProgrammesSlugRoute: typeof ProgrammesSlugRoute
+}
+
+const ProgrammesRouteChildren: ProgrammesRouteChildren = {
+  ProgrammesSlugRoute: ProgrammesSlugRoute,
+}
+
+const ProgrammesRouteWithChildren = ProgrammesRoute._addFileChildren(
+  ProgrammesRouteChildren,
+)
+
+interface ResourcesRouteChildren {
+  ResourcesSlugRoute: typeof ResourcesSlugRoute
+}
+
+const ResourcesRouteChildren: ResourcesRouteChildren = {
+  ResourcesSlugRoute: ResourcesSlugRoute,
+}
+
+const ResourcesRouteWithChildren = ResourcesRoute._addFileChildren(
+  ResourcesRouteChildren,
+)
+
+interface SpadraRouteChildren {
+  SpadraCountriesCodeRoute: typeof SpadraCountriesCodeRoute
+}
+
+const SpadraRouteChildren: SpadraRouteChildren = {
+  SpadraCountriesCodeRoute: SpadraCountriesCodeRoute,
+}
+
+const SpadraRouteWithChildren =
+  SpadraRoute._addFileChildren(SpadraRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AccessibilityRoute: AccessibilityRoute,
   AdvocacyRoute: AdvocacyRoute,
-  CareersRoute: CareersRoute,
+  CareersRoute: CareersRouteWithChildren,
   ContactRoute: ContactRoute,
+  EventsRoute: EventsRouteWithChildren,
+  GetInvolvedRoute: GetInvolvedRoute,
   GovernanceRoute: GovernanceRoute,
-  NewsRoute: NewsRoute,
-  ProgrammesRoute: ProgrammesRoute,
-  ResourcesRoute: ResourcesRoute,
+  KnowledgeHubRoute: KnowledgeHubRoute,
+  MembershipRoute: MembershipRoute,
+  NewsRoute: NewsRouteWithChildren,
+  PartnersRoute: PartnersRoute,
+  PrivacyRoute: PrivacyRoute,
+  ProgrammesRoute: ProgrammesRouteWithChildren,
+  ResourcesRoute: ResourcesRouteWithChildren,
+  SearchRoute: SearchRoute,
+  SpadraRoute: SpadraRouteWithChildren,
+  YouthRoute: YouthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

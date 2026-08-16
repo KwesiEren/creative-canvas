@@ -8,6 +8,7 @@ import type {
   NavTab,
   ProgrammeId,
 } from "@/types";
+import { htmlLang, type Locale } from "@/lib/i18n";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { AccessibilityModal } from "./AccessibilityModal";
@@ -49,6 +50,8 @@ interface AdfContextValue {
   onOpenDonate: () => void;
   onOpenMembership: () => void;
   onOpenAccessibility: () => void;
+  lang: Locale;
+  setLang: (locale: Locale) => void;
 }
 
 const AdfContext = createContext<AdfContextValue | null>(null);
@@ -80,6 +83,11 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [membershipOpen, setMembershipOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const [settings, setSettings] = useState<AccessibilitySettings>(DEFAULT_SETTINGS);
+  const [lang, setLang] = useState<Locale>("en");
+
+  useEffect(() => {
+    document.documentElement.lang = htmlLang(lang);
+  }, [lang]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -103,8 +111,10 @@ export function AppShell({ children }: { children: ReactNode }) {
       onOpenDonate: () => setDonateOpen(true),
       onOpenMembership: () => setMembershipOpen(true),
       onOpenAccessibility: () => setAccessibilityOpen(true),
+      lang,
+      setLang,
     }),
-    [extra, navigate],
+    [extra, navigate, lang],
   );
 
   return (
@@ -116,6 +126,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           onOpenAccessibility={value.onOpenAccessibility}
           onOpenTakeAction={value.onOpenTakeAction}
           onOpenDonate={value.onOpenDonate}
+          lang={lang}
+          setLang={setLang}
         />
         <main id="main" className="flex-1">
           {children}

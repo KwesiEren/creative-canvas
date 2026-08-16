@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
-import { NEWS_DATA, PROGRAMMES_DATA } from '@/data/mockData';
-import { NewsItem, NavTab } from '@/types';
-import { PageHero, SectionHeading, StatBand, btnDonate, btnGhostLight, btnGhost, btnPrimary } from './ui';
+import React, { useState } from "react";
+import { NEWS_DATA, PROGRAMMES_DATA } from "@/data/mockData";
+import { NewsItem, NavTab } from "@/types";
+import {
+  PageHero,
+  SectionHeading,
+  StatBand,
+  btnDonate,
+  btnGhostLight,
+  btnGhost,
+  btnPrimary,
+} from "./ui";
 
 interface Props {
   onNavigate: (tab: NavTab) => void;
@@ -10,35 +18,35 @@ interface Props {
 }
 
 const HERO_IMAGE =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuByj2Ml4c7nvfBge8H6Ux0mK8K1M2TK9Y7yWq32uM43yHwryJSWELU31LYXw4pOtZ6O1nbK9RJjyfbs-7P_dTMwIGUFAczcqIKVSA1Hnerc8LbJSPsQ4moGc6Qmbk8ITgWSikWHdMI5FiTPTzErUrsRKMNjQlVPQnNG9Qp0IW2NNuWaFAzxYd4VISnXM2eF3QKtAAs08--ZjkrUBx1cNWPBfHR0v1pt1Jn_o-BpPUpI2I9SwA8iCIaC';
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuByj2Ml4c7nvfBge8H6Ux0mK8K1M2TK9Y7yWq32uM43yHwryJSWELU31LYXw4pOtZ6O1nbK9RJjyfbs-7P_dTMwIGUFAczcqIKVSA1Hnerc8LbJSPsQ4moGc6Qmbk8ITgWSikWHdMI5FiTPTzErUrsRKMNjQlVPQnNG9Qp0IW2NNuWaFAzxYd4VISnXM2eF3QKtAAs08--ZjkrUBx1cNWPBfHR0v1pt1Jn_o-BpPUpI2I9SwA8iCIaC";
 
 const LEAD_IMAGE =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuCYZuIyX9Ho-ibqwzFt22KG1IYNDjtiXoApWd9YPpskMnoVcmLQqjWY5kwqBO9GGAPU2FSJ5ey2nO8utKrDW2WLTkzS5FQ21RGOyYYpOH0JhJ6GMTL5Hh_EUp81uixqO2v0lZx3T64xPoOG9zDAcs7_2TVgEsAgzakgKxMJOJAmb9Gx6ctoRJjhFlCNAz_kq2lMjPWRKNQbaN0tLNf6uB872UU_7RJJ-o0jNyfaFf25pUvb5owHhkR1';
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuCYZuIyX9Ho-ibqwzFt22KG1IYNDjtiXoApWd9YPpskMnoVcmLQqjWY5kwqBO9GGAPU2FSJ5ey2nO8utKrDW2WLTkzS5FQ21RGOyYYpOH0JhJ6GMTL5Hh_EUp81uixqO2v0lZx3T64xPoOG9zDAcs7_2TVgEsAgzakgKxMJOJAmb9Gx6ctoRJjhFlCNAz_kq2lMjPWRKNQbaN0tLNf6uB872UU_7RJJ-o0jNyfaFf25pUvb5owHhkR1";
 
 const CASE_IMAGE =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuCDP8_ZulRnJ2SL2bdrSYv-pqaZnHa-gQVASe20G4fphgygggTbqo7HXlYk8Xl2rfMZAhNcxG7QzYUdHzRbed25M4Yuc__M-BAckrFMAF-FHZC94acOS7lMsS257U0rbgbVSzay3V-vfXbI5iIVhwb6JP1-TP9sPFj492dw89b-lSZUbLF0FyugGooaXd8Qo_D2PkL1I4yJPHcbAr-AZuxU3kp_jmQTXKBKW8AnMAj5jx5o4fTHq-xt';
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuCDP8_ZulRnJ2SL2bdrSYv-pqaZnHa-gQVASe20G4fphgygggTbqo7HXlYk8Xl2rfMZAhNcxG7QzYUdHzRbed25M4Yuc__M-BAckrFMAF-FHZC94acOS7lMsS257U0rbgbVSzay3V-vfXbI5iIVhwb6JP1-TP9sPFj492dw89b-lSZUbLF0FyugGooaXd8Qo_D2PkL1I4yJPHcbAr-AZuxU3kp_jmQTXKBKW8AnMAj5jx5o4fTHq-xt";
 
 const FOCUS_AREAS = [
   {
-    number: '01',
-    title: 'Ratification of the African Disability Protocol',
-    body: 'We lead the continental push for member states to sign, ratify and domesticate the African Disability Protocol, establishing a clear legal standard for inclusion.',
-    action: 'Read policy brief',
-    tab: 'resources' as NavTab,
+    number: "01",
+    title: "Ratification of the African Disability Protocol",
+    body: "We lead the continental push for member states to sign, ratify and domesticate the African Disability Protocol, establishing a clear legal standard for inclusion.",
+    action: "Read policy brief",
+    tab: "resources" as NavTab,
   },
   {
-    number: '02',
-    title: 'Monitoring CRPD Implementation',
-    body: 'We equip Organizations of Persons with Disabilities to collect robust, disaggregated data and hold governments accountable to the UN Convention.',
-    action: 'View reports',
-    tab: 'resources' as NavTab,
+    number: "02",
+    title: "Monitoring CRPD Implementation",
+    body: "We equip Organizations of Persons with Disabilities to collect robust, disaggregated data and hold governments accountable to the UN Convention.",
+    action: "View reports",
+    tab: "resources" as NavTab,
   },
   {
-    number: '03',
-    title: 'Women and Youth with Disabilities',
-    body: 'We tackle intersectional discrimination and put the voices of women and young people with disabilities at the centre of every policy discussion.',
-    action: 'Explore programmes',
-    tab: 'programmes' as NavTab,
+    number: "03",
+    title: "Women and Youth with Disabilities",
+    body: "We tackle intersectional discrimination and put the voices of women and young people with disabilities at the centre of every policy discussion.",
+    action: "Explore programmes",
+    tab: "programmes" as NavTab,
   },
 ];
 
@@ -61,7 +69,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
         <button onClick={onOpenDonate} className={btnDonate}>
           Donate now
         </button>
-        <button onClick={() => onNavigate('programmes')} className={btnGhostLight}>
+        <button onClick={() => onNavigate("programmes")} className={btnGhostLight}>
           Explore our work
         </button>
       </PageHero>
@@ -83,16 +91,16 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-[#33415c]">
             The African Disability Forum brings national and regional Organizations of Persons with
-            Disabilities into a single, accountable movement. We convene members, produce the evidence
-            that policy makers cannot ignore, and represent the disability community before the African
-            Union, the United Nations and national parliaments.
+            Disabilities into a single, accountable movement. We convene members, produce the
+            evidence that policy makers cannot ignore, and represent the disability community before
+            the African Union, the United Nations and national parliaments.
           </p>
           <p className="mt-4 text-lg leading-relaxed text-[#33415c]">
-            Our work is led by persons with disabilities. Every programme, publication and platform we
-            build — including this website — is designed to be usable by everyone.
+            Our work is led by persons with disabilities. Every programme, publication and platform
+            we build — including this website — is designed to be usable by everyone.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <button onClick={() => onNavigate('about')} className={btnPrimary}>
+            <button onClick={() => onNavigate("about")} className={btnPrimary}>
               About ADF
             </button>
             <button onClick={onOpenTakeAction} className={btnGhost}>
@@ -116,7 +124,9 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
                 key={area.number}
                 className="border-b border-r border-[#0f1b3d]/20 bg-white p-8 flex flex-col"
               >
-                <span className="font-display text-5xl leading-none text-[#b7cbe0]">{area.number}</span>
+                <span className="font-display text-5xl leading-none text-[#b7cbe0]">
+                  {area.number}
+                </span>
                 <h3 className="mt-6 text-2xl uppercase text-[#0f1b3d]">{area.title}</h3>
                 <p className="mt-4 text-[#33415c] leading-relaxed flex-1">{area.body}</p>
                 <button
@@ -135,10 +145,10 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
       <StatBand
         caption="Our reach across the continent"
         stats={[
-          { value: '60+', label: 'Member OPDs' },
-          { value: '38', label: 'Countries engaged' },
-          { value: '420+', label: 'OPD leaders trained' },
-          { value: '18', label: 'Policy papers adopted' },
+          { value: "60+", label: "Member OPDs" },
+          { value: "38", label: "Countries engaged" },
+          { value: "420+", label: "OPD leaders trained" },
+          { value: "18", label: "Policy papers adopted" },
         ]}
       />
 
@@ -149,7 +159,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
           title="Latest from the movement"
           action={
             <button
-              onClick={() => onNavigate('news')}
+              onClick={() => onNavigate("news")}
               className="text-sm font-bold uppercase tracking-widest text-[#0f1b3d] border-b-2 border-[#0f1b3d] pb-1 hover:text-[#245a86] hover:border-[#245a86] focus-ring cursor-pointer"
             >
               All news
@@ -167,9 +177,13 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
               />
               <div className="mt-6 flex items-center gap-3 text-xs font-bold uppercase tracking-widest">
                 <span className="bg-[#0f1b3d] text-white px-3 py-1">{featured.category}</span>
-                <time dateTime={featured.datetime} className="text-[#5b6b85]">{featured.date}</time>
+                <time dateTime={featured.datetime} className="text-[#5b6b85]">
+                  {featured.date}
+                </time>
               </div>
-              <h3 className="mt-4 text-2xl md:text-3xl uppercase text-[#0f1b3d]">{featured.title}</h3>
+              <h3 className="mt-4 text-2xl md:text-3xl uppercase text-[#0f1b3d]">
+                {featured.title}
+              </h3>
               <p className="mt-4 text-lg text-[#33415c] leading-relaxed">{featured.summary}</p>
               <button
                 onClick={() => setSelectedNews(featured)}
@@ -191,9 +205,13 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
                 <div>
                   <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest">
                     <span className="text-[#245a86]">{item.category}</span>
-                    <time dateTime={item.datetime} className="text-[#5b6b85]">{item.date}</time>
+                    <time dateTime={item.datetime} className="text-[#5b6b85]">
+                      {item.date}
+                    </time>
                   </div>
-                  <h3 className="mt-2 text-lg uppercase text-[#0f1b3d] leading-tight">{item.title}</h3>
+                  <h3 className="mt-2 text-lg uppercase text-[#0f1b3d] leading-tight">
+                    {item.title}
+                  </h3>
                   <button
                     onClick={() => setSelectedNews(item)}
                     className="mt-3 text-xs font-bold uppercase tracking-widest text-[#0f1b3d] border-b-2 border-[#245a86] pb-0.5 hover:text-[#245a86] focus-ring cursor-pointer"
@@ -215,7 +233,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
             title="Where the work happens"
             action={
               <button
-                onClick={() => onNavigate('programmes')}
+                onClick={() => onNavigate("programmes")}
                 className="text-sm font-bold uppercase tracking-widest text-[#0f1b3d] border-b-2 border-[#0f1b3d] pb-1 hover:text-[#245a86] hover:border-[#245a86] focus-ring cursor-pointer"
               >
                 All programmes
@@ -230,11 +248,48 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
                   <span className="text-xs font-bold uppercase tracking-widest text-[#245a86]">
                     {prog.acronym}
                   </span>
-                  <h3 className="mt-3 text-lg uppercase text-[#0f1b3d] leading-tight">{prog.name}</h3>
-                  <p className="mt-3 text-sm text-[#33415c] leading-relaxed flex-1">{prog.tagline}</p>
+                  <h3 className="mt-3 text-lg uppercase text-[#0f1b3d] leading-tight">
+                    {prog.name}
+                  </h3>
+                  <p className="mt-3 text-sm text-[#33415c] leading-relaxed flex-1">
+                    {prog.tagline}
+                  </p>
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SPADRA portal */}
+      <section className="bg-[#0f1b3d] text-white">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#f5b301]">
+              SPADRA Portal
+            </p>
+            <h2 className="mt-3 text-2xl md:text-4xl uppercase leading-tight">
+              Disability data, evidence and stakeholders in one place
+            </h2>
+            <p className="mt-4 text-[#dbe6f2] leading-relaxed">
+              Explore country profiles, the African Disability Protocol tracker, research and a
+              resources repository — then create a free account to build your saved list and
+              personal dashboard.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => onNavigate("spadra")}
+              className="inline-flex items-center justify-center gap-2 bg-[#f5b301] text-[#0f1b3d] font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-[#ffc933] transition-colors cursor-pointer"
+            >
+              Enter the SPADRA portal
+            </button>
+            <button
+              onClick={() => onNavigate("programmes", { programmeId: "spadra" })}
+              className="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-white hover:text-[#0f1b3d] transition-colors cursor-pointer"
+            >
+              About the SPADRA programme
+            </button>
           </div>
         </div>
       </section>
@@ -249,17 +304,22 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
             loading="lazy"
           />
           <div className="p-8 md:p-12 flex flex-col justify-center">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#245a86]">Impact case study</p>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#245a86]">
+              Impact case study
+            </p>
             <h2 className="mt-4 text-2xl md:text-4xl uppercase text-[#0f1b3d]">
               Landmark inclusive education act passed
             </h2>
             <p className="mt-6 text-lg text-[#33415c] leading-relaxed">
               After a three-year advocacy campaign led by ADF and national partners, the Inclusive
               Education Act mandates reasonable accommodations in all public schools and allocates
-              dedicated budget lines for accessible learning materials — reaching over 200,000 children
-              with disabilities.
+              dedicated budget lines for accessible learning materials — reaching over 200,000
+              children with disabilities.
             </p>
-            <button onClick={() => onNavigate('resources')} className={`${btnPrimary} mt-8 self-start`}>
+            <button
+              onClick={() => onNavigate("resources")}
+              className={`${btnPrimary} mt-8 self-start`}
+            >
               Read the case study
             </button>
           </div>
@@ -282,7 +342,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
             <button onClick={onOpenTakeAction} className={btnGhostLight}>
               Take action
             </button>
-            <button onClick={() => onNavigate('contact')} className={btnGhostLight}>
+            <button onClick={() => onNavigate("contact")} className={btnGhostLight}>
               Contact the secretariat
             </button>
           </div>
@@ -295,7 +355,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
           Strategic partners
         </p>
         <div className="flex flex-wrap items-center gap-10 md:gap-16">
-          {['SIDA', 'African Union', 'United Nations', 'Mastercard Foundation'].map((p) => (
+          {["SIDA", "African Union", "United Nations", "Mastercard Foundation"].map((p) => (
             <span key={p} className="font-display text-xl md:text-2xl uppercase text-[#1e3a5f]">
               {p}
             </span>

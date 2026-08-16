@@ -1,15 +1,12 @@
-import {
-  HeadContent,
-  Outlet,
-  Scripts,
-  createRootRouteWithContext,
-} from "@tanstack/react-router";
+import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import appCss from "@/styles.css?url";
 import { AppShell } from "@/components/adf/app-shell";
+import { NotFoundScreen } from "@/components/adf/NotFoundScreen";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  notFoundComponent: NotFoundScreen,
   head: () => ({
     meta: [
       { charSet: "utf-8" },

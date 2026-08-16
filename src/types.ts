@@ -19,19 +19,9 @@ export type NavTab =
   | "accessibility"
   | "privacy";
 
-export type AboutSubSection =
-  | "who"
-  | "history"
-  | "vision"
-  | "leadership"
-  | "membership";
+export type AboutSubSection = "who" | "history" | "vision" | "leadership" | "membership";
 
-export type ProgrammeId =
-  | "spadra"
-  | "we-are-able"
-  | "we-can-work"
-  | "helasia"
-  | "csso";
+export type ProgrammeId = "spadra" | "we-are-able" | "we-can-work" | "helasia" | "csso";
 
 export interface NavExtra {
   subSection?: AboutSubSection;
@@ -51,6 +41,7 @@ export interface ChatMessage {
   sender: "user" | "assistant";
   text: string;
   timestamp: string;
+  sources?: { label: string; path: string }[];
 }
 
 export interface EventItem {
@@ -136,7 +127,8 @@ export interface OpdCountry {
   membersCount: number;
 }
 
-export type KnowledgeFormat = "Report" | "Toolkit" | "Video" | "Audio" | "Easy Read" | "Infographic";
+export type KnowledgeFormat =
+  "Report" | "Toolkit" | "Video" | "Audio" | "Easy Read" | "Infographic";
 
 export interface KnowledgeItem {
   id: string;

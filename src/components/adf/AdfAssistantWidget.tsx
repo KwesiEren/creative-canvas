@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChatMessage, NavTab } from '@/types';
+import React, { useState, useRef, useEffect } from "react";
+import { ChatMessage, NavTab } from "@/types";
 
 interface Props {
   onNavigate: (tab: NavTab) => void;
@@ -9,24 +9,35 @@ interface Props {
 
 export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, onOpenSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTabMode, setActiveTabMode] = useState<'chat' | 'quickLinks'>('chat');
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: 'm1',
-      sender: 'assistant',
-      text: 'Hello! I am the ADF AI Assistant. How can I assist you today regarding disability rights, African Disability Protocol, or member OPD resources?',
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
-  ]);
-  const [input, setInput] = useState('');
+  const [activeTabMode, setActiveTabMode] = useState<"chat" | "quickLinks">("chat");
+  const initialGreeting: ChatMessage = {
+    id: "m1",
+    sender: "assistant",
+    text: "Hello! I am the ADF AI Assistant. How can I assist you today regarding disability rights, African Disability Protocol, or member OPD resources?",
+    timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+  };
+  const [messages, setMessages] = useState<ChatMessage[]>([initialGreeting]);
+  const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const chatBottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isOpen && activeTabMode === 'chat') {
-      chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (isOpen && activeTabMode === "chat") {
+      chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages, isOpen, activeTabMode]);
+
+  const handleReset = () => {
+    setMessages([
+      {
+        ...initialGreeting,
+        id: "m-reset",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      },
+    ]);
+    setInput("");
+    setLoading(false);
+  };
 
   const handleSend = async (textToSend?: string) => {
     const query = textToSend || input;
@@ -34,36 +45,40 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
 
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
-      sender: 'user',
+      sender: "user",
       text: query,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     };
 
     setMessages((prev) => [...prev, userMsg]);
-    if (!textToSend) setInput('');
+    if (!textToSend) setInput("");
     setLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: query })
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: query }),
       });
       const data = await res.json();
 
       const assistantMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        sender: 'assistant',
-        text: data.text || 'The African Disability Forum unifies OPDs across 40+ African nations to ensure full rights and inclusion.',
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        sender: "assistant",
+        text:
+          data.text ||
+          "The African Disability Forum unifies OPDs across 40+ African nations to ensure full rights and inclusion.",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        sources: Array.isArray(data.sources) ? data.sources : [],
       };
       setMessages((prev) => [...prev, assistantMsg]);
     } catch (err) {
       const fallbackMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        sender: 'assistant',
-        text: 'African Disability Forum (ADF) works to advocate for the African Disability Protocol domestication and UN CRPD implementation.',
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        sender: "assistant",
+        text: "African Disability Forum (ADF) works to advocate for the African Disability Protocol domestication and UN CRPD implementation.",
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        sources: [{ label: "ADF summary", path: "home" }],
       };
       setMessages((prev) => [...prev, fallbackMsg]);
     } finally {
@@ -88,7 +103,9 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
           <div className="w-8 h-8 rounded-full bg-[#245a86] flex items-center justify-center text-white">
             <span className="material-symbols-outlined text-xl">smart_toy</span>
           </div>
-          <span className="font-extrabold text-xs sm:text-sm tracking-wide pr-1">ADF Assistant</span>
+          <span className="font-extrabold text-xs sm:text-sm tracking-wide pr-1">
+            ADF Assistant
+          </span>
         </button>
       ) : (
         /* Expanded Dialog Window */
@@ -109,34 +126,44 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
               </div>
             </div>
 
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-[#dbe6f2] hover:text-white p-1 rounded-none hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Close assistant dialog"
-            >
-              <span className="material-symbols-outlined text-xl">close</span>
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={handleReset}
+                aria-label="Reset chat conversation"
+                title="Reset conversation"
+                className="text-[#dbe6f2] hover:text-white p-1 rounded-none hover:bg-white/10 transition-colors cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-lg">restart_alt</span>
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-[#dbe6f2] hover:text-white p-1 rounded-none hover:bg-white/10 transition-colors cursor-pointer"
+                aria-label="Close assistant dialog"
+              >
+                <span className="material-symbols-outlined text-xl">close</span>
+              </button>
+            </div>
           </div>
 
           {/* Mode Switcher Tabs */}
           <div className="flex border-b border-[#c4c6cf] dark:border-[#1e3a5f] bg-[#f4f7fa] dark:bg-[#0f1b3d] text-xs font-bold">
             <button
-              onClick={() => setActiveTabMode('chat')}
+              onClick={() => setActiveTabMode("chat")}
               className={`flex-1 py-2.5 flex items-center justify-center gap-1.5 border-b-2 transition-colors cursor-pointer ${
-                activeTabMode === 'chat'
-                  ? 'border-[#245a86] text-[#245a86] dark:text-[#a8c6e4] bg-white dark:bg-[#0a1128]'
-                  : 'border-transparent text-[#5b6b85] hover:text-[#0f1b3d]'
+                activeTabMode === "chat"
+                  ? "border-[#245a86] text-[#245a86] dark:text-[#a8c6e4] bg-white dark:bg-[#0a1128]"
+                  : "border-transparent text-[#5b6b85] hover:text-[#0f1b3d]"
               }`}
             >
               <span className="material-symbols-outlined text-base">chat</span>
               <span>AI Chat</span>
             </button>
             <button
-              onClick={() => setActiveTabMode('quickLinks')}
+              onClick={() => setActiveTabMode("quickLinks")}
               className={`flex-1 py-2.5 flex items-center justify-center gap-1.5 border-b-2 transition-colors cursor-pointer ${
-                activeTabMode === 'quickLinks'
-                  ? 'border-[#245a86] text-[#245a86] dark:text-[#a8c6e4] bg-white dark:bg-[#0a1128]'
-                  : 'border-transparent text-[#5b6b85] hover:text-[#0f1b3d]'
+                activeTabMode === "quickLinks"
+                  ? "border-[#245a86] text-[#245a86] dark:text-[#a8c6e4] bg-white dark:bg-[#0a1128]"
+                  : "border-transparent text-[#5b6b85] hover:text-[#0f1b3d]"
               }`}
             >
               <span className="material-symbols-outlined text-base">explore</span>
@@ -145,23 +172,52 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
           </div>
 
           {/* Dialog Body */}
-          {activeTabMode === 'chat' ? (
+          {activeTabMode === "chat" ? (
             <div className="flex flex-col h-[360px] bg-white dark:bg-[#0a1128]">
+              {/* AI disclosure */}
+              <div className="px-3 py-1.5 bg-[#fdf6e3] dark:bg-[#3a2f12] border-b border-[#c4c6cf] dark:border-[#1e3a5f] text-[10px] text-[#5b5a4a] dark:text-[#e8d9a8] leading-snug">
+                Demo assistant — answers are generated from a small ADF knowledge base and may be
+                approximate. Verify critical details with the cited pages.
+              </div>
               {/* Message List */}
               <div className="flex-1 p-3 overflow-y-auto space-y-3 text-xs">
                 {messages.map((m) => (
                   <div
                     key={m.id}
-                    className={`flex flex-col ${m.sender === 'user' ? 'items-end' : 'items-start'}`}
+                    className={`flex flex-col ${m.sender === "user" ? "items-end" : "items-start"}`}
                   >
                     <div
                       className={`p-3 rounded-none max-w-[88%] font-medium leading-relaxed ${
-                        m.sender === 'user'
-                          ? 'bg-[#0f1b3d] text-white rounded-br-none shadow-sm'
-                          : 'bg-[#e8edf3] text-[#0a1128] dark:bg-[#152a4a] dark:text-[#f4f7fa] border border-[#c4c6cf] dark:border-[#33415c] rounded-bl-none shadow-sm'
+                        m.sender === "user"
+                          ? "bg-[#0f1b3d] text-white rounded-br-none shadow-sm"
+                          : "bg-[#e8edf3] text-[#0a1128] dark:bg-[#152a4a] dark:text-[#f4f7fa] border border-[#c4c6cf] dark:border-[#33415c] rounded-bl-none shadow-sm"
                       }`}
                     >
                       {m.text}
+                      {m.sender === "assistant" && m.sources && m.sources.length > 0 && (
+                        <div className="mt-2.5 pt-2 border-t border-[#c4c6cf]/60 dark:border-[#33415c]">
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-[#245a86] mb-1">
+                            Sources
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {m.sources.map((source) => (
+                              <button
+                                key={source.label}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  onNavigate(source.path as NavTab);
+                                }}
+                                className="inline-flex items-center gap-1 px-2 py-1 bg-white dark:bg-[#0a1128] border border-[#245a86] text-[#0f1b3d] dark:text-white font-bold text-[10px] uppercase tracking-wider hover:bg-[#e8edf3] dark:hover:bg-[#152a4a] transition-colors cursor-pointer"
+                              >
+                                <span className="material-symbols-outlined text-xs">
+                                  open_in_new
+                                </span>
+                                {source.label}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                     <span className="text-[10px] text-[#5b6b85] mt-1 px-1">{m.timestamp}</span>
                   </div>
@@ -179,19 +235,19 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
               {/* Quick Topic Chips */}
               <div className="px-3 py-1.5 bg-[#e8edf3] dark:bg-[#152a4a] border-t border-[#c4c6cf] dark:border-[#1e3a5f] flex gap-1.5 overflow-x-auto text-[11px] whitespace-nowrap">
                 <button
-                  onClick={() => handleQuickTopic('How can an OPD join ADF?')}
+                  onClick={() => handleQuickTopic("How can an OPD join ADF?")}
                   className="px-2.5 py-1 bg-white dark:bg-[#0a1128] border border-[#c4c6cf] rounded-full text-[#0f1b3d] dark:text-white font-bold hover:bg-[#e8edf3] transition-colors cursor-pointer"
                 >
                   Join ADF
                 </button>
                 <button
-                  onClick={() => handleQuickTopic('What is the African Disability Protocol?')}
+                  onClick={() => handleQuickTopic("What is the African Disability Protocol?")}
                   className="px-2.5 py-1 bg-white dark:bg-[#0a1128] border border-[#c4c6cf] rounded-full text-[#0f1b3d] dark:text-white font-bold hover:bg-[#e8edf3] transition-colors cursor-pointer"
                 >
                   African Disability Protocol
                 </button>
                 <button
-                  onClick={() => handleQuickTopic('Show upcoming workshops and events')}
+                  onClick={() => handleQuickTopic("Show upcoming workshops and events")}
                   className="px-2.5 py-1 bg-white dark:bg-[#0a1128] border border-[#c4c6cf] rounded-full text-[#0f1b3d] dark:text-white font-bold hover:bg-[#e8edf3] transition-colors cursor-pointer"
                 >
                   Events
@@ -232,13 +288,13 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
               <div className="space-y-2 pt-1">
                 <button
                   onClick={() => {
-                    onNavigate('home');
+                    onNavigate("home");
                     setIsOpen(false);
                   }}
                   className={`w-full flex items-center justify-between p-2.5 rounded-none border transition-colors cursor-pointer ${
-                    currentTab === 'home'
-                      ? 'bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold'
-                      : 'border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
+                    currentTab === "home"
+                      ? "bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold"
+                      : "border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]"
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -250,17 +306,19 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
 
                 <button
                   onClick={() => {
-                    onNavigate('about');
+                    onNavigate("about");
                     setIsOpen(false);
                   }}
                   className={`w-full flex items-center justify-between p-2.5 rounded-none border transition-colors cursor-pointer ${
-                    currentTab === 'about'
-                      ? 'bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold'
-                      : 'border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
+                    currentTab === "about"
+                      ? "bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold"
+                      : "border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]"
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base text-[#245a86]">groups</span>
+                    <span className="material-symbols-outlined text-base text-[#245a86]">
+                      groups
+                    </span>
                     <span>About & OPD Governance</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
@@ -268,13 +326,13 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
 
                 <button
                   onClick={() => {
-                    onNavigate('programmes');
+                    onNavigate("programmes");
                     setIsOpen(false);
                   }}
                   className={`w-full flex items-center justify-between p-2.5 rounded-none border transition-colors cursor-pointer ${
-                    currentTab === 'programmes'
-                      ? 'bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold'
-                      : 'border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
+                    currentTab === "programmes"
+                      ? "bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold"
+                      : "border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]"
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -286,17 +344,19 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
 
                 <button
                   onClick={() => {
-                    onNavigate('resources');
+                    onNavigate("resources");
                     setIsOpen(false);
                   }}
                   className={`w-full flex items-center justify-between p-2.5 rounded-none border transition-colors cursor-pointer ${
-                    currentTab === 'resources'
-                      ? 'bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold'
-                      : 'border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
+                    currentTab === "resources"
+                      ? "bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold"
+                      : "border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]"
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base text-[#245a86]">folder</span>
+                    <span className="material-symbols-outlined text-base text-[#245a86]">
+                      folder
+                    </span>
                     <span>Publications & Policy Repository</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
@@ -304,17 +364,19 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
 
                 <button
                   onClick={() => {
-                    onNavigate('advocacy');
+                    onNavigate("advocacy");
                     setIsOpen(false);
                   }}
                   className={`w-full flex items-center justify-between p-2.5 rounded-none border transition-colors cursor-pointer ${
-                    currentTab === 'advocacy'
-                      ? 'bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold'
-                      : 'border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]'
+                    currentTab === "advocacy"
+                      ? "bg-[#e8edf3] border-[#245a86] text-[#0a1128] font-bold"
+                      : "border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a]"
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base text-[#245a86]">event</span>
+                    <span className="material-symbols-outlined text-base text-[#245a86]">
+                      event
+                    </span>
                     <span>Events & Advocacy Workshops</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
@@ -328,7 +390,9 @@ export const AdfAssistantWidget: React.FC<Props> = ({ onNavigate, currentTab, on
                   className="w-full flex items-center justify-between p-2.5 rounded-none border border-[#c4c6cf] dark:border-[#33415c] hover:bg-[#e8edf3] dark:hover:bg-[#152a4a] transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base text-[#245a86]">settings_accessibility</span>
+                    <span className="material-symbols-outlined text-base text-[#245a86]">
+                      settings_accessibility
+                    </span>
                     <span>Accessibility Options</span>
                   </div>
                   <span className="material-symbols-outlined text-sm">chevron_right</span>
