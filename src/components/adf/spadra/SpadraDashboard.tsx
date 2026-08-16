@@ -145,7 +145,7 @@ export const SpadraDashboard: React.FC<Props> = ({ onOpenTab }) => {
         </div>
         <div className="flex flex-wrap gap-3">
           <Link
-            to="/spadra/countries/ke"
+            to="/spadra/countries/$code" params={{ code: "ke" }}
             className="inline-flex items-center gap-2 border-2 border-[#0f1b3d] px-5 py-3 text-xs font-bold uppercase tracking-widest text-[#0f1b3d] hover:bg-[#0f1b3d] hover:text-white transition-colors"
           >
             Sample country profile

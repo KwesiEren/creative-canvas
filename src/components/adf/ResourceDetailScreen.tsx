@@ -261,7 +261,7 @@ export const ResourceDetailScreen: React.FC<Props> = ({ slug }) => {
             {relatedResources.map((res) => (
               <Link
                 key={res.id}
-                to={`/resources/${slugify(res.title)}`}
+                to="/resources/$slug" params={{ slug: slugify(res.title) }}
                 className="group border-2 border-[#0f1b3d]/20 p-6 hover:border-[#245a86] transition-colors bg-white"
               >
                 <div className="text-xs font-bold uppercase tracking-widest text-[#245a86]">

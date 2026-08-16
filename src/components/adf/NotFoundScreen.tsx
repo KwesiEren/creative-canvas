@@ -21,7 +21,7 @@ export const NotFoundScreen: React.FC = () => (
           Back to home
         </Link>
         <Link
-          to="/search"
+          to="/search" search={{ q: "" }}
           className="inline-flex items-center gap-2 border-2 border-[#0f1b3d] text-[#0f1b3d] font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-[#e8edf3] transition-colors"
         >
           <span className="material-symbols-outlined text-base">search</span>

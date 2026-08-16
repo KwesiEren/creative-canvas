@@ -115,7 +115,7 @@ export const NewsDetailScreen: React.FC<NewsDetailScreenProps> = ({ slug }) => {
                   relatedStories.map((story) => (
                     <Link
                       key={story.id}
-                      to={`/news/${slugify(story.title)}`}
+                      to="/news/$slug" params={{ slug: slugify(story.title) }}
                       className="block group border-b border-[#0f1b3d]/15 pb-5 last:border-b-0 last:pb-0 focus-ring"
                     >
                       <div className="flex gap-4">
