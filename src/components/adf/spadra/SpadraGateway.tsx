@@ -3,8 +3,7 @@ import { signIn, signUp } from "@/lib/spadraStore";
 
 const inputBase =
   "h-auto px-4 py-3 rounded-sm border-2 border-[var(--s-primary)]/20 bg-white text-[var(--s-primary)] focus-visible:ring-1 focus-visible:ring-[var(--s-focus)] focus-visible:border-[var(--s-focus)] text-base font-medium w-full";
-const labelBase =
-  "text-[11px] font-bold uppercase tracking-widest text-[var(--s-accent)] mb-2 block";
+const labelBase = "text-sm font-bold text-[var(--s-primary)] mb-2 block";
 
 const MODES = ["Sign in", "Create account"] as const;
 type Mode = (typeof MODES)[number];
@@ -36,80 +35,47 @@ export const SpadraGateway: React.FC = () => {
   const [mode, setMode] = useState<Mode>("Sign in");
 
   return (
-    <div className="animate-fade-in min-h-screen bg-[var(--s-surface)]">
-      <section className="bg-[var(--s-primary)] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--s-highlight)]">
-              SPADRA — Pan-African Data & Advocacy Platform
-            </p>
-            <h1 className="mt-4 text-4xl md:text-5xl uppercase leading-tight">
-              One portal for African disability data, evidence and action
-            </h1>
-            <p className="mt-6 text-[var(--s-muted-light)] text-lg leading-relaxed">
-              The Strategic Partnership for Advancing Disability Rights in Africa brings together
-              disability data, research, resources, organisations and stakeholders in a single
-              digital workspace for the movement.
-            </p>
-            <ul className="mt-8 grid sm:grid-cols-2 gap-4">
-              {[
-                {
-                  icon: "query_stats",
-                  label: "Data & insights",
-                  desc: "Country profiles, indicators and analytics",
-                },
-                {
-                  icon: "menu_book",
-                  label: "Research & evidence",
-                  desc: "Reports, papers and treaty monitoring",
-                },
-                {
-                  icon: "folder_shared",
-                  label: "Resources repository",
-                  desc: "Toolkits with a personal saved list",
-                },
-                {
-                  icon: "groups",
-                  label: "Stakeholders",
-                  desc: "OPDs, partners, governments, donors",
-                },
-              ].map((f) => (
-                <li key={f.label} className="border-2 border-white/15 p-5">
-                  <span className="material-symbols-outlined text-[var(--s-highlight)] text-2xl">
-                    {f.icon}
-                  </span>
-                  <h2 className="mt-3 font-bold uppercase tracking-widest text-sm">{f.label}</h2>
-                  <p className="mt-1 text-sm text-[var(--s-muted-light)]">{f.desc}</p>
-                </li>
-              ))}
-            </ul>
+    <div className="animate-fade-in min-h-screen bg-[var(--s-surface)] flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 md:p-10">
+        <div className="flex flex-col items-center text-center">
+          <div className="w-14 h-14 rounded-full bg-[var(--s-primary)] flex items-center justify-center mb-4">
+            <span className="material-symbols-outlined text-white text-3xl">school</span>
           </div>
-
-          <div className="border-2 border-[var(--s-highlight)] bg-white text-[var(--s-primary)] p-6 md:p-8">
-            <div className="flex rounded-sm border-2 border-[var(--s-primary)] overflow-hidden">
-              {MODES.map((m) => (
-                <button
-                  key={m}
-                  type="button"
-                  onClick={() => setMode(m)}
-                  className={`flex-1 py-2.5 font-bold uppercase tracking-widest text-xs text-center transition-colors cursor-pointer ${
-                    mode === m
-                      ? "bg-[var(--s-primary)] text-white"
-                      : "bg-[var(--s-surface)] text-[var(--s-primary)]"
-                  }`}
-                >
-                  {m}
-                </button>
-              ))}
-            </div>
-            {mode === "Sign in" ? <SignInForm /> : <SignUpForm />}
-            <p className="mt-6 text-xs text-[var(--s-muted)]">
-              This is a prototype. No data leaves your browser, and any account you create is stored
-              locally for demonstration only.
-            </p>
-          </div>
+          <h1 className="text-2xl font-bold text-[var(--s-primary)]">SPADRA Portal</h1>
+          <p className="mt-2 text-sm text-[var(--s-muted)] leading-relaxed">
+            Sign in to access disability data, research, resources and advocacy tools across Africa.
+          </p>
         </div>
-      </section>
+
+        <div className="mt-8 flex rounded-sm border-2 border-[var(--s-primary)] overflow-hidden">
+          {MODES.map((m) => (
+            <button
+              key={m}
+              type="button"
+              onClick={() => setMode(m)}
+              className={`flex-1 py-2.5 font-bold uppercase tracking-widest text-xs text-center transition-colors cursor-pointer ${
+                mode === m
+                  ? "bg-[var(--s-primary)] text-white"
+                  : "bg-[var(--s-surface)] text-[var(--s-primary)]"
+              }`}
+            >
+              {m}
+            </button>
+          ))}
+        </div>
+
+        {mode === "Sign in" ? <SignInForm /> : <SignUpForm />}
+
+        <p className="mt-6 text-xs text-[var(--s-muted)] text-center">
+          Don't have access credentials?{" "}
+          <span className="font-bold text-[var(--s-accent)]">Contact the programme office</span> for
+          assistance.
+        </p>
+        <p className="mt-3 text-[11px] text-[var(--s-muted)] text-center">
+          This is a prototype. No data leaves your browser, and any account you create is stored
+          locally for demonstration only.
+        </p>
+      </div>
     </div>
   );
 };
@@ -123,7 +89,7 @@ const SignInForm: React.FC = () => {
         e.preventDefault();
         signIn(email.trim() || "member@adf-portal.org");
       }}
-      className="mt-6 space-y-5"
+      className="mt-8 space-y-5"
     >
       <div>
         <label htmlFor="spadra-signin-email" className={labelBase}>
@@ -145,11 +111,6 @@ const SignInForm: React.FC = () => {
       >
         Sign in to the portal
       </button>
-      <p className="text-xs text-[var(--s-muted)]">
-        New to SPADRA?{" "}
-        <span className="font-bold text-[var(--s-accent)]">Switch to "Create account"</span> to
-        join.
-      </p>
     </form>
   );
 };
@@ -173,7 +134,7 @@ const SignUpForm: React.FC = () => {
           role,
         });
       }}
-      className="mt-6 space-y-5"
+      className="mt-8 space-y-5"
     >
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
