@@ -13,10 +13,10 @@ export const SpadraResearch: React.FC = () => {
     <div className="space-y-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-[#0f1b3d] uppercase">
+          <h2 className="text-2xl font-bold text-[var(--s-primary)] uppercase">
             Research, reports & evidence
           </h2>
-          <p className="mt-2 text-[#33415c]">
+          <p className="mt-2 text-[var(--s-muted)]">
             Treaty monitoring toolkits, policy analyses and community evidence in accessible
             formats.
           </p>
@@ -33,9 +33,12 @@ export const SpadraResearch: React.FC = () => {
         {filtered.map((item) => {
           const saved = savedResources.includes(item.id);
           return (
-            <article key={item.id} className="border-2 border-[#0f1b3d] p-6 flex flex-col gap-4">
+            <article
+              key={item.id}
+              className="border-2 border-[var(--s-primary)] p-6 flex flex-col gap-4"
+            >
               <div className="flex items-start justify-between gap-3">
-                <span className="bg-[#0f1b3d] text-white text-[11px] font-bold uppercase tracking-widest px-2.5 py-1">
+                <span className="bg-[var(--s-primary)] text-white text-[11px] font-bold uppercase tracking-widest px-2.5 py-1">
                   {item.format}
                 </span>
                 <button
@@ -45,7 +48,9 @@ export const SpadraResearch: React.FC = () => {
                     saved ? `Remove ${item.title} from saved resources` : `Save ${item.title}`
                   }
                   className={`flex items-center gap-1 text-xs font-bold uppercase tracking-widest cursor-pointer ${
-                    saved ? "text-[#245a86]" : "text-[#33415c] hover:text-[#245a86]"
+                    saved
+                      ? "text-[var(--s-accent)]"
+                      : "text-[var(--s-muted)] hover:text-[var(--s-accent)]"
                   }`}
                 >
                   <span
@@ -58,36 +63,46 @@ export const SpadraResearch: React.FC = () => {
                 </button>
               </div>
               <div>
-                <h3 className="font-bold text-[#0f1b3d] leading-snug">{item.title}</h3>
-                <p className="mt-2 text-sm text-[#33415c] leading-relaxed">{item.summary}</p>
+                <h3 className="font-bold text-[var(--s-primary)] leading-snug">{item.title}</h3>
+                <p className="mt-2 text-sm text-[var(--s-muted)] leading-relaxed">{item.summary}</p>
               </div>
-              <dl className="mt-auto grid grid-cols-2 gap-3 text-xs border-t border-[#0f1b3d]/15 pt-4">
+              <dl className="mt-auto grid grid-cols-2 gap-3 text-xs border-t border-[var(--s-primary)]/15 pt-4">
                 <div>
-                  <dt className="font-bold uppercase tracking-widest text-[#245a86]">Theme</dt>
-                  <dd className="mt-0.5 font-bold text-[#0f1b3d]">{item.theme}</dd>
+                  <dt className="font-bold uppercase tracking-widest text-[var(--s-accent)]">
+                    Theme
+                  </dt>
+                  <dd className="mt-0.5 font-bold text-[var(--s-primary)]">{item.theme}</dd>
                 </div>
                 <div>
-                  <dt className="font-bold uppercase tracking-widest text-[#245a86]">Language</dt>
-                  <dd className="mt-0.5 font-bold text-[#0f1b3d]">{item.language}</dd>
+                  <dt className="font-bold uppercase tracking-widest text-[var(--s-accent)]">
+                    Language
+                  </dt>
+                  <dd className="mt-0.5 font-bold text-[var(--s-primary)]">{item.language}</dd>
                 </div>
                 <div>
-                  <dt className="font-bold uppercase tracking-widest text-[#245a86]">Year</dt>
-                  <dd className="mt-0.5 font-bold text-[#0f1b3d]">{item.year}</dd>
+                  <dt className="font-bold uppercase tracking-widest text-[var(--s-accent)]">
+                    Year
+                  </dt>
+                  <dd className="mt-0.5 font-bold text-[var(--s-primary)]">{item.year}</dd>
                 </div>
                 <div>
-                  <dt className="font-bold uppercase tracking-widest text-[#245a86]">Duration</dt>
-                  <dd className="mt-0.5 font-bold text-[#0f1b3d]">{item.duration ?? "—"}</dd>
+                  <dt className="font-bold uppercase tracking-widest text-[var(--s-accent)]">
+                    Duration
+                  </dt>
+                  <dd className="mt-0.5 font-bold text-[var(--s-primary)]">
+                    {item.duration ?? "—"}
+                  </dd>
                 </div>
               </dl>
               <details className="text-sm">
-                <summary className="cursor-pointer text-xs font-bold uppercase tracking-widest text-[#245a86] focus-ring">
+                <summary className="cursor-pointer text-xs font-bold uppercase tracking-widest text-[var(--s-accent)] focus-ring">
                   Accessible formats
                 </summary>
                 <ul className="mt-2 flex flex-wrap gap-2">
                   {item.accessibleFormats.map((f) => (
                     <li
                       key={f}
-                      className="bg-[#e8edf3] px-2.5 py-1 text-xs font-bold text-[#0f1b3d]"
+                      className="bg-[var(--s-surface)] px-2.5 py-1 text-xs font-bold text-[var(--s-primary)]"
                     >
                       {f}
                     </li>

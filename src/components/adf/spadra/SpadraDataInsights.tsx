@@ -27,8 +27,8 @@ export const SpadraDataInsights: React.FC = () => {
   return (
     <div className="space-y-12">
       <section>
-        <h2 className="text-2xl font-bold text-[#0f1b3d] uppercase">Country profiles</h2>
-        <p className="mt-2 text-[#33415c] leading-relaxed">
+        <h2 className="text-2xl font-bold text-[var(--s-primary)] uppercase">Country profiles</h2>
+        <p className="mt-2 text-[var(--s-muted)] leading-relaxed">
           Open a country to explore population context, disability data indicators, treaty status
           and milestones — each page ships an accessible chart plus an equivalent data table.
         </p>
@@ -38,18 +38,18 @@ export const SpadraDataInsights: React.FC = () => {
               key={profile.code}
               to="/spadra/countries/$code"
               params={{ code: profile.code }}
-              className="group border-2 border-[#0f1b3d] p-5 flex flex-col gap-3 hover:bg-[#e8edf3] transition-colors"
+              className="group border-2 border-[var(--s-primary)] p-5 flex flex-col gap-3 hover:bg-[var(--s-surface)] transition-colors"
             >
-              <span className="font-display text-3xl text-[#0f1b3d]">
+              <span className="font-display text-3xl text-[var(--s-primary)]">
                 {profile.country.toUpperCase().slice(0, 3)}
               </span>
               <div>
-                <h3 className="font-bold text-[#0f1b3d] uppercase tracking-wide">
+                <h3 className="font-bold text-[var(--s-primary)] uppercase tracking-wide">
                   {profile.country}
                 </h3>
-                <p className="mt-1 text-sm text-[#33415c]">{profile.region}</p>
+                <p className="mt-1 text-sm text-[var(--s-muted)]">{profile.region}</p>
               </div>
-              <span className="mt-auto inline-flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-[#245a86] group-hover:underline">
+              <span className="mt-auto inline-flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-[var(--s-accent)] group-hover:underline">
                 View profile
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
               </span>
@@ -61,10 +61,13 @@ export const SpadraDataInsights: React.FC = () => {
       <section aria-labelledby="tracker-heading">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 id="tracker-heading" className="text-2xl font-bold text-[#0f1b3d] uppercase">
+            <h2
+              id="tracker-heading"
+              className="text-2xl font-bold text-[var(--s-primary)] uppercase"
+            >
               African Disability Protocol tracker
             </h2>
-            <p className="mt-2 text-[#33415c]">
+            <p className="mt-2 text-[var(--s-muted)]">
               CRPD ratification and progress towards signing and ratifying the African Disability
               Protocol, maintained by the SPADRA secretariat.
             </p>
@@ -76,11 +79,11 @@ export const SpadraDataInsights: React.FC = () => {
             onChange={(v) => setStatusFilter(v as StatusOption)}
           />
         </div>
-        <div className="mt-6 overflow-x-auto border-2 border-[#0f1b3d]">
+        <div className="mt-6 overflow-x-auto border-2 border-[var(--s-primary)]">
           <table className="w-full border-collapse text-sm min-w-[720px]">
             <caption className="sr-only">Disability treaty ratification status by country</caption>
             <thead>
-              <tr className="bg-[#0f1b3d] text-white text-left">
+              <tr className="bg-[var(--s-primary)] text-white text-left">
                 <th scope="col" className="px-4 py-3 font-bold uppercase tracking-widest text-xs">
                   Country
                 </th>
@@ -102,8 +105,8 @@ export const SpadraDataInsights: React.FC = () => {
               {filteredRows.map((row) => {
                 const status = protocolStatus(row);
                 return (
-                  <tr key={row.code} className="border-t border-[#0f1b3d]/15 align-top">
-                    <th scope="row" className="px-4 py-3 font-bold text-[#0f1b3d]">
+                  <tr key={row.code} className="border-t border-[var(--s-primary)]/15 align-top">
+                    <th scope="row" className="px-4 py-3 font-bold text-[var(--s-primary)]">
                       {row.country}
                     </th>
                     <td className="px-4 py-3">
@@ -119,8 +122,8 @@ export const SpadraDataInsights: React.FC = () => {
                         label={status}
                       />
                     </td>
-                    <td className="px-4 py-3 text-[#33415c]">{row.nationalLaw}</td>
-                    <td className="px-4 py-3 text-[#33415c]">{row.lastUpdated}</td>
+                    <td className="px-4 py-3 text-[var(--s-muted)]">{row.nationalLaw}</td>
+                    <td className="px-4 py-3 text-[var(--s-muted)]">{row.lastUpdated}</td>
                   </tr>
                 );
               })}
@@ -130,10 +133,10 @@ export const SpadraDataInsights: React.FC = () => {
       </section>
 
       <section aria-labelledby="analytics-heading">
-        <h2 id="analytics-heading" className="text-2xl font-bold text-[#0f1b3d] uppercase">
+        <h2 id="analytics-heading" className="text-2xl font-bold text-[var(--s-primary)] uppercase">
           Analytics explorer
         </h2>
-        <p className="mt-2 text-[#33415c]">
+        <p className="mt-2 text-[var(--s-muted)]">
           Every visual below is backed by a machine-readable data table for screen-reader users.
         </p>
         <div className="mt-6 grid lg:grid-cols-2 gap-8">
@@ -142,10 +145,12 @@ export const SpadraDataInsights: React.FC = () => {
             unit="%"
             data={deviceCoverage}
           />
-          <div className="border-2 border-[#0f1b3d] p-6 flex flex-col justify-center gap-4">
-            <span className="material-symbols-outlined text-4xl text-[#245a86]">monitoring</span>
-            <h3 className="text-lg font-bold text-[#0f1b3d] uppercase">About the data</h3>
-            <p className="text-sm text-[#33415c] leading-relaxed">
+          <div className="border-2 border-[var(--s-primary)] p-6 flex flex-col justify-center gap-4">
+            <span className="material-symbols-outlined text-4xl text-[var(--s-accent)]">
+              monitoring
+            </span>
+            <h3 className="text-lg font-bold text-[var(--s-primary)] uppercase">About the data</h3>
+            <p className="text-sm text-[var(--s-muted)] leading-relaxed">
               Indicators combine national statistical office figures, WHO-WB estimates and OPD
               member verification. Figures are illustrative for this prototype and are reviewed each
               quarter by the SPADRA data working group.

@@ -17,7 +17,6 @@
   --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Hind", ui-sans-serif, system-ui, sans-serif;
 
-
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -112,7 +111,6 @@
   --sidebar-ring: oklch(0.45 0.1 255);
 }
 
-
 /* High-contrast mode toggled from the accessibility toolbar. */
 .hc {
   --background: oklch(1 0 0);
@@ -167,7 +165,6 @@
     line-height: 1.05;
     text-wrap: balance;
   }
-
 
   :focus-visible {
     outline: 3px solid var(--color-ring);
@@ -254,10 +251,15 @@
   );
 }
 
-
 @keyframes adf-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .animate-fade-in {
@@ -268,6 +270,23 @@
 .dyslexic {
   font-family: "Comic Sans MS", "Verdana", sans-serif;
   letter-spacing: 0.02em;
+}
+
+/* SPADRA portal — scoped brand overrides (blue + white theme, Montserrat font). */
+.spadra-portal {
+  --s-primary: #1d4ed8;
+  --s-primary-hover: #1e40af;
+  --s-accent: #2563eb;
+  --s-highlight: #3b82f6;
+  --s-surface: #eff6ff;
+  --s-muted-light: #bfdbfe;
+  --s-muted: #6b7280;
+  --s-focus: #2563eb;
+}
+
+.spadra-portal,
+.spadra-portal * {
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 }
 
 .material-symbols-outlined {

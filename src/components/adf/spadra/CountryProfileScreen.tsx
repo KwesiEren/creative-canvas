@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
 import { COUNTRY_PROFILES } from "@/data/extraData";
-import { findByIdSlug, findByCustomSlug } from "@/lib/slug";
+import { findByCustomSlug } from "@/lib/slug";
 import { Breadcrumbs, BarChart, MetaRow, EmptyState } from "../ui-extra";
-import { PageHero, SectionHeading } from "../ui";
+import { SectionHeading } from "../ui";
 
 interface Props {
   code: string;
@@ -19,7 +19,7 @@ export const CountryProfileScreen: React.FC<Props> = ({ code }) => {
         <div className="mt-8 text-center">
           <Link
             to="/spadra"
-            className="inline-flex items-center justify-center gap-2 border-2 border-[#0f1b3d] text-[#0f1b3d] font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-[#0f1b3d] hover:text-white transition-colors"
+            className="inline-flex items-center justify-center gap-2 border-2 border-[var(--s-primary)] text-[var(--s-primary)] font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-[var(--s-primary)] hover:text-white transition-colors"
           >
             Back to the SPADRA portal
           </Link>
@@ -40,13 +40,20 @@ export const CountryProfileScreen: React.FC<Props> = ({ code }) => {
         ]}
       />
 
-      <PageHero
-        eyebrow={`${profile.region} · SPADRA country profile`}
-        title={`${profile.country} at a glance`}
-        intro={profile.summary}
-        image="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1600&q=60"
-        imageAlt={`Map imagery representing ${profile.country}`}
-      />
+      {/* Country hero */}
+      <section className="bg-[var(--s-primary)] text-white">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-16">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--s-highlight)]">
+            {profile.region} · SPADRA country profile
+          </p>
+          <h1 className="mt-4 text-4xl md:text-5xl uppercase leading-tight">
+            {profile.country} at a glance
+          </h1>
+          <p className="mt-6 text-[var(--s-muted-light)] text-lg leading-relaxed max-w-3xl">
+            {profile.summary}
+          </p>
+        </div>
+      </section>
 
       <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-12 space-y-12">
         <MetaRow
@@ -76,12 +83,12 @@ export const CountryProfileScreen: React.FC<Props> = ({ code }) => {
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           <section>
             <SectionHeading eyebrow="Country context" title="Overview" />
-            <p className="text-lg leading-relaxed text-[#33415c]">{profile.summary}</p>
-            <div className="mt-6 bg-[#e8edf3] border-l-4 border-[#245a86] p-5">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#245a86]">
+            <p className="text-lg leading-relaxed text-[var(--s-muted)]">{profile.summary}</p>
+            <div className="mt-6 bg-[var(--s-surface)] border-l-4 border-[var(--s-accent)] p-5">
+              <p className="text-xs font-bold uppercase tracking-widest text-[var(--s-accent)]">
                 Focal member OPD
               </p>
-              <p className="mt-2 font-bold text-[#0f1b3d]">{profile.focalOpd}</p>
+              <p className="mt-2 font-bold text-[var(--s-primary)]">{profile.focalOpd}</p>
             </div>
           </section>
 
@@ -91,16 +98,16 @@ export const CountryProfileScreen: React.FC<Props> = ({ code }) => {
               {profile.milestones.map((milestone, i) => (
                 <li key={milestone.year} className="flex gap-4">
                   <div className="flex flex-col items-center">
-                    <span className="w-3 h-3 rounded-full bg-[#0f1b3d] mt-1.5 shrink-0" />
+                    <span className="w-3 h-3 rounded-full bg-[var(--s-primary)] mt-1.5 shrink-0" />
                     {i < profile.milestones.length - 1 && (
-                      <span className="w-0.5 flex-1 bg-[#0f1b3d]/20" />
+                      <span className="w-0.5 flex-1 bg-[var(--s-primary)]/20" />
                     )}
                   </div>
                   <div className="pb-6">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#245a86]">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[var(--s-accent)]">
                       {milestone.year}
                     </span>
-                    <p className="mt-1 font-bold text-[#0f1b3d]">{milestone.event}</p>
+                    <p className="mt-1 font-bold text-[var(--s-primary)]">{milestone.event}</p>
                   </div>
                 </li>
               ))}
@@ -108,18 +115,18 @@ export const CountryProfileScreen: React.FC<Props> = ({ code }) => {
           </section>
         </div>
 
-        <div className="border-2 border-[#0f1b3d] bg-[#e8edf3] p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="border-2 border-[var(--s-primary)] bg-[var(--s-surface)] p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-lg font-bold text-[#0f1b3d] uppercase">
+            <h2 className="text-lg font-bold text-[var(--s-primary)] uppercase">
               Explore related country data
             </h2>
-            <p className="mt-1 text-sm text-[#33415c]">
+            <p className="mt-1 text-sm text-[var(--s-muted)]">
               Compare treaty ratification across all tracked countries in the SPADRA policy tracker.
             </p>
           </div>
           <Link
             to="/spadra"
-            className="inline-flex items-center justify-center gap-2 bg-[#0f1b3d] text-white font-bold uppercase tracking-widest text-xs px-6 py-3 hover:bg-[#1e3a5f] transition-colors self-start md:self-auto"
+            className="inline-flex items-center justify-center gap-2 bg-[var(--s-primary)] text-white font-bold uppercase tracking-widest text-xs px-6 py-3 hover:bg-[var(--s-primary-hover)] transition-colors self-start md:self-auto"
           >
             <span className="material-symbols-outlined text-base">query_stats</span>
             Open the portal

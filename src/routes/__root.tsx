@@ -1,4 +1,10 @@
-import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRouteWithContext,
+  useRouterState,
+} from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import appCss from "@/styles.css?url";
@@ -20,7 +26,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Hind:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Hind:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap",
       },
 
       {
@@ -30,12 +36,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
   }),
   shellComponent: RootDocument,
-  component: () => (
+  component: MaybeShell,
+});
+
+function MaybeShell() {
+  const pathname = useRouterState({ selector: (s) => s.location.pathname });
+  const isSpadra = pathname.startsWith("/spadra");
+
+  if (isSpadra) {
+    return (
+      <div className="spadra-portal">
+        <Outlet />
+      </div>
+    );
+  }
+
+  return (
     <AppShell>
       <Outlet />
     </AppShell>
-  ),
-});
+  );
+}
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
