@@ -171,14 +171,12 @@ export const Header: React.FC<Props> = ({
             aria-label="African Disability Forum Home"
             className="font-bold text-xl md:text-2xl text-[#0f1b3d] dark:text-[#dbe6f2] focus-ring flex items-center gap-2.5 cursor-pointer text-left"
           >
-            <div className="w-10 h-10 rounded-full bg-[#0f1b3d] text-white flex items-center justify-center shadow-sm">
-              <span
-                className="material-symbols-outlined text-2xl"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                accessibility_new
-              </span>
-            </div>
+            <img
+              src={adfLogo.url}
+              alt="African Disability Forum logo"
+              className="h-10 w-auto dark:invert"
+            />
+
             <div className="flex flex-col">
               <span className="font-extrabold tracking-tight text-lg md:text-xl leading-none">
                 African Disability Forum
