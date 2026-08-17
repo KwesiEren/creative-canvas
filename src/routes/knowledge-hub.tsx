@@ -9,6 +9,7 @@ export const Route = createFileRoute("/knowledge-hub")({
       description:
         "Toolkits, explainers, multimedia and research curated for disability rights organizers, OPDs and policy advocates across Africa.",
       path: "/knowledge-hub",
+      image: "/images/adf-event-5.png",
       keywords:
         "disability rights, knowledge hub, research, toolkits, CRPD, African Disability Protocol, OPD resources",
     }),

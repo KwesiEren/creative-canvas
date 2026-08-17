@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
 import { NavTab, AboutSubSection, ProgrammeId } from "@/types";
-import adfLogo from "@/assets/adf-logo.png.asset.json";
+import { assetUrl } from "@/lib/assetUrl";
 
 
 interface Props {
@@ -30,7 +30,7 @@ export const Footer: React.FC<Props> = ({ onNavigate, onOpenAccessibility }) => 
         <div className="flex flex-col gap-3 md:col-span-1">
           <h2 className="text-lg uppercase flex items-center gap-2">
             <img
-              src={adfLogo.url}
+              src={assetUrl("/images/adf-logo.png")}
               alt="African Disability Forum logo"
               className="h-12 w-auto invert"
             />

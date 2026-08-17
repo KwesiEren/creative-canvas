@@ -11,9 +11,9 @@ import { KNOWLEDGE_ITEMS } from "@/data/extraData";
 import { slugify } from "@/lib/slug";
 import { PageHero } from "./ui";
 import { EmptyState } from "./ui-extra";
+import { assetUrl } from "@/lib/assetUrl";
 
-const HERO_IMAGE =
-  "/__l5e/assets-v1/b7b9c09a-82bb-4225-b852-22af7bb2ab1a/adf-photo-5.jpg";
+const HERO_IMAGE = assetUrl("/images/adf-event-5.png");
 
 interface ResultItem {
   id: string;

@@ -7,6 +7,7 @@ import type {
   YouthOpportunity,
   YouthStory,
 } from '../types';
+import { assetUrl } from '@/lib/assetUrl';
 
 /** Mock content for the Knowledge Hub, Youth, Partners and SPADRA sections. */
 
@@ -138,7 +139,7 @@ export const YOUTH_STORIES: YouthStory[] = [
     title: 'From student union to national assembly',
     name: 'Thandiwe Moyo',
     country: 'Zimbabwe',
-    image: '/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg',
+    image: assetUrl('/images/adf-event-1.jpg'),
     quote: 'They kept telling me the building had no ramp. I decided the law needed one first.',
     body: 'Thandiwe organised her university disability caucus, then led a two-year campaign that ended with accessible-infrastructure obligations written into a municipal by-law. She now advises three student federations on how to petition their councils.',
   },
@@ -147,7 +148,7 @@ export const YOUTH_STORIES: YouthStory[] = [
     title: 'Building sign language into the classroom',
     name: 'Ibrahim Diallo',
     country: 'Senegal',
-    image: '/__l5e/assets-v1/b7b9c09a-82bb-4225-b852-22af7bb2ab1a/adf-photo-5.jpg',
+    image: assetUrl('/images/adf-event-5.png'),
     quote: 'Deaf children were present in school but absent from the lesson.',
     body: 'Ibrahim trained 140 primary teachers in basic Senegalese sign language and helped the education ministry pilot interpreter placements in twelve schools across Dakar and Thiès.',
   },
@@ -156,7 +157,7 @@ export const YOUTH_STORIES: YouthStory[] = [
     title: 'A workshop that became a business',
     name: 'Grace Achieng',
     country: 'Kenya',
-    image: '/__l5e/assets-v1/ab8ae646-490d-420d-a8e9-5e2a2e083cd7/adf-photo-3.jpg',
+    image: assetUrl('/images/adf-event-3.jpg'),
     quote: 'We repair wheelchairs faster than they can be imported.',
     body: 'With a We Can Work seed grant, Grace set up a wheelchair repair and fitting workshop in Kisumu that now employs seven technicians, five of whom are wheelchair users themselves.',
   },

@@ -4,9 +4,9 @@ import { OPD_COUNTRIES } from "@/data/mockData";
 import { OpdCountry } from "@/types";
 import { PageHero, SectionHeading, btnPrimary, btnGhost, btnGhostLight } from "./ui";
 import { FilterChips, EmptyState } from "./ui-extra";
+import { assetUrl } from "@/lib/assetUrl";
 
-const HERO_IMAGE =
-  "/__l5e/assets-v1/fc164317-bb7d-412f-b227-19c662116535/adf-photo-2.jpg";
+const HERO_IMAGE = assetUrl("/images/adf-event-2.jpg");
 
 export const MembershipScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");

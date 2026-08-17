@@ -5,9 +5,9 @@ import { NewsItem } from "@/types";
 import { slugify } from "@/lib/slug";
 import { PageHero, SectionHeading } from "./ui";
 import { FilterChips, Pagination, EmptyState } from "./ui-extra";
+import { assetUrl } from "@/lib/assetUrl";
 
-const HERO_IMAGE =
-  "/__l5e/assets-v1/3903ae07-7c5c-4d6a-be46-db978561b3da/adf-photo-6.jpg";
+const HERO_IMAGE = assetUrl("/images/adf-event-6.png");
 
 const ITEMS_PER_PAGE = 9;
 

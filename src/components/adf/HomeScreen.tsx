@@ -10,6 +10,7 @@ import {
   btnGhost,
   btnPrimary,
 } from "./ui";
+import { assetUrl } from "@/lib/assetUrl";
 
 interface Props {
   onNavigate: (tab: NavTab, extra?: { programmeId?: ProgrammeId }) => void;
@@ -17,14 +18,11 @@ interface Props {
   onOpenDonate: () => void;
 }
 
-const HERO_IMAGE =
-  "/__l5e/assets-v1/fc164317-bb7d-412f-b227-19c662116535/adf-photo-2.jpg";
+const HERO_IMAGE = assetUrl("/images/adf-event-2.jpg");
 
-const LEAD_IMAGE =
-  "/__l5e/assets-v1/ab8ae646-490d-420d-a8e9-5e2a2e083cd7/adf-photo-3.jpg";
+const LEAD_IMAGE = assetUrl("/images/adf-event-3.jpg");
 
-const CASE_IMAGE =
-  "/__l5e/assets-v1/3e4db988-eb52-42fc-b023-d413f1380676/adf-photo-4.jpg";
+const CASE_IMAGE = assetUrl("/images/adf-event-4.jpg");
 
 const FOCUS_AREAS = [
   {
@@ -394,3 +392,5 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
     </div>
   );
 };
+
+

@@ -10,6 +10,7 @@ export const Route = createFileRoute("/")({
       description:
         "The African Disability Forum unites organisations of persons with disabilities across Africa to advance rights, influence policy and share evidence.",
       path: "/",
+      image: "/images/adf-event-2.jpg",
       keywords:
         "African Disability Forum, ADF, disability rights Africa, CRPD, African Disability Protocol, OPD",
     }),

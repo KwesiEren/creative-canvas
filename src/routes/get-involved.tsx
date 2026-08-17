@@ -9,6 +9,7 @@ export const Route = createFileRoute("/get-involved")({
       description:
         "Donate, volunteer your skills, or partner with the African Disability Forum to advance the rights of persons with disabilities across Africa.",
       path: "/get-involved",
+      image: "/images/adf-event-1.jpg",
       keywords:
         "donate, volunteer, partner, get involved, African Disability Forum, disability rights",
     }),

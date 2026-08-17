@@ -9,6 +9,7 @@ export const Route = createFileRoute("/spadra")({
       description:
         "The SPADRA digital portal: one workspace for African disability data, research, resources, organisations and stakeholder engagement.",
       path: "/spadra",
+      image: "/images/adf-event-4.jpg",
       keywords:
         "SPADRA, disability data Africa, policy tracker, African Disability Protocol, portal, stakeholders",
     }),

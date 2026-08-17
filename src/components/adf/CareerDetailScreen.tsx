@@ -8,9 +8,9 @@ import { findByTitleSlug, slugify } from "@/lib/slug";
 import { buildCanonical } from "@/lib/slug";
 import { Breadcrumbs, MetaRow, ShareRow, Prose } from "./ui-extra";
 import { btnPrimary, btnGhost, PageHero, SectionHeading } from "./ui";
+import { assetUrl } from "@/lib/assetUrl";
 
-const OFFICE_IMAGE =
-  "/__l5e/assets-v1/ab8ae646-490d-420d-a8e9-5e2a2e083cd7/adf-photo-3.jpg";
+const OFFICE_IMAGE = assetUrl("/images/adf-event-3.jpg");
 
 const hearAboutOptions = [
   "ADF website",

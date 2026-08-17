@@ -23,9 +23,10 @@ export function buildMeta({
   keywords,
 }: SeoMetaInput) {
   const canonical = buildCanonical(path);
-  const safeImage =
-    image ??
-    "/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg";
+  const baseUrl = "https://adf-secretariat.org";
+  const safeImage = image
+    ? (image.startsWith("http") ? image : `${baseUrl}${image.startsWith("/") ? image : `/${image}`}`)
+    : `${baseUrl}/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg`;
   const meta = [
     { title },
     { name: "description", content: description },

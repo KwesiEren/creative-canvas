@@ -9,6 +9,7 @@ export const Route = createFileRoute("/membership")({
       description:
         "Meet the national and regional organisations of persons with disabilities that make up the ADF federation, and learn how to join the continental voice for disability rights.",
       path: "/membership",
+      image: "/images/adf-event-2.jpg",
       keywords:
         "ADF membership, OPD directory, organisations of persons with disabilities, join ADF, disability rights network",
     }),

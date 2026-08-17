@@ -12,6 +12,7 @@ export const Route = createFileRoute("/search")({
       description:
         "Search news, events, resources, programmes, careers and knowledge hub content across the African Disability Forum website.",
       path: "/search",
+      image: "/images/adf-event-5.png",
       keywords: "search, ADF, African Disability Forum, news, resources, events",
     }),
 

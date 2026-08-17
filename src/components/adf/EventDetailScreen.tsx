@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { assetUrl } from '@/lib/assetUrl';
 
 const registrationSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters'),
@@ -109,7 +110,7 @@ export const EventDetailScreen: React.FC<Props> = ({ slug }) => {
         eyebrow={`${item.type} — ${item.status}`}
         title={item.title}
         intro={paragraphs[0] ?? ''}
-        image="/__l5e/assets-v1/ab8ae646-490d-420d-a8e9-5e2a2e083cd7/adf-photo-3.jpg"
+        image={assetUrl("/images/adf-event-3.jpg")}
         imageAlt={`${item.type} conference event`}
       />
 

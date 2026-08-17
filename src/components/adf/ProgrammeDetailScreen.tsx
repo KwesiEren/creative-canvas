@@ -5,6 +5,7 @@ import type { ProgrammeId } from '@/types';
 import { findByIdSlug, slugify } from '@/lib/slug';
 import { Breadcrumbs, ShareRow, FilterChips, EmptyState } from '@/components/adf/ui-extra';
 import { PageHero, SectionHeading, StatBand, btnDonate, btnGhost } from '@/components/adf/ui';
+import { assetUrl } from '@/lib/assetUrl';
 
 interface ProgrammeDetailScreenProps {
   programmeId: ProgrammeId;
@@ -50,7 +51,7 @@ export const ProgrammeDetailScreen: React.FC<ProgrammeDetailScreenProps> = ({ pr
         eyebrow={item.acronym}
         title={item.name}
         intro={item.tagline}
-        image={item.image}
+        image={assetUrl(item.image)}
         imageAlt={item.name}
       >
         <a href="#donate-partner" className={btnDonate}>

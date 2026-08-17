@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { PageHero, SectionHeading, btnPrimary } from "./ui";
+import { assetUrl } from "@/lib/assetUrl";
 
-const HERO_IMAGE =
-  "/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg";
+const HERO_IMAGE = assetUrl("/images/adf-event-1.jpg");
 
 const inputBase =
   "h-auto px-4 py-3 rounded-none border-2 border-[#0f1b3d]/30 bg-white text-[#0f1b3d] focus-visible:ring-1 focus-visible:ring-[#245a86] focus-visible:border-[#245a86] text-base font-medium w-full";

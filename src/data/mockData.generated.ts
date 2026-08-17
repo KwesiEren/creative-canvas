@@ -113,10 +113,10 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['African Union Commission', 'Ford Foundation', 'Disability Rights Fund'],
     leadRegion: 'Pan-African / Regional Hubs',
-    image: '/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg'
-  },
-  {
-    id: 'we-are-able',
+image: '/images/adf-event-4.jpg'
+    },
+    {
+      id: 'we-are-able',
     name: 'We Are Able!',
     acronym: 'We Are Able!',
     tagline: 'Fostering food security and resilient livelihoods for persons with disabilities in fragile contexts.',
@@ -133,10 +133,10 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['Dutch Ministry of Foreign Affairs', 'ZOA', 'Light for the World', 'VNG International'],
     leadRegion: 'East & Central Africa',
-    image: '/__l5e/assets-v1/b7b9c09a-82bb-4225-b852-22af7bb2ab1a/adf-photo-5.jpg'
-  },
-  {
-    id: 'we-can-work',
+image: '/images/adf-event-5.png'
+    },
+    {
+      id: 'we-can-work',
     name: 'We Can Work',
     acronym: 'We Can Work',
     tagline: 'Transforming economic inclusion and employment pathways for African youth with disabilities.',
@@ -153,10 +153,10 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['Mastercard Foundation', 'Light for the World', 'National Youth Councils'],
     leadRegion: 'Sub-Saharan Africa',
-    image: '/__l5e/assets-v1/3903ae07-7c5c-4d6a-be46-db978561b3da/adf-photo-6.jpg'
-  },
-  {
-    id: 'helasia',
+image: '/images/adf-event-3.jpg'
+    },
+    {
+      id: 'helasia',
     name: 'Inclusive Health & Assistive Technology in Africa',
     acronym: 'HELASIA',
     tagline: 'Guaranteeing equitable healthcare, rehabilitation services, and assistive tech supply chains.',
@@ -173,10 +173,10 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['Humanity & Inclusion (HI)', 'WHO Regional Office for Africa', 'GIZ'],
     leadRegion: 'West & Southern Africa',
-    image: '/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg'
-  },
-  {
-    id: 'csso',
+image: '/images/adf-event-1.jpg'
+    },
+    {
+      id: 'csso',
     name: 'Civil Society Support Organization Capacity Building',
     acronym: 'CSSO',
     tagline: 'Institutional strengthening, governance, and financial sustainability for OPDs.',
@@ -193,7 +193,7 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['Sida', 'CBM Christian Blind Mission', 'Norad'],
     leadRegion: 'Continental Secretariat',
-    image: '/__l5e/assets-v1/fc164317-bb7d-412f-b227-19c662116535/adf-photo-2.jpg'
+    image: '/images/adf-event-2.jpg'
   }
 ];
 
@@ -333,7 +333,7 @@ export const NEWS_DATA: NewsItem[] = [
     category: 'Advocacy',
     date: 'May 15, 2024',
     datetime: '2024-05-15',
-    image: '/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg',
+    image: '/images/adf-event-6.png',
     summary: 'The African Disability Forum presented continental accessibility frameworks to AU delegates in Addis Ababa, urging accelerated implementation of Agenda 2063 inclusion goals.',
     content: 'During the African Union Summit in Addis Ababa, the African Disability Forum (ADF) delivered a landmark address outlining standard accessibility criteria for physical and digital infrastructure. ADF urged member states to integrate universal design principles in public transportation, health centers, and digital government services. Delegations from over 30 countries pledged to review national accessibility legislation.'
   },
@@ -343,7 +343,7 @@ export const NEWS_DATA: NewsItem[] = [
     category: 'Community',
     date: 'May 2, 2024',
     datetime: '2024-05-02',
-    image: '/__l5e/assets-v1/b7b9c09a-82bb-4225-b852-22af7bb2ab1a/adf-photo-5.jpg',
+    image: '/images/adf-event-5.png',
     summary: 'Over 60 grassroots OPD representatives gathered in Nairobi for intensive training on human rights monitoring, shadow reporting, and government engagement.',
     content: 'ADF hosted a three-day intensive capacity-building workshop in Nairobi, Kenya, bringing together grassroots disability leaders from East and Central Africa. Participants received practical training on submitting shadow reports to the UN CRPD Committee, leveraging digital data collection tools, and advocating for municipal budget allocations for accessible infrastructure.'
   },
@@ -353,7 +353,7 @@ export const NEWS_DATA: NewsItem[] = [
     category: 'Policy',
     date: 'April 20, 2024',
     datetime: '2024-04-20',
-    image: '/__l5e/assets-v1/3903ae07-7c5c-4d6a-be46-db978561b3da/adf-photo-6.jpg',
+    image: '/images/adf-event-1.jpg',
     summary: 'ADF launched a baseline study analyzing educational access for children with sensory, cognitive, and physical disabilities in 22 African nations.',
     content: 'The African Disability Forum published its annual landmark report assessing educational policies in Africa. While 80% of surveyed nations have inclusive education policies on paper, fewer than 15% provide adequate specialized training for teachers or accessible learning materials like Braille and sign language interpreters. The report offers actionable legislative recommendations for education ministries.'
   }

@@ -4,9 +4,9 @@ import { PARTNERS } from '@/data/extraData';
 import { PartnerItem } from '@/types';
 import { PageHero, SectionHeading, btnDonate, btnGhost } from './ui';
 import { FilterChips } from './ui-extra';
+import { assetUrl } from '@/lib/assetUrl';
 
-const HERO_IMAGE =
-  '/__l5e/assets-v1/3e4db988-eb52-42fc-b023-d413f1380676/adf-photo-4.jpg';
+const HERO_IMAGE = assetUrl('/images/adf-event-4.jpg');
 
 const PARTNER_TYPES = [
   'All',

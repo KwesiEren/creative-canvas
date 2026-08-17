@@ -9,6 +9,7 @@ export const Route = createFileRoute("/privacy")({
       description:
         "How the African Disability Forum collects, uses and protects personal data across the website and the SPADRA portal.",
       path: "/privacy",
+      image: "/images/adf-event-6.png",
       keywords: "privacy, data protection, ADF, African Disability Forum",
     }),
   component: PrivacyScreen,
