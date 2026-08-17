@@ -11,8 +11,12 @@ export default defineConfig({
     base: process.env.VITE_BASE_PATH ?? "/",
   },
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
     server: { entry: "server" },
+  },
+  nitro: {
+    routeRules: {
+      "/images/**": { headers: { "cache-control": "public, max-age=31536000, immutable" } },
+      "/assets/**": { headers: { "cache-control": "public, max-age=31536000, immutable" } },
+    },
   },
 });
