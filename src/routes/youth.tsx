@@ -9,7 +9,7 @@ export const Route = createFileRoute("/youth")({
       description:
         "Stories, opportunities, polls and action for young leaders with disabilities driving change across Africa. ADF youth fellowships, internships and advocacy.",
       path: "/youth",
-      image: "/images/adf-event-2.jpg",
+      image: "/__l5e/assets-v1/fc164317-bb7d-412f-b227-19c662116535/adf-photo-2.jpg",
       keywords:
         "ADF youth, disability youth Africa, youth fellowship, young advocates, disability internships, youth polls, African Disability Protocol youth",
     }),

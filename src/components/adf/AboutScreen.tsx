@@ -119,7 +119,7 @@ export const AboutScreen: React.FC<Props> = ({ subSection = 'who', onOpenMembers
 
             <div className="md:col-span-5 rounded-none overflow-hidden border-2 border-[#0f1b3d] shadow-lg relative h-80 md:h-[400px]">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5RTHq8GFRwH8lZB1Uhqpuh-e3LRFZroug2X8Inod0btmKvbTBhoNJRJdpDRdSbNs_NOw0tMM8PZSVzBMm9PD-A9aaoOG1nicAhZM4k1YZI43-pr9uMgrPlUxqUnE2IqOT85HMDFf68qOwGJUp08zUM-LVTfTN1v-FLwvBbJ4GmbGuf7aUJYhet9Na2-I0tbFUTMne4ceQ68VWU7gfiTwvDOjjHfJYBls4vI2ckusTOzgPnVJxRCo9"
+                src="/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg"
                 alt="ADF Executive Council and continental assembly members gathered in Addis Ababa"
                 className="w-full h-full object-cover"
               />

@@ -113,7 +113,7 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['African Union Commission', 'Ford Foundation', 'Disability Rights Fund'],
     leadRegion: 'Pan-African / Regional Hubs',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA5RTHq8GFRwH8lZB1Uhqpuh-e3LRFZroug2X8Inod0btmKvbTBhoNJRJdpDRdSbNs_NOw0tMM8PZSVzBMm9PD-A9aaoOG1nicAhZM4k1YZI43-pr9uMgrPlUxqUnE2IqOT85HMDFf68qOwGJUp08zUM-LVTfTN1v-FLwvBbJ4GmbGuf7aUJYhet9Na2-I0tbFUTMne4ceQ68VWU7gfiTwvDOjjHfJYBls4vI2ckusTOzgPnVJxRCo9'
+    image: '/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg'
   },
   {
     id: 'we-are-able',
@@ -133,7 +133,7 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['Dutch Ministry of Foreign Affairs', 'ZOA', 'Light for the World', 'VNG International'],
     leadRegion: 'East & Central Africa',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAWMgSpRcEi36LcrbRNygtWEhD9sNqP-99aacQk2_aL6Q73qufsrvgmz_ZFe1uO5omdf7_QQBSvrlE9tUYBIrdEIC9E-yVnWIjhFAz4AbHjf4_NnZ0v0SMWDLF9cIrfYEZ9ujYxAXZ7BJfkZFRfi3NOiprqv4TZYUEz14kYasQMD4agv5QJmyZLH_vsqPVhJdiB3Xz-sRxAGCtteNb9o5Eei7KIBWVKK8WAb32kziMhLB4FO4bFHyEh'
+    image: '/__l5e/assets-v1/b7b9c09a-82bb-4225-b852-22af7bb2ab1a/adf-photo-5.jpg'
   },
   {
     id: 'we-can-work',
@@ -153,7 +153,7 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['Mastercard Foundation', 'Light for the World', 'National Youth Councils'],
     leadRegion: 'Sub-Saharan Africa',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBzksIuzYqheUTbwVm26qU0orIWA2Y08-RGztSqjAnjzi_rsNn9qJmCYlOhoASLG5bLni293T4NNnOW73F8ZubqDND5jMxUmpPMyHHSH57XUSHhZMsGEgCSGCGRkBGSVgLPNDVVlAAap_f8c3pCXydQ98aQgi94Bj4Whs5hLDM5GCTIRGnGu9bNGPxw1J7Yj0iSrDsE-TsO-Z05YajYkb5Thr9ynsQl69t2jdCZLFaCrCjLWRryw1Wf'
+    image: '/__l5e/assets-v1/3903ae07-7c5c-4d6a-be46-db978561b3da/adf-photo-6.jpg'
   },
   {
     id: 'helasia',
@@ -173,7 +173,7 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['Humanity & Inclusion (HI)', 'WHO Regional Office for Africa', 'GIZ'],
     leadRegion: 'West & Southern Africa',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqx52dnhilVrVuAUvN-_ZAtGZi8jbfvoDHPyg6JWOjsK3wD-HK2q_i0XcqYRrLf7gQ7s2EpFXyLmLkwJUSpVonEo7X7QGqP_HJoZkc7waUzM9abrP2RinGbmwrQxzkcZyIOvEbDy_U7NUvfteSxH_8D40jR9Vcot-wt3xTfDua5xa3g6gnTMOQLKIMfQfo-jCxG-p2rR2dGJr__veHnIs7sIndDcgedP6aBjN_wU7USpr67G6wFcgu'
+    image: '/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg'
   },
   {
     id: 'csso',
@@ -193,7 +193,7 @@ export const PROGRAMMES_DATA: ProgrammeItem[] = [
     ],
     donorsAndPartners: ['Sida', 'CBM Christian Blind Mission', 'Norad'],
     leadRegion: 'Continental Secretariat',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAepl-2rtsxjVUp56cDHwrYWv5ZEoA4b1K46ISaq_FfuuI5RaryfKiIDYlkixbDTkJiru51p6PQz2Pqt4kPFxjSw38JuVTmQCZuwkHp2Z4Mfis9nBwzM0i0Befu_JyAHArybAibiN9YaSzbLoY6EmZiOWLuCp_6NdGY2k6toOb5P1WhCw0qP8fwuzwGGJHQNdVG67GEUDIzp_ex5gvQCQhuEalURhu5ot-4LzChQU-XRyMzQ5OmSZWR'
+    image: '/__l5e/assets-v1/fc164317-bb7d-412f-b227-19c662116535/adf-photo-2.jpg'
   }
 ];
 
@@ -333,7 +333,7 @@ export const NEWS_DATA: NewsItem[] = [
     category: 'Advocacy',
     date: 'May 15, 2024',
     datetime: '2024-05-15',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA5RTHq8GFRwH8lZB1Uhqpuh-e3LRFZroug2X8Inod0btmKvbTBhoNJRJdpDRdSbNs_NOw0tMM8PZSVzBMm9PD-A9aaoOG1nicAhZM4k1YZI43-pr9uMgrPlUxqUnE2IqOT85HMDFf68qOwGJUp08zUM-LVTfTN1v-FLwvBbJ4GmbGuf7aUJYhet9Na2-I0tbFUTMne4ceQ68VWU7gfiTwvDOjjHfJYBls4vI2ckusTOzgPnVJxRCo9',
+    image: '/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg',
     summary: 'The African Disability Forum presented continental accessibility frameworks to AU delegates in Addis Ababa, urging accelerated implementation of Agenda 2063 inclusion goals.',
     content: 'During the African Union Summit in Addis Ababa, the African Disability Forum (ADF) delivered a landmark address outlining standard accessibility criteria for physical and digital infrastructure. ADF urged member states to integrate universal design principles in public transportation, health centers, and digital government services. Delegations from over 30 countries pledged to review national accessibility legislation.'
   },
@@ -343,7 +343,7 @@ export const NEWS_DATA: NewsItem[] = [
     category: 'Community',
     date: 'May 2, 2024',
     datetime: '2024-05-02',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAWMgSpRcEi36LcrbRNygtWEhD9sNqP-99aacQk2_aL6Q73qufsrvgmz_ZFe1uO5omdf7_QQBSvrlE9tUYBIrdEIC9E-yVnWIjhFAz4AbHjf4_NnZ0v0SMWDLF9cIrfYEZ9ujYxAXZ7BJfkZFRfi3NOiprqv4TZYUEz14kYasQMD4agv5QJmyZLH_vsqPVhJdiB3Xz-sRxAGCtteNb9o5Eei7KIBWVKK8WAb32kziMhLB4FO4bFHyEh',
+    image: '/__l5e/assets-v1/b7b9c09a-82bb-4225-b852-22af7bb2ab1a/adf-photo-5.jpg',
     summary: 'Over 60 grassroots OPD representatives gathered in Nairobi for intensive training on human rights monitoring, shadow reporting, and government engagement.',
     content: 'ADF hosted a three-day intensive capacity-building workshop in Nairobi, Kenya, bringing together grassroots disability leaders from East and Central Africa. Participants received practical training on submitting shadow reports to the UN CRPD Committee, leveraging digital data collection tools, and advocating for municipal budget allocations for accessible infrastructure.'
   },
@@ -353,7 +353,7 @@ export const NEWS_DATA: NewsItem[] = [
     category: 'Policy',
     date: 'April 20, 2024',
     datetime: '2024-04-20',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBzksIuzYqheUTbwVm26qU0orIWA2Y08-RGztSqjAnjzi_rsNn9qJmCYlOhoASLG5bLni293T4NNnOW73F8ZubqDND5jMxUmpPMyHHSH57XUSHhZMsGEgCSGCGRkBGSVgLPNDVVlAAap_f8c3pCXydQ98aQgi94Bj4Whs5hLDM5GCTIRGnGu9bNGPxw1J7Yj0iSrDsE-TsO-Z05YajYkb5Thr9ynsQl69t2jdCZLFaCrCjLWRryw1Wf',
+    image: '/__l5e/assets-v1/3903ae07-7c5c-4d6a-be46-db978561b3da/adf-photo-6.jpg',
     summary: 'ADF launched a baseline study analyzing educational access for children with sensory, cognitive, and physical disabilities in 22 African nations.',
     content: 'The African Disability Forum published its annual landmark report assessing educational policies in Africa. While 80% of surveyed nations have inclusive education policies on paper, fewer than 15% provide adequate specialized training for teachers or accessible learning materials like Braille and sign language interpreters. The report offers actionable legislative recommendations for education ministries.'
   }
@@ -365,7 +365,7 @@ export const EXECUTIVE_COUNCIL: ExecutiveMember[] = [
     name: 'Dr. Amina Ouedraogo',
     role: 'Chairperson',
     organization: 'West African Federation of the Disabled',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqx52dnhilVrVuAUvN-_ZAtGZi8jbfvoDHPyg6JWOjsK3wD-HK2q_i0XcqYRrLf7gQ7s2EpFXyLmLkwJUSpVonEo7X7QGqP_HJoZkc7waUzM9abrP2RinGbmwrQxzkcZyIOvEbDy_U7NUvfteSxH_8D40jR9Vcot-wt3xTfDua5xa3g6gnTMOQLKIMfQfo-jCxG-p2rR2dGJr__veHnIs7sIndDcgedP6aBjN_wU7USpr67G6wFcgu',
+    image: '/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg',
     bio: 'Dr. Amina Ouedraogo is a distinguished scholar and human rights advocate with over 20 years of leadership in regional disability rights across West Africa. She leads ADF strategic direction and international diplomatic engagement.'
   },
   {
@@ -373,7 +373,7 @@ export const EXECUTIVE_COUNCIL: ExecutiveMember[] = [
     name: 'Samuel Kiprono',
     role: 'Vice-Chairperson',
     organization: 'East Africa Disability Action Network',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAepl-2rtsxjVUp56cDHwrYWv5ZEoA4b1K46ISaq_FfuuI5RaryfKiIDYlkixbDTkJiru51p6PQz2Pqt4kPFxjSw38JuVTmQCZuwkHp2Z4Mfis9nBwzM0i0Befu_JyAHArybAibiN9YaSzbLoY6EmZiOWLuCp_6NdGY2k6toOb5P1WhCw0qP8fwuzwGGJHQNdVG67GEUDIzp_ex5gvQCQhuEalURhu5ot-4LzChQU-XRyMzQ5OmSZWR',
+    image: '/__l5e/assets-v1/fc164317-bb7d-412f-b227-19c662116535/adf-photo-2.jpg',
     bio: 'Samuel Kiprono specializes in legislative advocacy and policy domestication. He has spearheaded legislative campaigns across East Africa to ensure the ratification of the African Disability Protocol.'
   },
   {
@@ -381,7 +381,7 @@ export const EXECUTIVE_COUNCIL: ExecutiveMember[] = [
     name: 'Fatima Al-Fayed',
     role: 'Secretary General',
     organization: 'North African Deaf Association',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDT4nr-CwtF4MEXklm1wVkWyFWv5qgoP_77L-wdziSlcIfMEQpXm096ovbL-Ux3R9OakhOVFASJb0pE-fScEx2JLepia-v9xZL-0LBWHCg05aPaLzGkYXsDiD6AIWtxq2z3JXjyu52CuHuUg_b_1L0R_qmTyMmITe9FCinAe1f8rVloepSBgo-WNNCp7ST_GtFAfUbedpm_-67CULIxAEgaMSoT6Nq3ze5wiTBZMREXbcGz20Y_xjDA',
+    image: '/__l5e/assets-v1/ab8ae646-490d-420d-a8e9-5e2a2e083cd7/adf-photo-3.jpg',
     bio: 'Fatima Al-Fayed is an expert in sign language rights, inclusive governance, and institutional communications. She directs ADF internal governance and member OPD coordination.'
   }
 ];

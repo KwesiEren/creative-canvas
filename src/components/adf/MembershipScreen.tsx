@@ -6,7 +6,7 @@ import { PageHero, SectionHeading, btnPrimary, btnGhost, btnGhostLight } from ".
 import { FilterChips, EmptyState } from "./ui-extra";
 
 const HERO_IMAGE =
-  "/images/adf-event-2.jpg";
+  "/__l5e/assets-v1/fc164317-bb7d-412f-b227-19c662116535/adf-photo-2.jpg";
 
 export const MembershipScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");

@@ -16,7 +16,7 @@ const FORMATS: Array<{ value: 'All' | KnowledgeFormat; icon: string }> = [
 ];
 
 const HERO_IMAGE =
-  '/images/adf-event-5.png';
+  '/__l5e/assets-v1/b7b9c09a-82bb-4225-b852-22af7bb2ab1a/adf-photo-5.jpg';
 
 const ITEMS_PER_PAGE = 9;
 

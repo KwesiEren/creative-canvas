@@ -13,7 +13,7 @@ import { PageHero } from "./ui";
 import { EmptyState } from "./ui-extra";
 
 const HERO_IMAGE =
-  "/images/adf-event-5.png";
+  "/__l5e/assets-v1/b7b9c09a-82bb-4225-b852-22af7bb2ab1a/adf-photo-5.jpg";
 
 interface ResultItem {
   id: string;

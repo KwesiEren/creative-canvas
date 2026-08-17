@@ -7,7 +7,7 @@ import { PageHero, SectionHeading } from "./ui";
 import { FilterChips, Pagination, EmptyState } from "./ui-extra";
 
 const HERO_IMAGE =
-  "/images/adf-event-6.png";
+  "/__l5e/assets-v1/3903ae07-7c5c-4d6a-be46-db978561b3da/adf-photo-6.jpg";
 
 const ITEMS_PER_PAGE = 9;
 
