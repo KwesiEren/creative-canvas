@@ -10,7 +10,7 @@ import { Breadcrumbs, MetaRow, ShareRow, Prose } from "./ui-extra";
 import { btnPrimary, btnGhost, PageHero, SectionHeading } from "./ui";
 
 const OFFICE_IMAGE =
-  "/images/adf-event-3.jpg";
+  "/__l5e/assets-v1/ab8ae646-490d-420d-a8e9-5e2a2e083cd7/adf-photo-3.jpg";
 
 const hearAboutOptions = [
   "ADF website",

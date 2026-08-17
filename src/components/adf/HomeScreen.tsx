@@ -18,13 +18,13 @@ interface Props {
 }
 
 const HERO_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuByj2Ml4c7nvfBge8H6Ux0mK8K1M2TK9Y7yWq32uM43yHwryJSWELU31LYXw4pOtZ6O1nbK9RJjyfbs-7P_dTMwIGUFAczcqIKVSA1Hnerc8LbJSPsQ4moGc6Qmbk8ITgWSikWHdMI5FiTPTzErUrsRKMNjQlVPQnNG9Qp0IW2NNuWaFAzxYd4VISnXM2eF3QKtAAs08--ZjkrUBx1cNWPBfHR0v1pt1Jn_o-BpPUpI2I9SwA8iCIaC";
+  "/__l5e/assets-v1/fc164317-bb7d-412f-b227-19c662116535/adf-photo-2.jpg";
 
 const LEAD_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuCYZuIyX9Ho-ibqwzFt22KG1IYNDjtiXoApWd9YPpskMnoVcmLQqjWY5kwqBO9GGAPU2FSJ5ey2nO8utKrDW2WLTkzS5FQ21RGOyYYpOH0JhJ6GMTL5Hh_EUp81uixqO2v0lZx3T64xPoOG9zDAcs7_2TVgEsAgzakgKxMJOJAmb9Gx6ctoRJjhFlCNAz_kq2lMjPWRKNQbaN0tLNf6uB872UU_7RJJ-o0jNyfaFf25pUvb5owHhkR1";
+  "/__l5e/assets-v1/ab8ae646-490d-420d-a8e9-5e2a2e083cd7/adf-photo-3.jpg";
 
 const CASE_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuCDP8_ZulRnJ2SL2bdrSYv-pqaZnHa-gQVASe20G4fphgygggTbqo7HXlYk8Xl2rfMZAhNcxG7QzYUdHzRbed25M4Yuc__M-BAckrFMAF-FHZC94acOS7lMsS257U0rbgbVSzay3V-vfXbI5iIVhwb6JP1-TP9sPFj492dw89b-lSZUbLF0FyugGooaXd8Qo_D2PkL1I4yJPHcbAr-AZuxU3kp_jmQTXKBKW8AnMAj5jx5o4fTHq-xt";
+  "/__l5e/assets-v1/3e4db988-eb52-42fc-b023-d413f1380676/adf-photo-4.jpg";
 
 const FOCUS_AREAS = [
   {

@@ -2,7 +2,7 @@ import React from "react";
 import { PageHero, SectionHeading } from "./ui";
 
 const HERO_IMAGE =
-  "/images/adf-event-1.jpg";
+  "/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg";
 
 export const AccessibilityScreen: React.FC = () => (
   <div className="animate-fade-in">

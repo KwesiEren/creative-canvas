@@ -25,7 +25,7 @@ export function buildMeta({
   const canonical = buildCanonical(path);
   const safeImage =
     image ??
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuA5RTHq8GFRwH8lZB1Uhqpuh-e3LRFZroug2X8Inod0btmKvbTBhoNJRJdpDRdSbNs_NOw0tMM8PZSVzBMm9PD-A9aaoOG1nicAhZM4k1YZI43-pr9uMgrPlUxqUnE2IqOT85HMDFf68qOwGJUp08zUM-LVTfTN1v-FLwvBbJ4GmbGuf7aUJYhet9Na2-I0tbFUTMne4ceQ68VWU7gfiTwvDOjjHfJYBls4vI2ckusTOzgPnVJxRCo9";
+    "/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg";
   const meta = [
     { title },
     { name: "description", content: description },
