@@ -66,7 +66,7 @@
 }
 
 :root {
-  --radius: 9999px;
+  --radius: 12px;
   --text-scale: 1;
 
   /* Wishon charity template tokens (Home Four.mhtml). */
