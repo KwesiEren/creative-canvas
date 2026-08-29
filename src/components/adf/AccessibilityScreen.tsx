@@ -1,18 +1,9 @@
 import React from "react";
-import { PageHero, SectionHeading } from "./ui";
-import { assetUrl } from "@/lib/assetUrl";
-
-const HERO_IMAGE = assetUrl("/images/adf-event-1.jpg");
+import { PageBanner, SectionHeading } from "./ui";
 
 export const AccessibilityScreen: React.FC = () => (
   <div className="animate-fade-in">
-    <PageHero
-      eyebrow="Accessibility"
-      title="Making the whole site work for everyone"
-      intro="The ADF website is built to meet WCAG 2.2 AA, with a persistent toolbar for font sizing, contrast, motion and reading preferences."
-      image={HERO_IMAGE}
-      imageAlt="Close-up of hands adjusting a device"
-    />
+    <PageBanner title="Accessibility" crumbs={[{ label: "Home" }, { label: "Accessibility" }]} />
 
     <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-16">
       <div className="grid md:grid-cols-2 gap-6">

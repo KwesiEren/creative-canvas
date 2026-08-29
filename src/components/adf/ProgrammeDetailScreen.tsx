@@ -4,8 +4,7 @@ import { PROGRAMMES_DATA, NEWS_DATA, RESOURCES_DATA } from '@/data/mockData';
 import type { ProgrammeId } from '@/types';
 import { findByIdSlug, slugify } from '@/lib/slug';
 import { Breadcrumbs, ShareRow, FilterChips, EmptyState } from '@/components/adf/ui-extra';
-import { PageHero, SectionHeading, StatBand, btnDonate, btnGhost } from '@/components/adf/ui';
-import { assetUrl } from '@/lib/assetUrl';
+import { PageBanner, SectionHeading, StatBand, btnDonate, btnGhost } from '@/components/adf/ui';
 
 interface ProgrammeDetailScreenProps {
   programmeId: ProgrammeId;
@@ -47,22 +46,7 @@ export const ProgrammeDetailScreen: React.FC<ProgrammeDetailScreenProps> = ({ pr
         ]}
       />
 
-      <PageHero
-        eyebrow={item.acronym}
-        title={item.name}
-        intro={item.tagline}
-        image={assetUrl(item.image)}
-        imageAlt={item.name}
-      >
-        <a href="#donate-partner" className={btnDonate}>
-          <span className="material-symbols-outlined text-lg">favorite</span>
-          Support this Programme
-        </a>
-        <Link to="/programmes" className={btnGhost + ' !border-white !text-white hover:!bg-white hover:!text-[#0f1b3d]'}>
-          <span className="material-symbols-outlined text-lg">arrow_back</span>
-          All Programmes
-        </Link>
-      </PageHero>
+      <PageBanner title={item.name} crumbs={[{ label: "Home" }, { label: "Programmes", onClick: () => {} }, { label: item.name }]} />
 
       <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-20">
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-10">

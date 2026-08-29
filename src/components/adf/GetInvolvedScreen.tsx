@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { PageHero, SectionHeading, btnPrimary } from "./ui";
-import { assetUrl } from "@/lib/assetUrl";
-
-const HERO_IMAGE = assetUrl("/images/adf-event-1.jpg");
+import { PageBanner, SectionHeading, btnPrimary } from "./ui";
 
 const inputBase =
   "h-auto px-4 py-3 rounded-none border-2 border-[#0f1b3d]/30 bg-white text-[#0f1b3d] focus-visible:ring-1 focus-visible:ring-[#245a86] focus-visible:border-[#245a86] text-base font-medium w-full";
@@ -16,13 +13,7 @@ export const GetInvolvedScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageHero
-        eyebrow="Get Involved"
-        title="Stand with the African Disability Forum"
-        intro="Donate, volunteer your skills, or partner with us to advance the rights of persons with disabilities across Africa."
-        image={HERO_IMAGE}
-        imageAlt="Volunteers working together in a community project"
-      />
+      <PageBanner title="Get Involved" crumbs={[{ label: "Home" }, { label: "Get Involved" }]} />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-16">
         {/* Donate */}

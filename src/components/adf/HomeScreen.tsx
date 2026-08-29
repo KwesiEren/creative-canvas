@@ -66,18 +66,21 @@ const TESTIMONIALS = [
       "To strengthen the representative voice of persons with disabilities in Africa, build the institutional capacity of national OPDs, and hold governments accountable to the UN CRPD and the African Disability Protocol.",
     name: "ADF Secretariat",
     role: "Mission Statement",
+    rating: 5,
   },
   {
     quote:
       "ADF's continental coordination gives national OPDs the evidence, training and platforms we need to engage governments with confidence.",
     name: "Regional OPD Network",
     role: "East Africa",
+    rating: 5,
   },
   {
     quote:
       "Partnership with ADF has helped us align disability-inclusive programming with the African Disability Protocol ratification agenda.",
     name: "Development Partner",
     role: "Multilateral Funder",
+    rating: 5,
   },
 ];
 
@@ -147,23 +150,34 @@ function HomeHeroSlider({ onDonate }: { onDonate: () => void }) {
   }, [emblaApi]);
 
   return (
-    <section className="home-hero relative overflow-hidden bg-[var(--adf-charcoal)]" aria-label="Featured highlights">
+    <section className="home-hero relative overflow-hidden" aria-label="Featured highlights">
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex">
           {HERO_SLIDES.map((slide) => (
             <div key={slide.title} className="relative min-w-0 shrink-0 grow-0 basis-full min-h-[520px] md:min-h-[600px]">
-              <img src={slide.image} alt={slide.alt} className="absolute inset-0 h-full w-full object-cover" />
-              <div className="hero-scrim absolute inset-0" aria-hidden="true" />
-              <div className="relative z-10 flex h-full min-h-[520px] md:min-h-[600px] items-center">
-                <div className="max-w-[1200px] mx-auto px-4 md:px-6 w-full py-16">
-                  <h2 className="max-w-3xl text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
-                    {slide.title}
-                  </h2>
-                  <p className="mt-4 max-w-xl text-lg text-white/90">{slide.subtitle}</p>
-                  <button type="button" onClick={onDonate} className={`${btnDonate} mt-8`}>
-                    Donate Now
-                  </button>
+              {/* Split layout: blue gradient left, image right */}
+              <div className="absolute inset-0 flex">
+                <div className="w-full md:w-1/2 bg-gradient-to-br from-[var(--adf-main)] via-[#023aa3] to-[#022d80] flex items-center">
+                  <div className="max-w-[1200px] mx-auto px-8 md:px-16 w-full py-16">
+                    <h2 className="max-w-xl text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
+                      {slide.title}
+                    </h2>
+                    <p className="mt-4 max-w-md text-lg text-white/90">{slide.subtitle}</p>
+                    <div className="flex flex-wrap gap-4 mt-8">
+                      <button type="button" onClick={onDonate} className="adf-btn adf-btn-primary adf-btn-circle">
+                        DONATE NOW
+                      </button>
+                    </div>
+                  </div>
                 </div>
+                <div className="hidden md:block w-1/2 relative">
+                  <img src={slide.image} alt={slide.alt} className="absolute inset-0 h-full w-full object-cover" />
+                </div>
+              </div>
+              {/* Mobile fallback: image background */}
+              <div className="md:hidden absolute inset-0">
+                <img src={slide.image} alt={slide.alt} className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-[var(--adf-main)]/70" />
               </div>
             </div>
           ))}
@@ -207,13 +221,15 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
             className="w-full rounded-sm object-cover aspect-[4/3]"
             loading="lazy"
           />
-          <div className="home-intro-badge absolute -bottom-4 -right-4 hidden md:flex h-24 w-24 items-center justify-center rounded-full bg-[var(--adf-gold)] text-white font-display text-sm text-center leading-tight shadow-lg">
-            ADF
-          </div>
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-main)]">Welcome</p>
-          <h2 className="mt-3 text-3xl md:text-4xl text-[var(--adf-charcoal)]">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-green-100">
+              <span className="material-symbols-outlined text-sm text-green-600">check</span>
+            </span>
+            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-main)]">Welcome</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl text-[var(--adf-charcoal)] font-bold">
             Welcome to The African Disability Forum
           </h2>
           <p className="mt-5 text-[var(--adf-muted)] leading-relaxed">
@@ -233,17 +249,17 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
       </section>
 
       {/* Feature tiles */}
-      <section className="bg-[#f2f2f2]">
+      <section className="bg-[var(--adf-bg)]">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-16 grid md:grid-cols-3 gap-6">
           {FEATURE_TILES.map((tile) => (
             <article
               key={tile.title}
-              className="home-feature-tile bg-white rounded-sm p-8 text-center shadow-sm hover:shadow-md transition-shadow"
+              className="home-feature-tile bg-white p-8 text-center shadow-sm hover:shadow-md transition-shadow adf-card"
             >
               <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[var(--adf-main)]/10 text-[var(--adf-main)]">
                 <span className="material-symbols-outlined text-3xl">{tile.icon}</span>
               </span>
-              <h3 className="mt-6 text-xl text-[var(--adf-charcoal)]">{tile.title}</h3>
+              <h3 className="mt-6 text-xl text-[var(--adf-charcoal)] font-bold">{tile.title}</h3>
               <p className="mt-3 text-sm text-[var(--adf-muted)] leading-relaxed">{tile.body}</p>
               <button
                 type="button"
@@ -264,7 +280,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
       >
         <div className="absolute inset-0 bg-[var(--adf-main)]/85" aria-hidden="true" />
         <div className="relative max-w-[900px] mx-auto px-4 md:px-6 text-center text-white">
-          <h3 className="text-2xl md:text-4xl leading-snug">
+          <h3 className="text-2xl md:text-4xl leading-snug font-bold">
             Unifying the Voice of 10+ Million Africans with Disabilities
           </h3>
         </div>
@@ -273,14 +289,20 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
       {/* Testimonials */}
       <section className="max-w-[1200px] mx-auto px-4 md:px-6 py-16 md:py-20">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl text-[var(--adf-charcoal)]">What Partners &amp; Donors Say About Us</h2>
+          <h2 className="text-3xl md:text-4xl text-[var(--adf-charcoal)] font-bold">What Partners &amp; Donors Say About Us</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {TESTIMONIALS.map((item) => (
             <blockquote
               key={item.name}
-              className="home-testimonial bg-[#f2f2f2] rounded-sm p-8 flex flex-col"
+              className="home-testimonial bg-[var(--adf-bg)] p-8 flex flex-col adf-card"
             >
+              {/* Star rating */}
+              <div className="flex gap-1 mb-4">
+                {Array.from({ length: item.rating }).map((_, i) => (
+                  <span key={i} className="material-symbols-outlined text-[var(--adf-gold)] text-xl">star</span>
+                ))}
+              </div>
               <span className="material-symbols-outlined text-4xl text-[var(--adf-gold)]" aria-hidden="true">
                 format_quote
               </span>
@@ -300,17 +322,17 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
       </section>
 
       {/* Popular causes */}
-      <section className="bg-[#f2f2f2] py-16 md:py-20">
+      <section className="bg-[var(--adf-bg)] py-16 md:py-20">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-4xl text-center text-[var(--adf-charcoal)] mb-12">Find Popular Causes</h2>
+          <h2 className="text-3xl md:text-4xl text-center text-[var(--adf-charcoal)] mb-12 font-bold">Find Popular Causes</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {CAUSES.map((cause) => (
-              <article key={cause.title} className="home-cause-card bg-white rounded-sm overflow-hidden shadow-sm">
+              <article key={cause.title} className="home-cause-card bg-white overflow-hidden shadow-sm adf-card">
                 <div className="p-6">
                   <span className="inline-block rounded-full bg-[var(--adf-main)]/10 px-3 py-1 text-xs font-semibold text-[var(--adf-main)] uppercase">
                     {cause.tag}
                   </span>
-                  <h3 className="mt-4 text-xl text-[var(--adf-charcoal)]">{cause.title}</h3>
+                  <h3 className="mt-4 text-xl text-[var(--adf-charcoal)] font-bold">{cause.title}</h3>
                   <p className="mt-3 text-sm text-[var(--adf-muted)] leading-relaxed">{cause.body}</p>
                   <div className="mt-6">
                     <div className="flex justify-between text-xs font-semibold text-[var(--adf-charcoal)] mb-2">
@@ -341,11 +363,11 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
       {/* Mid-page CTA */}
       <section className="bg-[var(--adf-main)] py-14">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-white">
-          <h3 className="text-2xl md:text-3xl text-center md:text-left">
+          <h3 className="text-2xl md:text-3xl text-center md:text-left font-bold">
             Let&apos;s Make a Difference in the Lives of Others
           </h3>
-          <button type="button" onClick={onOpenDonate} className={btnDonate}>
-            Donate Now
+          <button type="button" onClick={onOpenDonate} className="adf-btn adf-btn-primary adf-btn-circle">
+            DONATE NOW
           </button>
         </div>
       </section>
@@ -355,7 +377,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-main)]">Our Latest Events</p>
-            <h2 className="mt-2 text-3xl md:text-4xl text-[var(--adf-charcoal)]">Upcoming Events</h2>
+            <h2 className="mt-2 text-3xl md:text-4xl text-[var(--adf-charcoal)] font-bold">Upcoming Events</h2>
           </div>
           <button
             type="button"
@@ -371,9 +393,9 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
               const { day, month } = formatEventDate(event.date);
               return (
                 <CarouselItem key={event.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
-                  <article className="home-event-card border border-black/10 rounded-sm p-6 h-full bg-white hover:shadow-md transition-shadow">
+                  <article className="home-event-card border border-black/10 p-6 h-full bg-white hover:shadow-md transition-shadow adf-card">
                     <div className="flex gap-4">
-                      <div className="home-event-date shrink-0 flex flex-col items-center justify-center w-16 h-16 bg-[var(--adf-main)] text-white rounded-sm">
+                      <div className="home-event-date shrink-0 flex flex-col items-center justify-center w-16 h-16 bg-[var(--adf-main)] text-white rounded-lg">
                         <span className="text-2xl font-display leading-none">{day}</span>
                         <span className="text-xs uppercase mt-0.5">{month}</span>
                       </div>
@@ -408,17 +430,17 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-gold)]">
               Let&apos;s Make a Difference in the Lives of Other People
             </p>
-            <h2 className="mt-3 text-3xl md:text-4xl">Help Each Other Can Change World</h2>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold">Help Each Other Can Change World</h2>
             <p className="mt-4 text-white/80 leading-relaxed">
               When we support one another, we create opportunities, restore hope, and build stronger communities.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {OBJECTIVES.map((obj) => (
-              <article key={obj.num} className="home-objective bg-white/10 backdrop-blur-sm rounded-sm p-8 text-white text-center">
+              <article key={obj.num} className="home-objective bg-white/10 backdrop-blur-sm p-8 text-white text-center adf-card">
                 <span className="text-sm font-semibold text-[var(--adf-gold)]">Objective {obj.num}</span>
                 <span className="material-symbols-outlined text-4xl mt-4 block text-[var(--adf-gold)]">{obj.icon}</span>
-                <h3 className="mt-4 text-lg text-white">{obj.title}</h3>
+                <h3 className="mt-4 text-lg text-white font-bold">{obj.title}</h3>
               </article>
             ))}
           </div>
@@ -432,7 +454,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-main)]">
               Watch Our Latest Blogs
             </p>
-            <h2 className="mt-2 text-3xl md:text-4xl text-[var(--adf-charcoal)]">News &amp; Articles</h2>
+            <h2 className="mt-2 text-3xl md:text-4xl text-[var(--adf-charcoal)] font-bold">News &amp; Articles</h2>
           </div>
           <button
             type="button"
@@ -448,25 +470,41 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
               <button
                 type="button"
                 onClick={() => onNavigate("news")}
-                className="w-full text-left focus-ring rounded-sm overflow-hidden border border-black/10 bg-white hover:shadow-md transition-shadow"
+                className="w-full text-left focus-ring overflow-hidden border border-black/10 bg-white hover:shadow-md transition-shadow adf-card"
               >
-                <img
-                  src={assetUrl(item.image)}
-                  alt=""
-                  className="w-full h-48 object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                  loading="lazy"
-                />
+                <div className="relative">
+                  <img
+                    src={assetUrl(item.image)}
+                    alt=""
+                    className="w-full h-48 object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                    loading="lazy"
+                  />
+                  <div className="adf-card-date">
+                    <span className="block text-xl font-bold leading-none">
+                      {new Date(item.date).getDate()}
+                    </span>
+                    <span className="block text-xs uppercase">
+                      {new Date(item.date).toLocaleString("en-GB", { month: "short" })}
+                    </span>
+                  </div>
+                </div>
                 <div className="p-5">
-                  <h3 className="text-lg text-[var(--adf-charcoal)] leading-snug group-hover:text-[var(--adf-main)] transition-colors">
+                  <h3 className="text-lg text-[var(--adf-charcoal)] leading-snug group-hover:text-[var(--adf-main)] transition-colors font-bold">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm text-[var(--adf-muted)]">
-                    {item.date} · {item.category}
+                    {item.category}
                   </p>
                 </div>
               </button>
             </article>
           ))}
+        </div>
+        {/* Pagination */}
+        <div className="flex justify-center gap-2 mt-10">
+          <span className="adf-pagination-btn adf-pagination-active">1</span>
+          <button type="button" className="adf-pagination-btn">2</button>
+          <button type="button" className="adf-pagination-btn">3</button>
         </div>
       </section>
 
@@ -475,7 +513,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
         <div className="max-w-[1200px] mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-10 items-center">
           <div className="text-white">
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-gold)]">Join Newsletter</p>
-            <h2 className="mt-3 text-3xl md:text-4xl">Give a Helping Hand</h2>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold">Give a Helping Hand</h2>
             <p className="mt-4 text-white/85 leading-relaxed max-w-md">
               Subscribe for ADF updates on advocacy, events, publications and opportunities to support disability rights
               across Africa.
@@ -492,10 +530,10 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
               value={newsletterEmail}
               onChange={(e) => setNewsletterEmail(e.target.value)}
               placeholder="Your email address"
-              className="flex-1 rounded-full border-0 px-5 py-3.5 text-[var(--adf-charcoal)] focus:outline-none focus:ring-2 focus:ring-[var(--adf-gold)]"
+              className="flex-1 rounded-lg border-0 px-5 py-3.5 text-[var(--adf-charcoal)] focus:outline-none focus:ring-2 focus:ring-[var(--adf-gold)]"
             />
-            <button type="submit" className={`${btnDonate} shrink-0`}>
-              Subscribe
+            <button type="submit" className="adf-btn adf-btn-primary adf-btn-circle shrink-0">
+              SUBSCRIBE
             </button>
           </form>
           {newsletterSent && (
@@ -507,7 +545,7 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
       </section>
 
       {/* Take action strip */}
-      <section className="bg-[#f2f2f2] py-12">
+      <section className="bg-[var(--adf-bg)] py-12">
         <div className="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-wrap items-center justify-center gap-4">
           <button type="button" onClick={onOpenTakeAction} className={btnPrimary}>
             Take Action

@@ -2,11 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
 import { PARTNERS } from '@/data/extraData';
 import { PartnerItem } from '@/types';
-import { PageHero, SectionHeading, btnDonate, btnGhost } from './ui';
+import { PageBanner, SectionHeading, btnDonate, btnGhost } from './ui';
 import { FilterChips } from './ui-extra';
-import { assetUrl } from '@/lib/assetUrl';
-
-const HERO_IMAGE = assetUrl('/images/adf-event-4.jpg');
 
 const PARTNER_TYPES = [
   'All',
@@ -45,13 +42,7 @@ export const PartnersScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageHero
-        eyebrow="About ADF"
-        title="Partners & Donors"
-        intro="ADF works with institutional funders, implementing NGOs, UN agencies and global networks. Meet the coalition."
-        image={HERO_IMAGE}
-        imageAlt="Diverse group of professionals collaborating around a table"
-      />
+      <PageBanner title="Partners" crumbs={[{ label: "Home" }, { label: "Partners" }]} />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-12">
         <div>

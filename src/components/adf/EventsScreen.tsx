@@ -3,11 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { EVENTS_DATA } from "@/data/mockData";
 import { EventItem } from "@/types";
 import { slugify } from "@/lib/slug";
-import { PageHero, SectionHeading, btnPrimary, btnGhost } from "./ui";
+import { PageBanner, SectionHeading, btnPrimary, btnGhost } from "./ui";
 import { FilterChips, Pagination, EmptyState } from "./ui-extra";
-import { assetUrl } from "@/lib/assetUrl";
-
-const HERO_IMAGE = assetUrl("/images/adf-event-4.jpg");
 
 const ITEMS_PER_PAGE = 12;
 
@@ -19,12 +16,6 @@ const formatDate = (dateStr: string): string => {
     year: "numeric",
   });
 };
-
-const btnPrimarySmall =
-  "inline-flex items-center justify-center gap-2 bg-[#0f1b3d] text-white font-bold uppercase tracking-widest text-xs px-5 py-2.5 hover:bg-[#1e3a5f] transition-colors focus-ring cursor-pointer";
-
-const btnGhostSmall =
-  "inline-flex items-center justify-center gap-2 border-2 border-[#0f1b3d] text-[#0f1b3d] font-bold uppercase tracking-widest text-xs px-5 py-2.5 hover:bg-[#0f1b3d] hover:text-white transition-colors focus-ring cursor-pointer";
 
 export const EventsScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"Upcoming" | "Past">("Upcoming");
@@ -42,8 +33,6 @@ export const EventsScreen: React.FC = () => {
     const countries = Array.from(new Set(EVENTS_DATA.map((e) => e.country)));
     return ["All", ...countries];
   }, []);
-
-  const modeOptions = ["All", "Virtual", "In-Person"];
 
   const tabEvents = useMemo(() => {
     return EVENTS_DATA.filter((e) => {
@@ -97,29 +86,29 @@ export const EventsScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageHero
-        eyebrow="ADF Engagement"
-        title="Events & Convenings"
-        intro="Workshops, summits, webinars and continental forums hosted or co-organized by ADF."
-        image={HERO_IMAGE}
-        imageAlt="Conference attendees participating in a panel discussion"
+      <PageBanner
+        title="Events"
+        crumbs={[
+          { label: "Home", onClick: () => {} },
+          { label: "Events" },
+        ]}
       />
 
-      <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16">
+      <section className="max-w-[1200px] mx-auto px-4 md:px-6 py-16">
         <SectionHeading
           eyebrow={`${activeTab} Events`}
           title={`${activeTab} Convenings & Gatherings`}
           intro="Connect with disability rights leaders, policymakers, OPD representatives and allies from across the African continent."
         />
 
-        <div className="mb-10 flex flex-wrap gap-2 border-b border-[#0f1b3d]/20 pb-6">
+        <div className="mb-10 flex flex-wrap gap-2 border-b border-black/10 pb-6">
           {(["Upcoming", "Past"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => handleTabChange(tab)}
               aria-pressed={activeTab === tab}
-              className={`border-2 border-[#0f1b3d] px-8 py-3 text-sm font-bold uppercase tracking-widest focus-ring cursor-pointer ${
-                activeTab === tab ? "bg-[#0f1b3d] text-white" : "text-[#0f1b3d] hover:bg-[#e8edf3]"
+              className={`border border-black/20 px-8 py-3 text-sm font-bold uppercase tracking-widest focus-ring cursor-pointer rounded-full transition-colors ${
+                activeTab === tab ? "bg-[var(--adf-main)] text-white border-[var(--adf-main)]" : "text-[var(--adf-charcoal)] hover:bg-[var(--adf-bg)]"
               }`}
             >
               {tab}
@@ -127,7 +116,7 @@ export const EventsScreen: React.FC = () => {
           ))}
         </div>
 
-        <div className="space-y-4 mb-10 bg-[#e8edf3] p-6 border-2 border-[#0f1b3d]/10">
+        <div className="space-y-4 mb-10 bg-[var(--adf-bg)] p-6 border border-black/10">
           <FilterChips
             legend="Type"
             options={typeOptions}
@@ -142,7 +131,7 @@ export const EventsScreen: React.FC = () => {
           />
           <FilterChips
             legend="Mode"
-            options={modeOptions}
+            options={["All", "Virtual", "In-Person"]}
             value={
               activeMode === "all" ? "All" : activeMode === "virtual" ? "Virtual" : "In-Person"
             }
@@ -174,41 +163,43 @@ export const EventsScreen: React.FC = () => {
 };
 
 const EventCard: React.FC<{ event: EventItem }> = ({ event }) => {
+  const date = new Date(event.date);
   return (
-    <article className="relative bg-white border-2 border-[#0f1b3d] flex flex-col overflow-hidden">
+    <article className="relative bg-white border border-black/10 flex flex-col overflow-hidden adf-card">
       {event.isVirtual && (
-        <span className="absolute top-4 right-4 z-10 bg-[#f5b301] text-[#0f1b3d] text-[11px] font-bold uppercase tracking-widest px-3 py-1.5">
+        <span className="absolute top-4 right-4 z-10 bg-[var(--adf-gold)] text-[var(--adf-charcoal)] text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
           Virtual/Hybrid
         </span>
       )}
 
       <div className="p-6 flex flex-col gap-4 flex-1">
-        <div className="flex justify-between items-start">
-          <span className="bg-[#e8edf3] text-[#0f1b3d] text-xs font-bold uppercase tracking-widest px-3 py-1.5">
-            {formatDate(event.date)}
-          </span>
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="bg-[#0f1b3d] text-white text-[11px] font-bold uppercase tracking-widest px-2.5 py-1">
-              {event.type}
-            </span>
-            <span className="text-xs font-bold text-[#5b6b85] uppercase tracking-wider">
-              {event.location}
+        <div className="flex gap-4">
+          <div className="adf-card-date shrink-0 flex flex-col items-center justify-center w-16 h-16 bg-[var(--adf-main)] text-white rounded-lg">
+            <span className="text-2xl font-display leading-none">{date.getDate()}</span>
+            <span className="text-xs uppercase mt-0.5">
+              {date.toLocaleString("en-GB", { month: "short" })}
             </span>
           </div>
-
-          <h3 className="text-lg font-extrabold text-[#0f1b3d] leading-snug mt-3">{event.title}</h3>
-
-          <p className="text-sm text-[#33415c] leading-relaxed line-clamp-2">{event.description}</p>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="bg-[var(--adf-main)] text-white text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">
+                {event.type}
+              </span>
+              <span className="text-xs font-bold text-[var(--adf-muted)] uppercase tracking-wider">
+                {event.location}
+              </span>
+            </div>
+            <h3 className="text-lg font-bold text-[var(--adf-charcoal)] leading-snug mt-2">{event.title}</h3>
+          </div>
         </div>
 
-        <div className="mt-auto pt-4 border-t border-[#0f1b3d]/15 flex flex-wrap gap-3">
-          <Link to="/events/$slug" params={{ slug: slugify(event.title) }} className={btnPrimarySmall}>
+        <p className="text-sm text-[var(--adf-muted)] leading-relaxed line-clamp-2">{event.description}</p>
+
+        <div className="mt-auto pt-4 border-t border-black/10 flex flex-wrap gap-3">
+          <Link to="/events/$slug" params={{ slug: slugify(event.title) }} className="adf-btn adf-btn-secondary text-xs focus-ring">
             Register
           </Link>
-          <Link to="/events/$slug" params={{ slug: slugify(event.title) }} className={btnGhostSmall}>
+          <Link to="/events/$slug" params={{ slug: slugify(event.title) }} className="adf-btn adf-btn-outline text-xs focus-ring">
             Details
           </Link>
         </div>

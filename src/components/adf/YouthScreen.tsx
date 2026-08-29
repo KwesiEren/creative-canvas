@@ -2,9 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
 import { YOUTH_OPPORTUNITIES, YOUTH_STORIES, YOUTH_POLLS, KNOWLEDGE_ITEMS } from '@/data/extraData';
 import type { PollItem } from '@/types';
-import { PageHero, SectionHeading, btnPrimary, btnGhost } from './ui';
+import { PageBanner, SectionHeading, btnPrimary, btnGhost } from './ui';
 import { FilterChips, Pagination } from './ui-extra';
-import { assetUrl } from '@/lib/assetUrl';
 
 interface QuizQuestion {
   id: string;
@@ -118,13 +117,7 @@ export const YouthScreen: React.FC = () => {
 
   return (
     <div className="space-y-20 animate-fade-in">
-      <PageHero
-        eyebrow="Youth Empowerment"
-        title="Youth Hub"
-        intro="Young leaders with disabilities driving change across Africa. Stories, opportunities, surveys, challenges and action."
-        image={assetUrl('/images/adf-event-2.jpg')}
-        imageAlt="Group of diverse young people collaborating together"
-      />
+      <PageBanner title="Youth" crumbs={[{ label: "Home" }, { label: "Youth" }]} />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10">
         <SectionHeading

@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { EVENTS_DATA } from '@/data/mockData.generated';
 import { findByTitleSlug, slugify } from '@/lib/slug';
 import { Breadcrumbs, MetaRow, Prose, ShareRow, EmptyState } from '@/components/adf/ui-extra';
-import { btnPrimary, PageHero, SectionHeading } from '@/components/adf/ui';
+import { btnPrimary, PageBanner, SectionHeading } from '@/components/adf/ui';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -106,12 +106,13 @@ export const EventDetailScreen: React.FC<Props> = ({ slug }) => {
         ]}
       />
 
-      <PageHero
-        eyebrow={`${item.type} — ${item.status}`}
+      <PageBanner
         title={item.title}
-        intro={paragraphs[0] ?? ''}
-        image={assetUrl("/images/adf-event-3.jpg")}
-        imageAlt={`${item.type} conference event`}
+        crumbs={[
+          { label: "Home" },
+          { label: "Events", onClick: () => {} },
+          { label: item.title },
+        ]}
       />
 
       <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-12 space-y-12">

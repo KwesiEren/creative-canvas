@@ -9,12 +9,8 @@ import {
 } from "@/data/mockData";
 import { KNOWLEDGE_ITEMS } from "@/data/extraData";
 import { slugify } from "@/lib/slug";
-import { PageHero } from "./ui";
+import { PageBanner } from "./ui";
 import { EmptyState } from "./ui-extra";
-import { assetUrl } from "@/lib/assetUrl";
-
-const HERO_IMAGE = assetUrl("/images/adf-event-5.png");
-
 interface ResultItem {
   id: string;
   type: string;
@@ -110,13 +106,7 @@ export const SearchScreen: React.FC<Props> = ({ query }) => {
 
   return (
     <div className="animate-fade-in">
-      <PageHero
-        eyebrow="Search"
-        title="Search the ADF website"
-        intro="Find news, events, resources, programmes, careers and knowledge hub content in one place."
-        image={HERO_IMAGE}
-        imageAlt="Stack of reference books on a library table"
-      />
+      <PageBanner title="Search" crumbs={[{ label: "Home" }, { label: "Search" }]} />
 
       <section className="max-w-[900px] mx-auto px-4 md:px-10 py-12">
         <form

@@ -19,12 +19,12 @@ interface PageBannerProps {
   crumbs?: { label: string; onClick?: () => void }[];
 }
 
-/** Inner-page title band (Wishon sp-page-title). */
+/** Inner-page title band (dark gradient, no watermark). */
 export const PageBanner: React.FC<PageBannerProps> = ({ title, crumbs }) => (
   <section className="adf-page-banner">
     <div className="max-w-[1200px] mx-auto px-4 md:px-6">
       {crumbs && crumbs.length > 0 && (
-        <nav aria-label="Breadcrumb" className="mb-3 text-sm text-white/80 capitalize">
+        <nav aria-label="Breadcrumb" className="breadcrumb mb-3">
           <ol className="flex flex-wrap items-center gap-2">
             {crumbs.map((crumb, index) => (
               <li key={`${crumb.label}-${index}`} className="flex items-center gap-2">

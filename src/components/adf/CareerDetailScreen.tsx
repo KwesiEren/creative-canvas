@@ -7,10 +7,8 @@ import { CAREERS_DATA } from "@/data/mockData";
 import { findByTitleSlug, slugify } from "@/lib/slug";
 import { buildCanonical } from "@/lib/slug";
 import { Breadcrumbs, MetaRow, ShareRow, Prose } from "./ui-extra";
-import { btnPrimary, btnGhost, PageHero, SectionHeading } from "./ui";
-import { assetUrl } from "@/lib/assetUrl";
+import { btnPrimary, btnGhost, PageBanner, SectionHeading } from "./ui";
 
-const OFFICE_IMAGE = assetUrl("/images/adf-event-3.jpg");
 
 const hearAboutOptions = [
   "ADF website",
@@ -163,13 +161,7 @@ export const CareerDetailScreen: React.FC<CareerDetailScreenProps> = ({
         ]}
       />
 
-      <PageHero
-        eyebrow={`Careers / ${item.department}`}
-        title={item.title}
-        intro={`Closing date: ${item.deadline}. ${item.location}.`}
-        image={OFFICE_IMAGE}
-        imageAlt="A diverse team collaborating in a modern office meeting space"
-      />
+      <PageBanner title={item.title} crumbs={[{ label: "Home" }, { label: "Careers", onClick: () => {} }, { label: item.title }]} />
 
       <section className="bg-white">
         <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-12">

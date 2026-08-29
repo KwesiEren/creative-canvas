@@ -1,18 +1,9 @@
 import React from "react";
-import { PageHero, SectionHeading } from "./ui";
-import { assetUrl } from "@/lib/assetUrl";
-
-const HERO_IMAGE = assetUrl("/images/adf-event-6.png");
+import { PageBanner, SectionHeading } from "./ui";
 
 export const PrivacyScreen: React.FC = () => (
   <div className="animate-fade-in">
-    <PageHero
-      eyebrow="Privacy"
-      title="Privacy notice"
-      intro="How the African Disability Forum collects, uses and protects personal data across the website and the SPADRA portal."
-      image={HERO_IMAGE}
-      imageAlt="Padlock icon on a laptop keyboard"
-    />
+    <PageBanner title="Privacy Policy" crumbs={[{ label: "Home" }, { label: "Privacy" }]} />
 
     <section className="max-w-[900px] mx-auto px-4 md:px-10 py-16 space-y-16">
       {[

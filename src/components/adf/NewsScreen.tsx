@@ -3,11 +3,9 @@ import { Link } from "@tanstack/react-router";
 import { NEWS_DATA } from "@/data/mockData";
 import { NewsItem } from "@/types";
 import { slugify } from "@/lib/slug";
-import { PageHero, SectionHeading } from "./ui";
+import { PageBanner, SectionHeading } from "./ui";
 import { FilterChips, Pagination, EmptyState } from "./ui-extra";
 import { assetUrl } from "@/lib/assetUrl";
-
-const HERO_IMAGE = assetUrl("/images/adf-event-6.png");
 
 const ITEMS_PER_PAGE = 9;
 
@@ -40,22 +38,22 @@ export const NewsScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageHero
-        eyebrow="Newsroom"
-        title="News & Articles"
-        intro="Statements, campaign updates and continental reporting from the African Disability Forum and its member organisations."
-        image={HERO_IMAGE}
-        imageAlt="Newspaper and press clippings on a desk"
+      <PageBanner
+        title="Blog"
+        crumbs={[
+          { label: "Home", onClick: () => {} },
+          { label: "Blog" },
+        ]}
       />
 
-      <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16">
+      <section className="max-w-[1200px] mx-auto px-4 md:px-6 py-16">
         <SectionHeading
           eyebrow="Latest Updates"
           title="Stories from the continent"
           intro="Filter by category to follow treaty monitoring, programme milestones and advocacy victories."
         />
 
-        <div className="mb-10 bg-[#e8edf3] p-6 border-2 border-[#0f1b3d]/10">
+        <div className="mb-10 bg-[var(--adf-bg)] p-6 border border-black/10">
           <FilterChips
             legend="Category"
             options={categoryOptions}
@@ -90,29 +88,34 @@ export const NewsScreen: React.FC = () => {
 const NewsCard: React.FC<{ item: NewsItem }> = ({ item }) => {
   const slug = slugify(item.title);
   return (
-    <article className="relative bg-white border-2 border-[#0f1b3d] flex flex-col overflow-hidden">
-      <Link to="/news/$slug" params={{ slug: slug }} className="focus-ring block overflow-hidden">
+    <article className="relative bg-white border border-black/10 flex flex-col overflow-hidden adf-card">
+      <Link to="/news/$slug" params={{ slug: slug }} className="focus-ring block overflow-hidden relative">
         <img src={item.image} alt={item.title} className="h-48 w-full object-cover" />
+        <div className="adf-card-date">
+          <span className="block text-xl font-bold leading-none">
+            {new Date(item.date).getDate()}
+          </span>
+          <span className="block text-xs uppercase">
+            {new Date(item.date).toLocaleString("en-GB", { month: "short" })}
+          </span>
+        </div>
       </Link>
       <div className="p-6 flex flex-col gap-3 flex-1">
         <div className="flex items-center gap-2 text-xs font-bold">
-          <span className="bg-[#0f1b3d] text-white px-2.5 py-1 rounded-none uppercase tracking-widest">
+          <span className="bg-[var(--adf-main)] text-white px-2.5 py-1 rounded-full uppercase tracking-widest">
             {item.category}
           </span>
-          <time dateTime={item.datetime} className="text-[#5b6b85] uppercase tracking-wider">
-            {item.date}
-          </time>
         </div>
-        <h2 className="text-lg font-extrabold text-[#0f1b3d] leading-snug">
-          <Link to="/news/$slug" params={{ slug: slug }} className="hover:text-[#245a86] focus-ring">
+        <h2 className="text-lg font-bold text-[var(--adf-charcoal)] leading-snug">
+          <Link to="/news/$slug" params={{ slug: slug }} className="hover:text-[var(--adf-main)] focus-ring">
             {item.title}
           </Link>
         </h2>
-        <p className="text-sm text-[#33415c] leading-relaxed flex-1 line-clamp-3">{item.summary}</p>
-        <div className="mt-auto pt-4 border-t border-[#0f1b3d]/15">
+        <p className="text-sm text-[var(--adf-muted)] leading-relaxed flex-1 line-clamp-3">{item.summary}</p>
+        <div className="mt-auto pt-4 border-t border-black/10">
           <Link
             to="/news/$slug" params={{ slug: slug }}
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#245a86] hover:underline focus-ring"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--adf-main)] hover:underline focus-ring"
           >
             Read full story
             <span className="material-symbols-outlined text-base">arrow_forward</span>

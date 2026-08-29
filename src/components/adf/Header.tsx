@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { NavTab, AboutSubSection, ProgrammeId } from "@/types";
 import { RESOURCES_DATA, NEWS_DATA, EVENTS_DATA, PROGRAMMES_DATA } from "@/data/mockData";
-import { t, type Locale } from "@/lib/i18n";
 import { assetUrl } from "@/lib/assetUrl";
 
 interface Props {
@@ -14,17 +13,15 @@ interface Props {
   onOpenAccessibility: () => void;
   onOpenTakeAction: () => void;
   onOpenDonate: () => void;
-  lang: Locale;
-  setLang: (locale: Locale) => void;
+  lang: string;
+  setLang: (locale: string) => void;
 }
 
-const navActive = (active: boolean) => (active ? "text-[var(--adf-charcoal)]" : undefined);
-
 const dropdownPanel =
-  "absolute left-0 top-full mt-0 min-w-[15rem] bg-white shadow-lg rounded-sm py-2 z-50 animate-fade-in";
+  "absolute left-0 top-full mt-0 min-w-[15rem] bg-white shadow-lg rounded-lg py-2 z-50 animate-fade-in border border-black/5";
 
 const dropdownItem =
-  "w-full text-left px-4 py-2.5 text-sm text-[#252525] hover:bg-[var(--adf-main)] hover:text-white transition-colors focus-ring flex items-center gap-2";
+  "w-full text-left px-4 py-2.5 text-sm text-[#252525] hover:bg-[var(--adf-main)] hover:text-white transition-colors focus-ring flex items-center gap-2 rounded-md mx-1 w-[calc(100%-8px)]";
 
 export const Header: React.FC<Props> = ({
   currentTab,
@@ -117,60 +114,24 @@ export const Header: React.FC<Props> = ({
   }, [searchQuery]);
 
   return (
-    <header className="w-full sticky top-0 z-40 shadow-sm">
-      {/* Top utility bar */}
-      <div className="bg-[var(--adf-topbar)] text-[var(--adf-topbar-muted)] text-sm">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6 h-9 flex items-center justify-between">
-          <div className="hidden sm:flex items-center gap-5">
-            <a href="mailto:info@adf-africa.org" className="hover:text-white focus-ring">
-              info@adf-africa.org
-            </a>
-            <span className="hidden md:inline">Addis Ababa, Ethiopia</span>
-          </div>
-          <div className="flex items-center gap-4 ml-auto text-xs">
-            <button
-              type="button"
-              onClick={onOpenAccessibility}
-              className="hidden sm:flex items-center gap-1 hover:text-white focus-ring cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-base">settings_accessibility</span>
-              <span>{t(lang, "common.accessibility")}</span>
-            </button>
-            <div className="flex items-center gap-1 font-semibold">
-              {(["en", "fr", "kis"] as const).map((locale, i) => (
-                <React.Fragment key={locale}>
-                  {i > 0 && <span className="opacity-50">/</span>}
-                  <button
-                    type="button"
-                    onClick={() => setLang(locale)}
-                    aria-pressed={lang === locale}
-                    className={`px-1 cursor-pointer focus-ring ${lang === locale ? "text-[var(--adf-gold)]" : "hover:text-white"}`}
-                  >
-                    {locale === "kis" ? "KIS" : locale.toUpperCase()}
-                  </button>
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main header */}
-      <div className="bg-white">
-        <div className="max-w-[1200px] mx-auto flex items-stretch justify-between">
+    <>
+      <header className="adf-header w-full">
+        <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 md:px-6 h-20">
+          {/* Logo */}
           <button
             type="button"
             onClick={() => handleNavClick("home")}
             aria-label="African Disability Forum Home"
-            className="adf-header-logo shrink-0 focus-ring cursor-pointer"
+            className="shrink-0 focus-ring cursor-pointer"
           >
             <img
               src={assetUrl("/images/adf-logo.png")}
-              alt="African Disability Forum logo"
-              className="h-8 w-auto brightness-0 invert"
+              alt="African Disability Forum"
+              className="h-14 w-auto"
             />
           </button>
 
+          {/* Desktop Navigation */}
           <nav
             ref={dropdownRef}
             aria-label="Primary Navigation"
@@ -179,8 +140,7 @@ export const Header: React.FC<Props> = ({
             <button
               type="button"
               onClick={() => handleNavClick("home")}
-              data-active={currentTab === "home"}
-              className={`adf-nav-link focus-ring ${navActive(currentTab === "home") ?? ""}`}
+              className={`text-base font-normal text-[var(--adf-muted)] hover:text-[var(--adf-charcoal)] transition-colors focus-ring py-2 ${currentTab === "home" ? "text-[var(--adf-charcoal)]" : ""}`}
             >
               Home
             </button>
@@ -190,11 +150,10 @@ export const Header: React.FC<Props> = ({
                 type="button"
                 onClick={() => setOpenDropdown(openDropdown === "about" ? null : "about")}
                 onMouseEnter={() => setOpenDropdown("about")}
-                data-active={currentTab === "about"}
-                className={`adf-nav-link focus-ring flex items-center gap-1 cursor-pointer ${navActive(currentTab === "about") ?? ""}`}
+                className={`text-base font-normal text-[var(--adf-muted)] hover:text-[var(--adf-charcoal)] transition-colors focus-ring flex items-center gap-1 py-2 ${currentTab === "about" ? "text-[var(--adf-charcoal)]" : ""}`}
               >
                 ADF
-                <span className="material-symbols-outlined text-base">expand_more</span>
+                <span className="material-symbols-outlined text-sm">expand_more</span>
               </button>
               {openDropdown === "about" && (
                 <div onMouseLeave={() => setOpenDropdown(null)} className={dropdownPanel}>
@@ -217,46 +176,14 @@ export const Header: React.FC<Props> = ({
             <div className="relative">
               <button
                 type="button"
-                onClick={() => setOpenDropdown(openDropdown === "programmes" ? null : "programmes")}
-                onMouseEnter={() => setOpenDropdown("programmes")}
-                data-active={currentTab === "programmes"}
-                className={`adf-nav-link focus-ring flex items-center gap-1 cursor-pointer ${navActive(currentTab === "programmes") ?? ""}`}
-              >
-                Programmes
-                <span className="material-symbols-outlined text-base">expand_more</span>
-              </button>
-              {openDropdown === "programmes" && (
-                <div onMouseLeave={() => setOpenDropdown(null)} className={`${dropdownPanel} min-w-[18rem]`}>
-                  {PROGRAMMES_DATA.map((prog) => (
-                    <button
-                      key={prog.id}
-                      type="button"
-                      onClick={() => handleNavClick("programmes", { programmeId: prog.id })}
-                      className={dropdownItem}
-                    >
-                      <span className="font-semibold text-[var(--adf-main)] group-hover:text-white">{prog.acronym}</span>
-                      <span className="truncate">{prog.name}</span>
-                    </button>
-                  ))}
-                  <button type="button" onClick={() => handleNavClick("spadra")} className={`${dropdownItem} border-t border-black/10 mt-1`}>
-                    SPADRA Portal
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setOpenDropdown(openDropdown === "news" ? null : "news")}
-                onMouseEnter={() => setOpenDropdown("news")}
-                data-active={currentTab === "news" || currentTab === "advocacy" || currentTab === "events"}
-                className={`adf-nav-link focus-ring flex items-center gap-1 cursor-pointer ${navActive(currentTab === "news" || currentTab === "advocacy" || currentTab === "events") ?? ""}`}
+                onClick={() => setOpenDropdown(openDropdown === "events" ? null : "events")}
+                onMouseEnter={() => setOpenDropdown("events")}
+                className={`text-base font-normal text-[var(--adf-muted)] hover:text-[var(--adf-charcoal)] transition-colors focus-ring flex items-center gap-1 py-2 ${currentTab === "events" || currentTab === "advocacy" ? "text-[var(--adf-charcoal)]" : ""}`}
               >
                 Events
-                <span className="material-symbols-outlined text-base">expand_more</span>
+                <span className="material-symbols-outlined text-sm">expand_more</span>
               </button>
-              {openDropdown === "news" && (
+              {openDropdown === "events" && (
                 <div onMouseLeave={() => setOpenDropdown(null)} className={dropdownPanel}>
                   <button type="button" onClick={() => handleNavClick("advocacy")} className={dropdownItem}>
                     Events Calendar
@@ -271,15 +198,14 @@ export const Header: React.FC<Props> = ({
             <div className="relative">
               <button
                 type="button"
-                onClick={() => setOpenDropdown(openDropdown === "resources" ? null : "resources")}
-                onMouseEnter={() => setOpenDropdown("resources")}
-                data-active={currentTab === "resources" || currentTab === "news"}
-                className={`adf-nav-link focus-ring flex items-center gap-1 cursor-pointer ${navActive(currentTab === "resources" || currentTab === "news") ?? ""}`}
+                onClick={() => setOpenDropdown(openDropdown === "blog" ? null : "blog")}
+                onMouseEnter={() => setOpenDropdown("blog")}
+                className={`text-base font-normal text-[var(--adf-muted)] hover:text-[var(--adf-charcoal)] transition-colors focus-ring flex items-center gap-1 py-2 ${currentTab === "news" || currentTab === "resources" ? "text-[var(--adf-charcoal)]" : ""}`}
               >
                 Blog
-                <span className="material-symbols-outlined text-base">expand_more</span>
+                <span className="material-symbols-outlined text-sm">expand_more</span>
               </button>
-              {openDropdown === "resources" && (
+              {openDropdown === "blog" && (
                 <div onMouseLeave={() => setOpenDropdown(null)} className={dropdownPanel}>
                   <button type="button" onClick={() => handleNavClick("news")} className={dropdownItem}>
                     Blog Posts
@@ -297,8 +223,7 @@ export const Header: React.FC<Props> = ({
             <button
               type="button"
               onClick={() => handleNavClick("contact")}
-              data-active={currentTab === "contact"}
-              className={`adf-nav-link focus-ring ${navActive(currentTab === "contact") ?? ""}`}
+              className={`text-base font-normal text-[var(--adf-muted)] hover:text-[var(--adf-charcoal)] transition-colors focus-ring py-2 ${currentTab === "contact" ? "text-[var(--adf-charcoal)]" : ""}`}
             >
               Contact
             </button>
@@ -306,24 +231,28 @@ export const Header: React.FC<Props> = ({
             <button
               type="button"
               onClick={() => handleNavClick("spadra")}
-              data-active={currentTab === "spadra"}
-              className={`adf-nav-link focus-ring ${navActive(currentTab === "spadra") ?? ""}`}
+              className={`text-base font-normal text-[var(--adf-muted)] hover:text-[var(--adf-charcoal)] transition-colors focus-ring py-2 ${currentTab === "spadra" ? "text-[var(--adf-charcoal)]" : ""}`}
             >
-              SPADRA
+              SPRADA
             </button>
           </nav>
 
-          <div className="flex items-center gap-3 pr-4 md:pr-6 shrink-0">
+          {/* Right actions */}
+          <div className="flex items-center gap-3 shrink-0">
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              aria-label={t(lang, "common.search")}
+              aria-label="Search"
               className="hidden sm:inline-flex h-10 w-10 items-center justify-center rounded-full text-[var(--adf-charcoal)] hover:text-[var(--adf-main)] focus-ring cursor-pointer"
             >
               <span className="material-symbols-outlined">search</span>
             </button>
-            <button type="button" onClick={onOpenDonate} className="adf-btn adf-btn-primary hidden sm:inline-flex focus-ring">
-              Donate Now
+            <button
+              type="button"
+              onClick={onOpenDonate}
+              className="adf-btn adf-btn-primary adf-btn-circle hidden sm:inline-flex focus-ring"
+            >
+              DONATE NOW
             </button>
             <button
               type="button"
@@ -332,79 +261,90 @@ export const Header: React.FC<Props> = ({
               aria-expanded={mobileMenuOpen}
               className="xl:hidden inline-flex flex-col justify-center gap-1.5 p-2 focus-ring cursor-pointer"
             >
-              <span className={`block h-0.5 w-6 bg-[var(--adf-main)] transition-transform ${mobileMenuOpen ? "translate-y-2 rotate-45" : ""}`} />
-              <span className={`block h-0.5 w-6 bg-[var(--adf-main)] transition-opacity ${mobileMenuOpen ? "opacity-0" : ""}`} />
-              <span className={`block h-0.5 w-6 bg-[var(--adf-main)] transition-transform ${mobileMenuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+              <span className={`block h-0.5 w-6 bg-[var(--adf-charcoal)] transition-transform ${mobileMenuOpen ? "translate-y-2 rotate-45" : ""}`} />
+              <span className={`block h-0.5 w-6 bg-[var(--adf-charcoal)] transition-opacity ${mobileMenuOpen ? "opacity-0" : ""}`} />
+              <span className={`block h-0.5 w-6 bg-[var(--adf-charcoal)] transition-transform ${mobileMenuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
             </button>
           </div>
         </div>
-      </div>
+      </header>
+
+      {/* Accessibility icon (fixed top-right) */}
+      <button
+        type="button"
+        onClick={onOpenAccessibility}
+        aria-label="Accessibility settings"
+        className="fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-[var(--adf-main)] text-white flex items-center justify-center shadow-lg hover:bg-[#023aa3] transition-colors focus-ring cursor-pointer"
+      >
+        <span className="material-symbols-outlined text-2xl">accessibility_new</span>
+      </button>
 
       {/* Mobile offcanvas */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-[var(--adf-main)] text-white px-4 py-5 space-y-4 animate-fade-in max-h-[80vh] overflow-y-auto">
-          <button type="button" onClick={() => handleNavClick("home")} className="block w-full text-left py-2 font-semibold">
+        <div className="xl:hidden bg-white border-t border-black/10 px-4 py-5 space-y-4 animate-fade-in max-h-[80vh] overflow-y-auto">
+          <button type="button" onClick={() => handleNavClick("home")} className="block w-full text-left py-2 font-semibold text-[var(--adf-charcoal)]">
             Home
           </button>
-          <div className="space-y-1 border-t border-white/20 pt-3">
-            <p className="text-xs uppercase tracking-wider text-white/70">ADF</p>
-            <button type="button" onClick={() => handleNavClick("about", { subSection: "who" })} className="block w-full text-left py-1.5 text-sm">
+          <div className="space-y-1 border-t border-black/10 pt-3">
+            <p className="text-xs uppercase tracking-wider text-[var(--adf-muted)] font-semibold">ADF</p>
+            <button type="button" onClick={() => handleNavClick("about", { subSection: "who" })} className="block w-full text-left py-1.5 text-sm text-[var(--adf-charcoal)]">
               About Us
             </button>
-            <button type="button" onClick={() => handleNavClick("membership")} className="block w-full text-left py-1.5 text-sm">
+            <button type="button" onClick={() => handleNavClick("membership")} className="block w-full text-left py-1.5 text-sm text-[var(--adf-charcoal)]">
               OPD Membership
             </button>
-            <button type="button" onClick={() => handleNavClick("get-involved")} className="block w-full text-left py-1.5 text-sm">
+            <button type="button" onClick={() => handleNavClick("get-involved")} className="block w-full text-left py-1.5 text-sm text-[var(--adf-charcoal)]">
               Get Involved
             </button>
           </div>
-          <div className="space-y-1 border-t border-white/20 pt-3">
-            <p className="text-xs uppercase tracking-wider text-white/70">Programmes</p>
+          <div className="space-y-1 border-t border-black/10 pt-3">
+            <p className="text-xs uppercase tracking-wider text-[var(--adf-muted)] font-semibold">Programmes</p>
             {PROGRAMMES_DATA.map((p) => (
               <button
                 key={p.id}
                 type="button"
                 onClick={() => handleNavClick("programmes", { programmeId: p.id })}
-                className="block w-full text-left py-1.5 text-sm"
+                className="block w-full text-left py-1.5 text-sm text-[var(--adf-charcoal)]"
               >
                 {p.acronym}
               </button>
             ))}
           </div>
-          <div className="space-y-1 border-t border-white/20 pt-3">
-            <p className="text-xs uppercase tracking-wider text-white/70">Events &amp; Blog</p>
-            <button type="button" onClick={() => handleNavClick("advocacy")} className="block w-full text-left py-1.5 text-sm">
+          <div className="space-y-1 border-t border-black/10 pt-3">
+            <p className="text-xs uppercase tracking-wider text-[var(--adf-muted)] font-semibold">Events &amp; Blog</p>
+            <button type="button" onClick={() => handleNavClick("advocacy")} className="block w-full text-left py-1.5 text-sm text-[var(--adf-charcoal)]">
               Events
             </button>
-            <button type="button" onClick={() => handleNavClick("news")} className="block w-full text-left py-1.5 text-sm">
+            <button type="button" onClick={() => handleNavClick("news")} className="block w-full text-left py-1.5 text-sm text-[var(--adf-charcoal)]">
               Blog
             </button>
-            <button type="button" onClick={() => handleNavClick("resources")} className="block w-full text-left py-1.5 text-sm">
+            <button type="button" onClick={() => handleNavClick("resources")} className="block w-full text-left py-1.5 text-sm text-[var(--adf-charcoal)]">
               Publications
             </button>
           </div>
-          <div className="flex flex-wrap gap-3 border-t border-white/20 pt-3">
-            <button type="button" onClick={() => handleNavClick("contact")} className="text-sm font-semibold">
+          <div className="flex flex-wrap gap-3 border-t border-black/10 pt-3">
+            <button type="button" onClick={() => handleNavClick("contact")} className="text-sm font-semibold text-[var(--adf-charcoal)]">
               Contact
             </button>
-            <button type="button" onClick={() => handleNavClick("careers")} className="text-sm font-semibold">
+            <button type="button" onClick={() => handleNavClick("careers")} className="text-sm font-semibold text-[var(--adf-charcoal)]">
               Careers
             </button>
-            <button type="button" onClick={() => handleNavClick("spadra")} className="text-sm font-semibold">
-              SPADRA
+            <button type="button" onClick={() => handleNavClick("spadra")} className="text-sm font-semibold text-[var(--adf-charcoal)]">
+              SPRADA
             </button>
           </div>
           <div className="flex gap-2 pt-2">
-            <button type="button" onClick={() => { setMobileMenuOpen(false); onOpenTakeAction(); }} className="adf-btn adf-btn-outline border-white text-white flex-1 focus-ring">
+            <button type="button" onClick={() => { setMobileMenuOpen(false); onOpenTakeAction(); }} className="adf-btn adf-btn-outline flex-1 focus-ring">
               Take Action
             </button>
-            <button type="button" onClick={() => { setMobileMenuOpen(false); onOpenDonate(); }} className="adf-btn adf-btn-primary flex-1 focus-ring">
-              Donate Now
+            <button type="button" onClick={() => { setMobileMenuOpen(false); onOpenDonate(); }} className="adf-btn adf-btn-primary adf-btn-circle flex-1 focus-ring">
+              DONATE NOW
             </button>
           </div>
         </div>
       )}
 
+      {/* Search modal */}
       {searchOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 pt-20 p-4">
           <div className="bg-white rounded-lg max-w-2xl w-full p-6 shadow-xl space-y-4 animate-fade-in">
@@ -425,7 +365,7 @@ export const Header: React.FC<Props> = ({
                 placeholder="Search policy briefs, events, programmes, news..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full p-3 pl-10 bg-[#f2f2f2] border border-black/10 rounded-full text-sm text-[var(--adf-charcoal)] focus:outline-none focus:ring-2 focus:ring-[var(--adf-main)]"
+                className="w-full p-3 pl-10 bg-[#f2f2f2] border border-black/10 rounded-lg text-sm text-[var(--adf-charcoal)] focus:outline-none focus:ring-2 focus:ring-[var(--adf-main)]"
               />
               <span className="material-symbols-outlined absolute left-3 top-3 text-[var(--adf-muted)]">search</span>
             </div>
@@ -471,6 +411,6 @@ export const Header: React.FC<Props> = ({
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 };

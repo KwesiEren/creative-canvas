@@ -2,11 +2,9 @@ import React, { useState, useMemo } from "react";
 import { Link } from "@tanstack/react-router";
 import { OPD_COUNTRIES } from "@/data/mockData";
 import { OpdCountry } from "@/types";
-import { PageHero, SectionHeading, btnPrimary, btnGhost, btnGhostLight } from "./ui";
+import { PageBanner, SectionHeading, btnPrimary, btnGhost, btnGhostLight } from "./ui";
 import { FilterChips, EmptyState } from "./ui-extra";
-import { assetUrl } from "@/lib/assetUrl";
 
-const HERO_IMAGE = assetUrl("/images/adf-event-2.jpg");
 
 export const MembershipScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,13 +32,7 @@ export const MembershipScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageHero
-        eyebrow="ADF Membership"
-        title="Member OPD Directory"
-        intro="Search national, regional and pan-African organisations of persons with disabilities that make up the ADF federation."
-        image={HERO_IMAGE}
-        imageAlt="People collaborating around a table at a civil society meeting"
-      />
+      <PageBanner title="Membership" crumbs={[{ label: "Home" }, { label: "Membership" }]} />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

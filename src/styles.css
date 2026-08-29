@@ -7,6 +7,7 @@
 
 /*
  * African Disability Forum design system.
+ * Based on the Wishon charity template (Home Four.mhtml).
  *
  * Accessibility-first: all colour pairs meet WCAG 2.2 AA contrast,
  * focus rings are always visible, and a high-contrast variant (.hc)
@@ -158,8 +159,8 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-size: 1.0625rem;
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -170,7 +171,7 @@
     font-family: var(--font-display);
     font-weight: 700;
     letter-spacing: -0.04em;
-    line-height: 1.15;
+    line-height: 1.2;
     text-wrap: balance;
     color: var(--adf-charcoal);
   }
@@ -250,23 +251,26 @@
   outline-offset: 2px;
 }
 
-/* --- Wishon shared chrome --- */
+/* --- Button system (Wishon template) --- */
 .adf-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 9999px;
+  border-radius: 10px;
   font-family: var(--font-sans);
   font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1;
-  padding: 0.875rem 1.75rem;
+  font-weight: 700;
+  line-height: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 17px 47px;
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
   cursor: pointer;
+  border: none;
 }
 
 .adf-btn-primary {
@@ -275,7 +279,8 @@
 }
 
 .adf-btn-primary:hover {
-  background: #e0a61f;
+  background: var(--adf-main);
+  color: #ffffff;
 }
 
 .adf-btn-secondary {
@@ -284,7 +289,8 @@
 }
 
 .adf-btn-secondary:hover {
-  background: #023aa3;
+  background: var(--adf-gold);
+  color: #ffffff;
 }
 
 .adf-btn-outline {
@@ -298,18 +304,17 @@
   color: #ffffff;
 }
 
-.adf-header-logo {
-  position: relative;
-  background: var(--adf-main);
-  padding: 1rem 2.5rem 1rem 1.25rem;
+.adf-btn-circle {
+  border-radius: 30px;
 }
 
-.adf-header-logo::before {
-  content: "";
-  position: absolute;
-  inset: 0 -100vw 0 0;
-  background: var(--adf-main);
-  z-index: -1;
+/* --- Header (Wishon template) --- */
+.adf-header {
+  background: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 60px 0px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
 }
 
 .adf-nav-link {
@@ -326,10 +331,13 @@
   color: var(--adf-charcoal);
 }
 
+/* --- Page banner (inner pages) - dark gradient, no watermark --- */
 .adf-page-banner {
-  background: var(--adf-main);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   color: #ffffff;
-  padding: 2rem 0 2.5rem;
+  padding: 100px 0 120px;
+  position: relative;
+  overflow: hidden;
 }
 
 .adf-page-banner h1 {
@@ -338,6 +346,31 @@
   margin: 0;
 }
 
+.adf-page-banner .breadcrumb {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.adf-page-banner .breadcrumb a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+
+.adf-page-banner .breadcrumb a:hover {
+  color: #ffffff;
+}
+
+/* --- Hero scrim (home slider) --- */
+.hero-scrim {
+  background: linear-gradient(
+    90deg,
+    rgba(3, 69, 191, 0.92) 0%,
+    rgba(3, 69, 191, 0.78) 45%,
+    rgba(3, 69, 191, 0.45) 100%
+  );
+}
+
+/* --- Footer (Wishon template) --- */
 .adf-footer {
   position: relative;
   overflow: hidden;
@@ -378,9 +411,13 @@
   background: var(--adf-main);
 }
 
-/* Home Four page sections */
+/* --- Home page sections --- */
 .home-hero h2 {
   color: #ffffff;
+}
+
+.home-feature-tile {
+  border-top: 4px solid var(--adf-gold);
 }
 
 .home-event-date {
@@ -391,16 +428,118 @@
   color: #999;
 }
 
-/* Hero scrim used behind slider / photography. */
-.hero-scrim {
-  background: linear-gradient(
-    90deg,
-    rgba(3, 69, 191, 0.92) 0%,
-    rgba(3, 69, 191, 0.78) 45%,
-    rgba(3, 69, 191, 0.45) 100%
-  );
+/* --- Date badge (blog/event cards) --- */
+.date-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--adf-main);
+  color: #ffffff;
+  padding: 8px 12px;
+  text-align: center;
+  border-radius: 4px;
+  line-height: 1;
+  z-index: 2;
 }
 
+.date-badge .day {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.date-badge .month {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* --- Blog card --- */
+.blog-card {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 0px 60px 0px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  background: #ffffff;
+}
+
+.blog-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 10px 30px 0px;
+  transform: translateY(-2px);
+}
+
+/* --- Event card (new tall style) --- */
+.event-card {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 0px 60px 0px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.event-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 10px 30px 0px;
+  transform: translateY(-2px);
+}
+
+/* --- Pagination --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #ffffff;
+  color: var(--adf-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover {
+  border-color: var(--adf-main);
+  color: var(--adf-main);
+}
+
+.pagination-btn.active {
+  background: var(--adf-main);
+  border-color: var(--adf-main);
+  color: #ffffff;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* --- Accessibility badge --- */
+.a11y-badge {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #ffffff;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #333;
+  z-index: 50;
+  border-top: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+
+/* --- Animations --- */
 @keyframes adf-fade-in {
   from {
     opacity: 0;
@@ -416,13 +555,14 @@
   animation: adf-fade-in 0.35s ease-out both;
 }
 
+/* --- Dyslexia mode --- */
 .dyslexic body,
 .dyslexic {
   font-family: "Comic Sans MS", "Verdana", sans-serif;
   letter-spacing: 0.02em;
 }
 
-/* SPADRA portal — scoped brand overrides (blue + white theme, Montserrat font). */
+/* --- SPADRA portal — scoped brand overrides (blue + white theme, Montserrat font). --- */
 .spadra-portal {
   --s-primary: #1d4ed8;
   --s-primary-hover: #1e40af;

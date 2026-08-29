@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
 import { KNOWLEDGE_ITEMS, KNOWLEDGE_THEMES } from '@/data/extraData';
 import { KnowledgeItem, KnowledgeFormat } from '@/types';
-import { PageHero, SectionHeading, btnPrimary } from './ui';
+import { PageBanner, SectionHeading, btnPrimary } from './ui';
 import { FilterChips, Pagination } from './ui-extra';
 
 const FORMATS: Array<{ value: 'All' | KnowledgeFormat; icon: string }> = [
@@ -14,10 +14,6 @@ const FORMATS: Array<{ value: 'All' | KnowledgeFormat; icon: string }> = [
   { value: 'Easy Read', icon: 'menu_book' },
   { value: 'Infographic', icon: 'insights' },
 ];
-
-import { assetUrl } from '@/lib/assetUrl';
-
-const HERO_IMAGE = assetUrl('/images/adf-event-5.png');
 
 const ITEMS_PER_PAGE = 9;
 
@@ -69,13 +65,7 @@ export const KnowledgeHubScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageHero
-        eyebrow="ADF Resources"
-        title="Knowledge Hub"
-        intro="Toolkits, explainers, multimedia and research curated for disability rights organizers, OPDs and policy advocates across Africa."
-        image={HERO_IMAGE}
-        imageAlt="Stack of open research books and documents on a wooden table"
-      />
+      <PageBanner title="Knowledge Hub" crumbs={[{ label: "Home" }, { label: "Knowledge Hub" }]} />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-12">
         <div>
