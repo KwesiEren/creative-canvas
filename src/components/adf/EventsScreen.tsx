@@ -3,19 +3,21 @@ import { Link } from "@tanstack/react-router";
 import { EVENTS_DATA } from "@/data/mockData";
 import { EventItem } from "@/types";
 import { slugify } from "@/lib/slug";
-import { PageBanner, SectionHeading, btnPrimary, btnGhost } from "./ui";
+import { PageBanner, SectionHeading } from "./ui";
 import { FilterChips, Pagination, EmptyState } from "./ui-extra";
+import { assetUrl } from "@/lib/assetUrl";
 
 const ITEMS_PER_PAGE = 12;
 
-const formatDate = (dateStr: string): string => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-};
+// Pool of existing events images to cycle through
+const EVENT_IMAGES = [
+  "/images/adf-event-1.jpg",
+  "/images/adf-event-2.jpg",
+  "/images/adf-event-3.jpg",
+  "/images/adf-event-4.jpg",
+  "/images/adf-event-5.png",
+  "/images/adf-event-6.png",
+];
 
 export const EventsScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"Upcoming" | "Past">("Upcoming");
@@ -85,30 +87,39 @@ export const EventsScreen: React.FC = () => {
   };
 
   return (
-    <div className="animate-fade-in">
-      <PageBanner
-        title="Events"
-        crumbs={[
-          { label: "Home", onClick: () => {} },
-          { label: "Events" },
-        ]}
-      />
+    <div className="animate-fade-in font-sans">
+      {/* Dynamic Hero Banner matching Figma 1894x378 Aspect ratio with existing image */}
+      <section 
+        className="relative min-h-[320px] md:min-h-[378px] flex items-center bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{ backgroundImage: `url(${assetUrl("/images/adf-event-3.jpg")})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/45" />
+        <div className="relative max-w-[1200px] w-full mx-auto px-4 md:px-6 z-10 text-white py-12">
+          <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-wider text-white/70 mb-3">
+            <span>Home</span> <span className="mx-1">/</span> <span>Events</span> <span className="mx-1">/</span> <span className="text-[var(--adf-gold)] font-semibold">Events</span>
+          </nav>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Events</h1>
+        </div>
+      </section>
 
       <section className="max-w-[1200px] mx-auto px-4 md:px-6 py-16">
         <SectionHeading
-          eyebrow={`${activeTab} Events`}
-          title={`${activeTab} Convenings & Gatherings`}
-          intro="Connect with disability rights leaders, policymakers, OPD representatives and allies from across the African continent."
+          eyebrow={`${activeTab} Convenings`}
+          title={`${activeTab} Gatherings & Forums`}
+          intro="Connect with disability rights leaders, policymakers, and OPD representatives from across the African continent."
         />
 
-        <div className="mb-10 flex flex-wrap gap-2 border-b border-black/10 pb-6">
+        {/* Tab triggers */}
+        <div className="mb-10 flex flex-wrap gap-2 border-b border-slate-200 pb-6">
           {(["Upcoming", "Past"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => handleTabChange(tab)}
               aria-pressed={activeTab === tab}
-              className={`border border-black/20 px-8 py-3 text-sm font-bold uppercase tracking-widest focus-ring cursor-pointer rounded-full transition-colors ${
-                activeTab === tab ? "bg-[var(--adf-main)] text-white border-[var(--adf-main)]" : "text-[var(--adf-charcoal)] hover:bg-[var(--adf-bg)]"
+              className={`border px-8 py-3 text-sm font-bold uppercase tracking-widest cursor-pointer transition-colors duration-200 rounded-lg ${
+                activeTab === tab 
+                  ? "bg-blue-700 text-white border-blue-700 shadow-md" 
+                  : "text-slate-700 border-slate-300 hover:bg-slate-50"
               }`}
             >
               {tab}
@@ -116,7 +127,8 @@ export const EventsScreen: React.FC = () => {
           ))}
         </div>
 
-        <div className="space-y-4 mb-10 bg-[var(--adf-bg)] p-6 border border-black/10">
+        {/* Filter chips panel */}
+        <div className="space-y-4 mb-10 bg-slate-50 p-6 border border-slate-200 rounded-xl shadow-sm">
           <FilterChips
             legend="Type"
             options={typeOptions}
@@ -139,13 +151,14 @@ export const EventsScreen: React.FC = () => {
           />
         </div>
 
-        {paginatedEvents.length === 0 ? (
+        {filteredEvents.length === 0 ? (
           <EmptyState message="No events match your current filters. Try clearing the filters or switching tabs." />
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {paginatedEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
+            {/* 4-Column Responsive Grid matching Figma portrait aspect ratio layout */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {paginatedEvents.map((event, index) => (
+                <EventCard key={event.id} event={event} index={index} />
               ))}
             </div>
 
@@ -162,48 +175,58 @@ export const EventsScreen: React.FC = () => {
   );
 };
 
-const EventCard: React.FC<{ event: EventItem }> = ({ event }) => {
+const EventCard: React.FC<{ event: EventItem; index: number }> = ({ event, index }) => {
   const date = new Date(event.date);
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "short" });
+  
+  // Cycle background images from the pool of existing images
+  const bgImage = EVENT_IMAGES[index % EVENT_IMAGES.length];
+
   return (
-    <article className="relative bg-white border border-black/10 flex flex-col overflow-hidden adf-card">
+    <Link 
+      to="/events/$slug" 
+      params={{ slug: slugify(event.title) }} 
+      className="relative block aspect-[270/369] rounded-xl overflow-hidden shadow-md group hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+    >
+      {/* Background Image */}
+      <img 
+        src={assetUrl(bgImage)} 
+        alt={event.title} 
+        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      {/* Dark overlay for readable white text */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
+
+      {/* Date badge on top right */}
+      <div className="absolute top-4 right-4 bg-blue-700 text-white font-extrabold text-xs py-2 px-3.5 rounded-lg text-center shadow-md">
+        <span className="block text-sm leading-none">{day}</span>
+        <span className="block text-[9px] uppercase leading-none mt-0.5 tracking-wider">{month}</span>
+      </div>
+
+      {/* Hybrid/Virtual Label indicator */}
       {event.isVirtual && (
-        <span className="absolute top-4 right-4 z-10 bg-[var(--adf-gold)] text-[var(--adf-charcoal)] text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
-          Virtual/Hybrid
+        <span className="absolute top-4 left-4 bg-amber-400 text-slate-800 text-[9px] font-extrabold uppercase tracking-widest px-2 py-1 rounded">
+          Virtual
         </span>
       )}
 
-      <div className="p-6 flex flex-col gap-4 flex-1">
-        <div className="flex gap-4">
-          <div className="adf-card-date shrink-0 flex flex-col items-center justify-center w-16 h-16 bg-[var(--adf-main)] text-white rounded-lg">
-            <span className="text-2xl font-display leading-none">{date.getDate()}</span>
-            <span className="text-xs uppercase mt-0.5">
-              {date.toLocaleString("en-GB", { month: "short" })}
-            </span>
-          </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="bg-[var(--adf-main)] text-white text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">
-                {event.type}
-              </span>
-              <span className="text-xs font-bold text-[var(--adf-muted)] uppercase tracking-wider">
-                {event.location}
-              </span>
-            </div>
-            <h3 className="text-lg font-bold text-[var(--adf-charcoal)] leading-snug mt-2">{event.title}</h3>
-          </div>
+      {/* Text elements at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 p-5 text-white flex flex-col gap-2">
+        <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold text-white/90">
+          <span className="flex items-center gap-1">
+            <span className="material-symbols-outlined text-[14px] text-amber-400">schedule</span>
+            {event.time.split(" ")[0]}
+          </span>
+          <span className="flex items-center gap-1 truncate max-w-[130px]">
+            <span className="material-symbols-outlined text-[14px] text-amber-400">location_on</span>
+            {event.location.split(" &")[0]}
+          </span>
         </div>
-
-        <p className="text-sm text-[var(--adf-muted)] leading-relaxed line-clamp-2">{event.description}</p>
-
-        <div className="mt-auto pt-4 border-t border-black/10 flex flex-wrap gap-3">
-          <Link to="/events/$slug" params={{ slug: slugify(event.title) }} className="adf-btn adf-btn-secondary text-xs focus-ring">
-            Register
-          </Link>
-          <Link to="/events/$slug" params={{ slug: slugify(event.title) }} className="adf-btn adf-btn-outline text-xs focus-ring">
-            Details
-          </Link>
-        </div>
+        <h3 className="text-base font-bold leading-snug group-hover:text-amber-300 transition-colors line-clamp-2">
+          {event.title}
+        </h3>
       </div>
-    </article>
+    </Link>
   );
 };
