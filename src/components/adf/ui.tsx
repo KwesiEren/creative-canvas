@@ -1,18 +1,54 @@
 import React from 'react';
 
-/** Shared presentation primitives for the ADF editorial design system. */
+/** Shared presentation primitives aligned to the Wishon charity template. */
 
 export const btnPrimary =
-  'inline-flex items-center justify-center gap-2 bg-[#0f1b3d] text-white font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-[#1e3a5f] transition-colors focus-ring cursor-pointer';
+  'adf-btn adf-btn-secondary focus-ring';
 
 export const btnDonate =
-  'inline-flex items-center justify-center gap-2 bg-[#f5b301] text-[#0f1b3d] font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-[#ffc933] transition-colors focus-ring cursor-pointer';
+  'adf-btn adf-btn-primary focus-ring';
 
 export const btnGhost =
-  'inline-flex items-center justify-center gap-2 border-2 border-[#0f1b3d] text-[#0f1b3d] font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-[#0f1b3d] hover:text-white transition-colors focus-ring cursor-pointer';
+  'adf-btn adf-btn-outline focus-ring';
 
 export const btnGhostLight =
-  'inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-white hover:text-[#0f1b3d] transition-colors focus-ring cursor-pointer';
+  'adf-btn border border-white text-white bg-transparent hover:bg-white hover:text-[var(--adf-main)] focus-ring';
+
+interface PageBannerProps {
+  title: string;
+  crumbs?: { label: string; onClick?: () => void }[];
+}
+
+/** Inner-page title band (Wishon sp-page-title). */
+export const PageBanner: React.FC<PageBannerProps> = ({ title, crumbs }) => (
+  <section className="adf-page-banner">
+    <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+      {crumbs && crumbs.length > 0 && (
+        <nav aria-label="Breadcrumb" className="mb-3 text-sm text-white/80 capitalize">
+          <ol className="flex flex-wrap items-center gap-2">
+            {crumbs.map((crumb, index) => (
+              <li key={`${crumb.label}-${index}`} className="flex items-center gap-2">
+                {index > 0 && <span aria-hidden="true">/</span>}
+                {crumb.onClick ? (
+                  <button
+                    type="button"
+                    onClick={crumb.onClick}
+                    className="hover:text-white focus-ring rounded-sm"
+                  >
+                    {crumb.label}
+                  </button>
+                ) : (
+                  <span aria-current="page">{crumb.label}</span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+      <h1>{title}</h1>
+    </div>
+  </section>
+);
 
 interface PageHeroProps {
   eyebrow: string;
@@ -24,7 +60,7 @@ interface PageHeroProps {
   tall?: boolean;
 }
 
-/** Full-bleed page banner: photograph with a navy scrim and title over it. */
+/** Full-bleed page banner: photograph with a blue scrim and title over it. */
 export const PageHero: React.FC<PageHeroProps> = ({
   eyebrow,
   title,
@@ -34,16 +70,16 @@ export const PageHero: React.FC<PageHeroProps> = ({
   children,
   tall = false,
 }) => (
-  <section className={`relative w-full ${tall ? 'min-h-[560px]' : 'min-h-[360px]'} flex items-center overflow-hidden bg-[#0a1128]`}>
+  <section className={`relative w-full ${tall ? 'min-h-[560px]' : 'min-h-[360px]'} flex items-center overflow-hidden bg-[var(--adf-main)]`}>
     <img src={image} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" />
     <div className="hero-scrim absolute inset-0" aria-hidden="true" />
-    <div className="relative w-full max-w-[1280px] mx-auto px-4 md:px-10 py-16 md:py-24">
-      <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#a8c6e4]">{eyebrow}</p>
-      <h1 className={`mt-4 text-white uppercase ${tall ? 'text-4xl sm:text-5xl md:text-7xl' : 'text-3xl sm:text-4xl md:text-5xl'} max-w-4xl`}>
+    <div className="relative w-full max-w-[1200px] mx-auto px-4 md:px-6 py-16 md:py-24">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">{eyebrow}</p>
+      <h1 className={`mt-4 text-white ${tall ? 'text-4xl sm:text-5xl md:text-6xl' : 'text-3xl sm:text-4xl md:text-5xl'} max-w-4xl`}>
         {title}
       </h1>
       {intro && (
-        <p className="mt-6 max-w-2xl text-lg md:text-xl text-[#dbe6f2] leading-relaxed">{intro}</p>
+        <p className="mt-6 max-w-2xl text-lg md:text-xl text-white/90 leading-relaxed">{intro}</p>
       )}
       {children && <div className="mt-8 flex flex-wrap gap-4">{children}</div>}
     </div>
@@ -67,18 +103,18 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 }) => (
   <div
     className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b ${
-      light ? 'border-white/25' : 'border-[#0f1b3d]/20'
+      light ? 'border-white/25' : 'border-black/10'
     } pb-6 mb-12`}
   >
     <div className="max-w-2xl">
       {eyebrow && (
-        <p className={`text-xs font-bold uppercase tracking-[0.25em] ${light ? 'text-[#a8c6e4]' : 'text-[#245a86]'}`}>
+        <p className={`text-xs font-semibold uppercase tracking-[0.18em] ${light ? 'text-white/75' : 'text-[var(--adf-main)]'}`}>
           {eyebrow}
         </p>
       )}
-      <h2 className={`mt-3 text-3xl md:text-4xl uppercase ${light ? 'text-white' : 'text-[#0f1b3d]'}`}>{title}</h2>
+      <h2 className={`mt-3 text-3xl md:text-4xl ${light ? 'text-white' : 'text-[var(--adf-charcoal)]'}`}>{title}</h2>
       {intro && (
-        <p className={`mt-4 text-lg leading-relaxed ${light ? 'text-[#dbe6f2]' : 'text-[#33415c]'}`}>{intro}</p>
+        <p className={`mt-4 text-lg leading-relaxed ${light ? 'text-white/90' : 'text-[var(--adf-muted)]'}`}>{intro}</p>
       )}
     </div>
     {action}
@@ -91,10 +127,10 @@ interface StatBandProps {
 }
 
 export const StatBand: React.FC<StatBandProps> = ({ stats, caption }) => (
-  <section className="bg-[#0f1b3d] text-white">
-    <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-16">
+  <section className="bg-[var(--adf-main)] text-white">
+    <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-16">
       {caption && (
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#a8c6e4] mb-10">{caption}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/75 mb-10">{caption}</p>
       )}
       <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/20">
         {stats.map((s) => (
@@ -102,7 +138,7 @@ export const StatBand: React.FC<StatBandProps> = ({ stats, caption }) => (
             <dt className="sr-only">{s.label}</dt>
             <dd>
               <span className="block font-display text-4xl md:text-5xl leading-none">{s.value}</span>
-              <span className="mt-3 block text-sm uppercase tracking-widest text-[#b7cbe0]">{s.label}</span>
+              <span className="mt-3 block text-sm uppercase tracking-widest text-white/75">{s.label}</span>
             </dd>
           </div>
         ))}

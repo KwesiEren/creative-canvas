@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { NEWS_DATA, PROGRAMMES_DATA } from "@/data/mockData";
-import { NewsItem, NavTab, ProgrammeId } from "@/types";
-import {
-  PageHero,
-  SectionHeading,
-  StatBand,
-  btnDonate,
-  btnGhostLight,
-  btnGhost,
-  btnPrimary,
-} from "./ui";
+import React, { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { NEWS_DATA, EVENTS_DATA } from "@/data/mockData";
+import { NavTab, ProgrammeId } from "@/types";
+import { btnDonate, btnPrimary } from "./ui";
 import { assetUrl } from "@/lib/assetUrl";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface Props {
   onNavigate: (tab: NavTab, extra?: { programmeId?: ProgrammeId }) => void;
@@ -18,203 +18,318 @@ interface Props {
   onOpenDonate: () => void;
 }
 
-const HERO_IMAGE = assetUrl("/images/adf-event-2.jpg");
-
-const LEAD_IMAGE = assetUrl("/images/adf-event-3.jpg");
-
-const CASE_IMAGE = assetUrl("/images/adf-event-4.jpg");
-
-const FOCUS_AREAS = [
+const HERO_SLIDES = [
   {
-    number: "01",
-    title: "Ratification of the African Disability Protocol",
-    body: "We lead the continental push for member states to sign, ratify and domesticate the African Disability Protocol, establishing a clear legal standard for inclusion.",
-    action: "Read policy brief",
-    tab: "resources" as NavTab,
+    title: "Advancing The Rights of Persons With Disability.",
+    subtitle: "We are here to support you every step of the way",
+    image: assetUrl("/images/adf-event-2.jpg"),
+    alt: "ADF members advocating for disability rights at a continental meeting",
   },
   {
-    number: "02",
-    title: "Monitoring CRPD Implementation",
-    body: "We equip Organizations of Persons with Disabilities to collect robust, disaggregated data and hold governments accountable to the UN Convention.",
-    action: "View reports",
-    tab: "resources" as NavTab,
+    title: "Strengthening OPD Capacity To Promote Rights",
+    subtitle: "We are here to support you every step of the way",
+    image: assetUrl("/images/adf-event-3.jpg"),
+    alt: "Organizations of persons with disabilities in a capacity-building workshop",
   },
   {
-    number: "03",
-    title: "Women and Youth with Disabilities",
-    body: "We tackle intersectional discrimination and put the voices of women and young people with disabilities at the centre of every policy discussion.",
-    action: "Explore programmes",
-    tab: "programmes" as NavTab,
+    title: "Make A Difference Now.",
+    subtitle: "We are here to support you every step of the way",
+    image: assetUrl("/images/adf-event-4.jpg"),
+    alt: "Community advocates working together for inclusion across Africa",
   },
 ];
 
+const FEATURE_TILES = [
+  {
+    title: "ADF Professional Programmes",
+    body: "Get involved in our continuous professional programmes.",
+    icon: "school",
+    tab: "programmes" as NavTab,
+  },
+  {
+    title: "Technical Resources",
+    body: "Access all our technical reports and other documentation.",
+    icon: "menu_book",
+    tab: "resources" as NavTab,
+  },
+  {
+    title: "OPD Membership",
+    body: "Become a member of our organisation.",
+    icon: "groups",
+    tab: "membership" as NavTab,
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "To strengthen the representative voice of persons with disabilities in Africa, build the institutional capacity of national OPDs, and hold governments accountable to the UN CRPD and the African Disability Protocol.",
+    name: "ADF Secretariat",
+    role: "Mission Statement",
+  },
+  {
+    quote:
+      "ADF's continental coordination gives national OPDs the evidence, training and platforms we need to engage governments with confidence.",
+    name: "Regional OPD Network",
+    role: "East Africa",
+  },
+  {
+    quote:
+      "Partnership with ADF has helped us align disability-inclusive programming with the African Disability Protocol ratification agenda.",
+    name: "Development Partner",
+    role: "Multilateral Funder",
+  },
+];
+
+const CAUSES = [
+  {
+    tag: "Medical",
+    title: "Disability-Inclusive Healthcare",
+    body: "Accessible healthcare facilities, telemedicine, health information and disability-sensitive health policies.",
+    raised: 25270,
+    goal: 30000,
+    pct: 84,
+  },
+  {
+    tag: "Education",
+    title: "Assistive Technology",
+    body: "Access to affordable wheelchairs, hearing technologies, screen readers, communication devices and other assistive products.",
+    raised: 25270,
+    goal: 30000,
+    pct: 84,
+  },
+  {
+    tag: "Food",
+    title: "Inclusive Humanitarian Action",
+    body: "Ensuring persons with disabilities are not left behind during conflicts, disasters, and epidemics.",
+    raised: 25270,
+    goal: 30000,
+    pct: 84,
+  },
+];
+
+const OBJECTIVES = [
+  { num: "01", title: "We Support Persons With Disability", icon: "volunteer_activism" },
+  { num: "02", title: "We Enhance The Lives of PWD", icon: "diversity_3" },
+  { num: "03", title: "We Ensure PWD Receive Health Care", icon: "health_and_safety" },
+];
+
+function formatEventDate(iso: string) {
+  const d = new Date(iso);
+  return {
+    day: d.getDate(),
+    month: d.toLocaleString("en-GB", { month: "short" }),
+  };
+}
+
+function HomeHeroSlider({ onDonate }: { onDonate: () => void }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selected, setSelected] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelected(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const timer = window.setInterval(() => emblaApi.scrollNext(), 6000);
+    return () => window.clearInterval(timer);
+  }, [emblaApi]);
+
+  return (
+    <section className="home-hero relative overflow-hidden bg-[var(--adf-charcoal)]" aria-label="Featured highlights">
+      <div ref={emblaRef} className="overflow-hidden">
+        <div className="flex">
+          {HERO_SLIDES.map((slide) => (
+            <div key={slide.title} className="relative min-w-0 shrink-0 grow-0 basis-full min-h-[520px] md:min-h-[600px]">
+              <img src={slide.image} alt={slide.alt} className="absolute inset-0 h-full w-full object-cover" />
+              <div className="hero-scrim absolute inset-0" aria-hidden="true" />
+              <div className="relative z-10 flex h-full min-h-[520px] md:min-h-[600px] items-center">
+                <div className="max-w-[1200px] mx-auto px-4 md:px-6 w-full py-16">
+                  <h2 className="max-w-3xl text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
+                    {slide.title}
+                  </h2>
+                  <p className="mt-4 max-w-xl text-lg text-white/90">{slide.subtitle}</p>
+                  <button type="button" onClick={onDonate} className={`${btnDonate} mt-8`}>
+                    Donate Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+        {HERO_SLIDES.map((slide, i) => (
+          <button
+            key={slide.title}
+            type="button"
+            aria-label={`Go to slide ${i + 1}`}
+            aria-current={selected === i}
+            onClick={() => emblaApi?.scrollTo(i)}
+            className={`h-2.5 rounded-full transition-all ${selected === i ? "w-8 bg-[var(--adf-gold)]" : "w-2.5 bg-white/50 hover:bg-white/80"}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOpenDonate }) => {
-  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
-  const featured = NEWS_DATA[0];
-  const rest = NEWS_DATA.slice(1, 3);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSent, setNewsletterSent] = useState(false);
+
+  const handleNewsletter = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newsletterEmail.trim()) setNewsletterSent(true);
+  };
 
   return (
     <div className="animate-fade-in">
-      {/* Hero */}
-      <PageHero
-        tall
-        eyebrow="African Disability Forum"
-        title="Nothing about us without us."
-        intro="A continental federation of Organizations of Persons with Disabilities advancing rights, influencing policy and holding governments to account across Africa."
-        image={HERO_IMAGE}
-        imageAlt="Members of African Organizations of Persons with Disabilities meeting around a conference table"
-      >
-        <button onClick={onOpenDonate} className={btnDonate}>
-          Donate now
-        </button>
-        <button onClick={() => onNavigate("programmes")} className={btnGhostLight}>
-          Explore our work
-        </button>
-      </PageHero>
+      <HomeHeroSlider onDonate={onOpenDonate} />
 
-      {/* Lead story */}
-      <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-5">
+      {/* Welcome intro */}
+      <section className="max-w-[1200px] mx-auto px-4 md:px-6 py-16 md:py-20 grid lg:grid-cols-2 gap-10 items-center">
+        <div className="relative">
           <img
-            src={LEAD_IMAGE}
-            alt="Young African woman with a disability speaking at a youth leadership summit"
-            className="w-full aspect-4/5 object-cover border border-[#0f1b3d]/15"
+            src={assetUrl("/images/adf-event-1.jpg")}
+            alt="Members of the African Disability Forum at a continental convening"
+            className="w-full rounded-sm object-cover aspect-[4/3]"
             loading="lazy"
           />
+          <div className="home-intro-badge absolute -bottom-4 -right-4 hidden md:flex h-24 w-24 items-center justify-center rounded-full bg-[var(--adf-gold)] text-white font-display text-sm text-center leading-tight shadow-lg">
+            ADF
+          </div>
         </div>
-        <div className="lg:col-span-7">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#245a86]">Who we are</p>
-          <h2 className="mt-4 text-3xl md:text-5xl uppercase text-[#0f1b3d]">
-            One continental voice for 80 million people
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-main)]">Welcome</p>
+          <h2 className="mt-3 text-3xl md:text-4xl text-[var(--adf-charcoal)]">
+            Welcome to The African Disability Forum
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-[#33415c]">
-            The African Disability Forum brings national and regional Organizations of Persons with
-            Disabilities into a single, accountable movement. We convene members, produce the
-            evidence that policy makers cannot ignore, and represent the disability community before
-            the African Union, the United Nations and national parliaments.
+          <p className="mt-5 text-[var(--adf-muted)] leading-relaxed">
+            ADF is the continental membership organisation of Disabled Persons&apos; Organisations (DPOs/OPDs) in Africa,
+            formally established in 2014. We strengthen and unify representative voices of Africans with disabilities,
+            their families and organisations.
           </p>
-          <p className="mt-4 text-lg leading-relaxed text-[#33415c]">
-            Our work is led by persons with disabilities. Every programme, publication and platform
-            we build — including this website — is designed to be usable by everyone.
+          <p className="mt-4 text-[var(--adf-muted)] leading-relaxed">
+            Africa&apos;s size and regional diversity make direct representation by one organisation difficult; ADF
+            therefore builds on existing organisations, networks, capacities and successes. Governance is independent and
+            democratic, with particular attention given to women and youth with disabilities.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <button onClick={() => onNavigate("about")} className={btnPrimary}>
-              About ADF
-            </button>
-            <button onClick={onOpenTakeAction} className={btnGhost}>
-              Take action
-            </button>
-          </div>
+          <button type="button" onClick={() => onNavigate("about")} className={`${btnPrimary} mt-8`}>
+            About Us
+          </button>
         </div>
       </section>
 
-      {/* Strategic focus areas */}
-      <section className="bg-[#e8edf3]">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-20">
-          <SectionHeading
-            eyebrow="The roadmap"
-            title="Strategic focus areas"
-            intro="Our advocacy targets systemic change, so the rights enshrined in international frameworks are realised on the ground."
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-[#0f1b3d]/20">
-            {FOCUS_AREAS.map((area) => (
-              <article
-                key={area.number}
-                className="border-b border-r border-[#0f1b3d]/20 bg-white p-8 flex flex-col"
-              >
-                <span className="font-display text-5xl leading-none text-[#b7cbe0]">
-                  {area.number}
-                </span>
-                <h3 className="mt-6 text-2xl uppercase text-[#0f1b3d]">{area.title}</h3>
-                <p className="mt-4 text-[#33415c] leading-relaxed flex-1">{area.body}</p>
-                <button
-                  onClick={() => onNavigate(area.tab)}
-                  className="mt-8 self-start text-sm font-bold uppercase tracking-widest text-[#0f1b3d] border-b-2 border-[#245a86] pb-1 hover:text-[#245a86] focus-ring cursor-pointer"
-                >
-                  {area.action}
-                </button>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Impact band */}
-      <StatBand
-        caption="Our reach across the continent"
-        stats={[
-          { value: "60+", label: "Member OPDs" },
-          { value: "38", label: "Countries engaged" },
-          { value: "420+", label: "OPD leaders trained" },
-          { value: "18", label: "Policy papers adopted" },
-        ]}
-      />
-
-      {/* Latest news */}
-      <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-20">
-        <SectionHeading
-          eyebrow="Newsroom"
-          title="Latest from the movement"
-          action={
-            <button
-              onClick={() => onNavigate("news")}
-              className="text-sm font-bold uppercase tracking-widest text-[#0f1b3d] border-b-2 border-[#0f1b3d] pb-1 hover:text-[#245a86] hover:border-[#245a86] focus-ring cursor-pointer"
+      {/* Feature tiles */}
+      <section className="bg-[#f2f2f2]">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-16 grid md:grid-cols-3 gap-6">
+          {FEATURE_TILES.map((tile) => (
+            <article
+              key={tile.title}
+              className="home-feature-tile bg-white rounded-sm p-8 text-center shadow-sm hover:shadow-md transition-shadow"
             >
-              All news
-            </button>
-          }
-        />
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {featured && (
-            <article className="lg:col-span-7">
-              <img
-                src={featured.image}
-                alt={featured.title}
-                className="w-full h-[320px] md:h-[420px] object-cover border border-[#0f1b3d]/15"
-                loading="lazy"
-              />
-              <div className="mt-6 flex items-center gap-3 text-xs font-bold uppercase tracking-widest">
-                <span className="bg-[#0f1b3d] text-white px-3 py-1">{featured.category}</span>
-                <time dateTime={featured.datetime} className="text-[#5b6b85]">
-                  {featured.date}
-                </time>
-              </div>
-              <h3 className="mt-4 text-2xl md:text-3xl uppercase text-[#0f1b3d]">
-                {featured.title}
-              </h3>
-              <p className="mt-4 text-lg text-[#33415c] leading-relaxed">{featured.summary}</p>
+              <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[var(--adf-main)]/10 text-[var(--adf-main)]">
+                <span className="material-symbols-outlined text-3xl">{tile.icon}</span>
+              </span>
+              <h3 className="mt-6 text-xl text-[var(--adf-charcoal)]">{tile.title}</h3>
+              <p className="mt-3 text-sm text-[var(--adf-muted)] leading-relaxed">{tile.body}</p>
               <button
-                onClick={() => setSelectedNews(featured)}
-                className="mt-6 text-sm font-bold uppercase tracking-widest text-[#0f1b3d] border-b-2 border-[#245a86] pb-1 hover:text-[#245a86] focus-ring cursor-pointer"
+                type="button"
+                onClick={() => onNavigate(tile.tab)}
+                className="mt-6 text-sm font-semibold text-[var(--adf-main)] hover:underline focus-ring"
               >
-                Read full story
+                Learn More
               </button>
             </article>
-          )}
-          <div className="lg:col-span-5 flex flex-col divide-y divide-[#0f1b3d]/20 border-t border-[#0f1b3d]/20">
-            {rest.map((item) => (
-              <article key={item.id} className="py-8 flex gap-5">
-                <img
-                  src={item.image}
-                  alt=""
-                  className="w-28 h-28 object-cover shrink-0 border border-[#0f1b3d]/15"
-                  loading="lazy"
-                />
-                <div>
-                  <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest">
-                    <span className="text-[#245a86]">{item.category}</span>
-                    <time dateTime={item.datetime} className="text-[#5b6b85]">
-                      {item.date}
-                    </time>
+          ))}
+        </div>
+      </section>
+
+      {/* Mission band */}
+      <section
+        className="relative py-20 md:py-28 bg-cover bg-center"
+        style={{ backgroundImage: `url(${assetUrl("/images/adf-event-5.png")})` }}
+      >
+        <div className="absolute inset-0 bg-[var(--adf-main)]/85" aria-hidden="true" />
+        <div className="relative max-w-[900px] mx-auto px-4 md:px-6 text-center text-white">
+          <h3 className="text-2xl md:text-4xl leading-snug">
+            Unifying the Voice of 10+ Million Africans with Disabilities
+          </h3>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="max-w-[1200px] mx-auto px-4 md:px-6 py-16 md:py-20">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <h2 className="text-3xl md:text-4xl text-[var(--adf-charcoal)]">What Partners &amp; Donors Say About Us</h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {TESTIMONIALS.map((item) => (
+            <blockquote
+              key={item.name}
+              className="home-testimonial bg-[#f2f2f2] rounded-sm p-8 flex flex-col"
+            >
+              <span className="material-symbols-outlined text-4xl text-[var(--adf-gold)]" aria-hidden="true">
+                format_quote
+              </span>
+              <p className="mt-4 text-[var(--adf-muted)] leading-relaxed flex-1">&ldquo;{item.quote}&rdquo;</p>
+              <footer className="mt-6 pt-4 border-t border-black/10">
+                <cite className="not-italic font-semibold text-[var(--adf-charcoal)]">{item.name}</cite>
+                <p className="text-sm text-[var(--adf-muted)]">{item.role}</p>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <button type="button" onClick={onOpenDonate} className={btnPrimary}>
+            Start Donating
+          </button>
+        </div>
+      </section>
+
+      {/* Popular causes */}
+      <section className="bg-[#f2f2f2] py-16 md:py-20">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+          <h2 className="text-3xl md:text-4xl text-center text-[var(--adf-charcoal)] mb-12">Find Popular Causes</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {CAUSES.map((cause) => (
+              <article key={cause.title} className="home-cause-card bg-white rounded-sm overflow-hidden shadow-sm">
+                <div className="p-6">
+                  <span className="inline-block rounded-full bg-[var(--adf-main)]/10 px-3 py-1 text-xs font-semibold text-[var(--adf-main)] uppercase">
+                    {cause.tag}
+                  </span>
+                  <h3 className="mt-4 text-xl text-[var(--adf-charcoal)]">{cause.title}</h3>
+                  <p className="mt-3 text-sm text-[var(--adf-muted)] leading-relaxed">{cause.body}</p>
+                  <div className="mt-6">
+                    <div className="flex justify-between text-xs font-semibold text-[var(--adf-charcoal)] mb-2">
+                      <span>{cause.pct}%</span>
+                      <span>Pledge so far</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-[#e5e5e5] overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-[var(--adf-gold)]"
+                        style={{ width: `${cause.pct}%` }}
+                      />
+                    </div>
+                    <div className="mt-3 flex justify-between text-sm text-[var(--adf-muted)]">
+                      <span>${cause.raised.toLocaleString()} Raised</span>
+                      <span>${cause.goal.toLocaleString()} Goal</span>
+                    </div>
                   </div>
-                  <h3 className="mt-2 text-lg uppercase text-[#0f1b3d] leading-tight">
-                    {item.title}
-                  </h3>
-                  <button
-                    onClick={() => setSelectedNews(item)}
-                    className="mt-3 text-xs font-bold uppercase tracking-widest text-[#0f1b3d] border-b-2 border-[#245a86] pb-0.5 hover:text-[#245a86] focus-ring cursor-pointer"
-                  >
-                    Read story
+                  <button type="button" onClick={onOpenDonate} className={`${btnDonate} w-full mt-6`}>
+                    Donate now
                   </button>
                 </div>
               </article>
@@ -223,174 +338,188 @@ export const HomeScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction, onOp
         </div>
       </section>
 
-      {/* Programmes strip */}
-      <section className="bg-[#e8edf3]">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-20">
-          <SectionHeading
-            eyebrow="Programmes"
-            title="Where the work happens"
-            action={
-              <button
-                onClick={() => onNavigate("programmes")}
-                className="text-sm font-bold uppercase tracking-widest text-[#0f1b3d] border-b-2 border-[#0f1b3d] pb-1 hover:text-[#245a86] hover:border-[#245a86] focus-ring cursor-pointer"
-              >
-                All programmes
-              </button>
-            }
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-            {PROGRAMMES_DATA.slice(0, 4).map((prog) => (
-              <article key={prog.id} className="bg-white border border-[#0f1b3d]/15 flex flex-col">
-                <img src={prog.image} alt="" className="h-40 w-full object-cover" loading="lazy" />
-                <div className="p-6 flex flex-col flex-1">
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#245a86]">
-                    {prog.acronym}
-                  </span>
-                  <h3 className="mt-3 text-lg uppercase text-[#0f1b3d] leading-tight">
-                    {prog.name}
-                  </h3>
-                  <p className="mt-3 text-sm text-[#33415c] leading-relaxed flex-1">
-                    {prog.tagline}
-                  </p>
-                </div>
+      {/* Mid-page CTA */}
+      <section className="bg-[var(--adf-main)] py-14">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-white">
+          <h3 className="text-2xl md:text-3xl text-center md:text-left">
+            Let&apos;s Make a Difference in the Lives of Others
+          </h3>
+          <button type="button" onClick={onOpenDonate} className={btnDonate}>
+            Donate Now
+          </button>
+        </div>
+      </section>
+
+      {/* Upcoming events */}
+      <section className="max-w-[1200px] mx-auto px-4 md:px-6 py-16 md:py-20">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-main)]">Our Latest Events</p>
+            <h2 className="mt-2 text-3xl md:text-4xl text-[var(--adf-charcoal)]">Upcoming Events</h2>
+          </div>
+          <button
+            type="button"
+            onClick={() => onNavigate("events")}
+            className="text-sm font-semibold text-[var(--adf-main)] hover:underline focus-ring self-start md:self-auto"
+          >
+            View all events
+          </button>
+        </div>
+        <Carousel opts={{ align: "start", loop: true }} className="w-full">
+          <CarouselContent className="-ml-4">
+            {EVENTS_DATA.slice(0, 4).map((event) => {
+              const { day, month } = formatEventDate(event.date);
+              return (
+                <CarouselItem key={event.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
+                  <article className="home-event-card border border-black/10 rounded-sm p-6 h-full bg-white hover:shadow-md transition-shadow">
+                    <div className="flex gap-4">
+                      <div className="home-event-date shrink-0 flex flex-col items-center justify-center w-16 h-16 bg-[var(--adf-main)] text-white rounded-sm">
+                        <span className="text-2xl font-display leading-none">{day}</span>
+                        <span className="text-xs uppercase mt-0.5">{month}</span>
+                      </div>
+                      <div className="min-w-0">
+                        <ul className="text-xs text-[var(--adf-muted)] space-y-0.5">
+                          <li>{event.time.split(" - ")[0]}</li>
+                          <li>{event.location.split(" &")[0]}</li>
+                        </ul>
+                        <h3 className="mt-2 text-base font-semibold text-[var(--adf-charcoal)] leading-snug line-clamp-2">
+                          {event.title}
+                        </h3>
+                      </div>
+                    </div>
+                  </article>
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex -left-4 border-[var(--adf-main)] text-[var(--adf-main)]" />
+          <CarouselNext className="hidden md:flex -right-4 border-[var(--adf-main)] text-[var(--adf-main)]" />
+        </Carousel>
+      </section>
+
+      {/* Objectives */}
+      <section
+        className="relative py-16 md:py-20 bg-cover bg-center"
+        style={{ backgroundImage: `url(${assetUrl("/images/adf-event-6.png")})` }}
+      >
+        <div className="absolute inset-0 bg-[var(--adf-charcoal)]/90" aria-hidden="true" />
+        <div className="relative max-w-[1200px] mx-auto px-4 md:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12 text-white">
+            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-gold)]">
+              Let&apos;s Make a Difference in the Lives of Other People
+            </p>
+            <h2 className="mt-3 text-3xl md:text-4xl">Help Each Other Can Change World</h2>
+            <p className="mt-4 text-white/80 leading-relaxed">
+              When we support one another, we create opportunities, restore hope, and build stronger communities.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {OBJECTIVES.map((obj) => (
+              <article key={obj.num} className="home-objective bg-white/10 backdrop-blur-sm rounded-sm p-8 text-white text-center">
+                <span className="text-sm font-semibold text-[var(--adf-gold)]">Objective {obj.num}</span>
+                <span className="material-symbols-outlined text-4xl mt-4 block text-[var(--adf-gold)]">{obj.icon}</span>
+                <h3 className="mt-4 text-lg text-white">{obj.title}</h3>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SPADRA portal */}
-      <section className="bg-[#0f1b3d] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 grid lg:grid-cols-2 gap-10 items-center">
+      {/* News & articles */}
+      <section className="max-w-[1200px] mx-auto px-4 md:px-6 py-16 md:py-20">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#f5b301]">
-              SPADRA Portal
+            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-main)]">
+              Watch Our Latest Blogs
             </p>
-            <h2 className="mt-3 text-2xl md:text-4xl uppercase leading-tight">
-              Disability data, evidence and stakeholders in one place
-            </h2>
-            <p className="mt-4 text-[#dbe6f2] leading-relaxed">
-              Explore country profiles, the African Disability Protocol tracker, research and a
-              resources repository — then create a free account to build your saved list and
-              personal dashboard.
-            </p>
+            <h2 className="mt-2 text-3xl md:text-4xl text-[var(--adf-charcoal)]">News &amp; Articles</h2>
           </div>
-          <div className="flex flex-wrap gap-4">
-            <button
-              onClick={() => onNavigate("spadra")}
-              className="inline-flex items-center justify-center gap-2 bg-[#f5b301] text-[#0f1b3d] font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-[#ffc933] transition-colors cursor-pointer"
-            >
-              Enter the SPADRA portal
-            </button>
-            <button
-              onClick={() => onNavigate("programmes", { programmeId: "spadra" })}
-              className="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold uppercase tracking-widest text-sm px-8 py-4 hover:bg-white hover:text-[#0f1b3d] transition-colors cursor-pointer"
-            >
-              About the SPADRA programme
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => onNavigate("news")}
+            className="text-sm font-semibold text-[var(--adf-main)] hover:underline focus-ring self-start md:self-auto"
+          >
+            Read more
+          </button>
         </div>
-      </section>
-
-      {/* Case study */}
-      <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 border border-[#0f1b3d]/15">
-          <img
-            src={CASE_IMAGE}
-            alt="Government official signing the landmark inclusive education act with disability advocates standing behind"
-            className="w-full h-full min-h-[320px] object-cover"
-            loading="lazy"
-          />
-          <div className="p-8 md:p-12 flex flex-col justify-center">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#245a86]">
-              Impact case study
-            </p>
-            <h2 className="mt-4 text-2xl md:text-4xl uppercase text-[#0f1b3d]">
-              Landmark inclusive education act passed
-            </h2>
-            <p className="mt-6 text-lg text-[#33415c] leading-relaxed">
-              After a three-year advocacy campaign led by ADF and national partners, the Inclusive
-              Education Act mandates reasonable accommodations in all public schools and allocates
-              dedicated budget lines for accessible learning materials — reaching over 200,000
-              children with disabilities.
-            </p>
-            <button
-              onClick={() => onNavigate("resources")}
-              className={`${btnPrimary} mt-8 self-start`}
-            >
-              Read the case study
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Get involved */}
-      <section className="bg-[#0f1b3d] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-20">
-          <SectionHeading
-            light
-            eyebrow="Get involved"
-            title="Your support changes what is possible"
-            intro="Join as a member organisation, partner with us on programmes, or fund the advocacy that moves national law."
-          />
-          <div className="flex flex-wrap gap-4">
-            <button onClick={onOpenDonate} className={btnDonate}>
-              Donate now
-            </button>
-            <button onClick={onOpenTakeAction} className={btnGhostLight}>
-              Take action
-            </button>
-            <button onClick={() => onNavigate("contact")} className={btnGhostLight}>
-              Contact the secretariat
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Partners */}
-      <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16">
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#5b6b85] mb-8">
-          Strategic partners
-        </p>
-        <div className="flex flex-wrap items-center gap-10 md:gap-16">
-          {["SIDA", "African Union", "United Nations", "Mastercard Foundation"].map((p) => (
-            <span key={p} className="font-display text-xl md:text-2xl uppercase text-[#1e3a5f]">
-              {p}
-            </span>
+        <div className="grid md:grid-cols-3 gap-6">
+          {NEWS_DATA.map((item) => (
+            <article key={item.id} className="home-news-card group">
+              <button
+                type="button"
+                onClick={() => onNavigate("news")}
+                className="w-full text-left focus-ring rounded-sm overflow-hidden border border-black/10 bg-white hover:shadow-md transition-shadow"
+              >
+                <img
+                  src={assetUrl(item.image)}
+                  alt=""
+                  className="w-full h-48 object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div className="p-5">
+                  <h3 className="text-lg text-[var(--adf-charcoal)] leading-snug group-hover:text-[var(--adf-main)] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-[var(--adf-muted)]">
+                    {item.date} · {item.category}
+                  </p>
+                </div>
+              </button>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* News detail modal */}
-      {selectedNews && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a1128]/80 p-4">
-          <div className="bg-white max-w-2xl w-full p-6 border-2 border-[#0f1b3d] relative max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-start gap-4 mb-4 border-b border-[#0f1b3d]/20 pb-3">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest bg-[#0f1b3d] text-white px-2 py-1">
-                  {selectedNews.category}
-                </span>
-                <time className="block text-xs text-[#5b6b85] mt-2">{selectedNews.date}</time>
-                <h2 className="text-2xl uppercase text-[#0f1b3d] mt-2">{selectedNews.title}</h2>
-              </div>
-              <button
-                onClick={() => setSelectedNews(null)}
-                aria-label="Close article"
-                className="p-1 text-[#33415c] hover:bg-[#e8edf3] focus-ring cursor-pointer"
-              >
-                <span className="material-symbols-outlined">close</span>
-              </button>
-            </div>
-            <img src={selectedNews.image} alt="" className="w-full h-64 object-cover mb-4" />
-            <div className="text-base text-[#0a1128] leading-relaxed space-y-3">
-              <p className="font-bold">{selectedNews.summary}</p>
-              <p>{selectedNews.content}</p>
-            </div>
+      {/* Newsletter */}
+      <section className="home-newsletter bg-[var(--adf-main)] py-16 md:py-20">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-10 items-center">
+          <div className="text-white">
+            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[var(--adf-gold)]">Join Newsletter</p>
+            <h2 className="mt-3 text-3xl md:text-4xl">Give a Helping Hand</h2>
+            <p className="mt-4 text-white/85 leading-relaxed max-w-md">
+              Subscribe for ADF updates on advocacy, events, publications and opportunities to support disability rights
+              across Africa.
+            </p>
           </div>
+          <form onSubmit={handleNewsletter} className="flex flex-col sm:flex-row gap-3">
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="newsletter-email"
+              type="email"
+              required
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              placeholder="Your email address"
+              className="flex-1 rounded-full border-0 px-5 py-3.5 text-[var(--adf-charcoal)] focus:outline-none focus:ring-2 focus:ring-[var(--adf-gold)]"
+            />
+            <button type="submit" className={`${btnDonate} shrink-0`}>
+              Subscribe
+            </button>
+          </form>
+          {newsletterSent && (
+            <p className="lg:col-span-2 text-sm text-[var(--adf-gold)]" role="status">
+              Thank you for subscribing. We&apos;ll be in touch with ADF updates.
+            </p>
+          )}
         </div>
-      )}
+      </section>
+
+      {/* Take action strip */}
+      <section className="bg-[#f2f2f2] py-12">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-wrap items-center justify-center gap-4">
+          <button type="button" onClick={onOpenTakeAction} className={btnPrimary}>
+            Take Action
+          </button>
+          <button type="button" onClick={() => onNavigate("get-involved")} className={btnPrimary}>
+            Become a Volunteer
+          </button>
+          <button type="button" onClick={() => onNavigate("contact")} className="adf-btn adf-btn-outline focus-ring">
+            Contact Us
+          </button>
+        </div>
+      </section>
     </div>
   );
 };
-
-

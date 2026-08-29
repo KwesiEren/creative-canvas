@@ -14,8 +14,8 @@
  */
 
 @theme inline {
-  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Hind", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Merriweather", ui-serif, Georgia, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -65,29 +65,37 @@
 }
 
 :root {
-  --radius: 0rem;
+  --radius: 9999px;
   --text-scale: 1;
 
-  /* Navy institutional palette. */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.22 0.06 265);
-  --surface: oklch(0.94 0.014 250);
-  --surface-foreground: oklch(0.22 0.06 265);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.06 265);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.06 265);
+  /* Wishon charity template tokens (Home Four.mhtml). */
+  --adf-main: #0345bf;
+  --adf-gold: #f3b42c;
+  --adf-charcoal: #313131;
+  --adf-footer: #171717;
+  --adf-muted: #6f6f6f;
+  --adf-topbar: #333333;
+  --adf-topbar-muted: #aaaaaa;
 
-  --primary: oklch(0.22 0.07 268);
-  --primary-foreground: oklch(0.98 0.004 250);
-  --secondary: oklch(0.94 0.014 250);
-  --secondary-foreground: oklch(0.32 0.07 262);
-  --muted: oklch(0.94 0.014 250);
-  --muted-foreground: oklch(0.44 0.04 262);
-  --accent: oklch(0.45 0.08 250);
-  --accent-foreground: oklch(0.99 0.004 250);
-  --highlight: oklch(0.82 0.16 84);
-  --highlight-foreground: oklch(0.22 0.07 268);
+  --background: #ffffff;
+  --foreground: #252525;
+  --surface: #f2f2f2;
+  --surface-foreground: #252525;
+  --card: #ffffff;
+  --card-foreground: #252525;
+  --popover: #ffffff;
+  --popover-foreground: #252525;
+
+  --primary: #0345bf;
+  --primary-foreground: #ffffff;
+  --secondary: #f3b42c;
+  --secondary-foreground: #ffffff;
+  --muted: #f2f2f2;
+  --muted-foreground: #6f6f6f;
+  --accent: #0345bf;
+  --accent-foreground: #ffffff;
+  --highlight: #f3b42c;
+  --highlight-foreground: #252525;
 
   --destructive: oklch(0.5 0.19 27);
   --destructive-foreground: oklch(0.99 0.004 250);
@@ -160,10 +168,11 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
     text-wrap: balance;
+    color: var(--adf-charcoal);
   }
 
   :focus-visible {
@@ -237,17 +246,158 @@
 }
 
 .focus-ring:focus-visible {
-  outline: 3px solid #245a86;
+  outline: 3px solid var(--adf-main);
   outline-offset: 2px;
 }
 
-/* Navy scrim used behind hero text over photography. */
+/* --- Wishon shared chrome --- */
+.adf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.875rem 1.75rem;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+  cursor: pointer;
+}
+
+.adf-btn-primary {
+  background: var(--adf-gold);
+  color: #ffffff;
+}
+
+.adf-btn-primary:hover {
+  background: #e0a61f;
+}
+
+.adf-btn-secondary {
+  background: var(--adf-main);
+  color: #ffffff;
+}
+
+.adf-btn-secondary:hover {
+  background: #023aa3;
+}
+
+.adf-btn-outline {
+  background: transparent;
+  border: 1px solid var(--adf-main);
+  color: var(--adf-main);
+}
+
+.adf-btn-outline:hover {
+  background: var(--adf-main);
+  color: #ffffff;
+}
+
+.adf-header-logo {
+  position: relative;
+  background: var(--adf-main);
+  padding: 1rem 2.5rem 1rem 1.25rem;
+}
+
+.adf-header-logo::before {
+  content: "";
+  position: absolute;
+  inset: 0 -100vw 0 0;
+  background: var(--adf-main);
+  z-index: -1;
+}
+
+.adf-nav-link {
+  color: var(--adf-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.875rem;
+  padding: 2.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.adf-nav-link:hover,
+.adf-nav-link[data-active="true"] {
+  color: var(--adf-charcoal);
+}
+
+.adf-page-banner {
+  background: var(--adf-main);
+  color: #ffffff;
+  padding: 2rem 0 2.5rem;
+}
+
+.adf-page-banner h1 {
+  color: #ffffff;
+  font-size: clamp(1.75rem, 4vw, 3.125rem);
+  margin: 0;
+}
+
+.adf-footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--adf-footer);
+  color: #a2a2a2;
+}
+
+.adf-footer a {
+  color: #a2a2a2;
+  transition: color 0.2s ease;
+}
+
+.adf-footer a:hover {
+  color: #ffffff;
+}
+
+.adf-footer-shape {
+  pointer-events: none;
+  position: absolute;
+  opacity: 0.08;
+}
+
+.adf-footer-shape-1 {
+  top: -2rem;
+  left: -3rem;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  background: var(--adf-gold);
+}
+
+.adf-footer-shape-2 {
+  bottom: 4rem;
+  right: -2rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: var(--adf-main);
+}
+
+/* Home Four page sections */
+.home-hero h2 {
+  color: #ffffff;
+}
+
+.home-event-date {
+  font-family: var(--font-display);
+}
+
+.home-newsletter input::placeholder {
+  color: #999;
+}
+
+/* Hero scrim used behind slider / photography. */
 .hero-scrim {
   background: linear-gradient(
     90deg,
-    rgba(10, 17, 40, 0.95) 0%,
-    rgba(10, 17, 40, 0.88) 45%,
-    rgba(10, 17, 40, 0.55) 100%
+    rgba(3, 69, 191, 0.92) 0%,
+    rgba(3, 69, 191, 0.78) 45%,
+    rgba(3, 69, 191, 0.45) 100%
   );
 }
 

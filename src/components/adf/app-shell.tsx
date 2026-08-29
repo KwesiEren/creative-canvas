@@ -132,7 +132,11 @@ export function AppShell({ children }: { children: ReactNode }) {
         <main id="main" className="flex-1">
           {children}
         </main>
-        <Footer onNavigate={value.onNavigate} onOpenAccessibility={value.onOpenAccessibility} />
+        <Footer
+          onNavigate={value.onNavigate}
+          onOpenAccessibility={value.onOpenAccessibility}
+          onOpenDonate={value.onOpenDonate}
+        />
       </div>
 
       <AdfAssistantWidget
