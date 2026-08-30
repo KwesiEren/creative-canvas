@@ -119,7 +119,7 @@ function HeroSlider({ onDonate }: { onDonate: () => void }) {
               <div className="relative z-10 flex h-full min-h-[640px] md:min-h-[738px] items-center">
                 <div className="max-w-[1200px] mx-auto px-4 md:px-6 w-full py-16 md:py-24">
                   <div className="max-w-2xl text-white">
-                    <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+                    <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-tight text-white">
                       {slide.title}
                     </h1>
                     <p className="mt-6 text-lg sm:text-xl text-white/80 max-w-lg leading-relaxed">

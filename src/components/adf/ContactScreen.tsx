@@ -34,7 +34,7 @@ export const ContactScreen: React.FC = () => {
           <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-wider text-white/70 mb-3">
             <span>Home</span> <span className="mx-1">/</span> <span className="text-[var(--adf-gold)] font-semibold">Contact</span>
           </nav>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Contact</h1>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">Contact</h1>
         </div>
       </section>
 

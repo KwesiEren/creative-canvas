@@ -98,7 +98,7 @@ export const EventsScreen: React.FC = () => {
           <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-wider text-white/70 mb-3">
             <span>Home</span> <span className="mx-1">/</span> <span>Events</span> <span className="mx-1">/</span> <span className="text-[var(--adf-gold)] font-semibold">Events</span>
           </nav>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Events</h1>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">Events</h1>
         </div>
       </section>
 
