@@ -26,9 +26,12 @@ This document establishes the design principles, UI component specifications, co
 
 ## 3. Typography & Hierarchy
 
-- **Primary Display Font**: `Merriweather`, serif (`font-display`) for main hero titles, section headlines, and page titles (`text-3xl` to `text-6xl`).
-- **Body & Interface Font**: `DM Sans` / system sans-serif (`font-sans`) for body paragraphs, input fields, navigation links, and button labels.
-- **Eyebrow Headers**: Small, bold, uppercase tracking-widest text (`text-xs font-bold uppercase tracking-widest text-amber-500`).
+The whole platform uses **Montserrat** as the single typeface — headings, body copy, navigation, forms, buttons, and SPADRA.
+
+- **Platform font**: `Montserrat`, sans-serif (`font-sans` and `font-display` both resolve to Montserrat).
+- **Headings**: `font-display` / `font-extrabold` (`700`–`800`) for hero titles, section headlines, and page titles (`text-3xl` to `text-6xl`).
+- **Body & interface**: `font-sans` at `400`/`500`/`600` for paragraphs, inputs, navigation, and button labels.
+- **Eyebrow headers**: Small, bold, uppercase tracking-widest text (`text-xs font-bold uppercase tracking-widest text-amber-500`).
 
 ---
 
@@ -40,7 +43,7 @@ Every sub-page (Events, Contact, Blog, About, Resources, Membership, etc.) must 
 - **Background**: High-resolution photography (`/images/home_hero_bg.jpg` or category photo) with a dark gradient scrim overlay (`from-black/85 via-black/70 to-black/45`).
 - **Content Elements**:
   - Breadcrumb navigation (`Home / [Parent Page] / [Current Page]`) in uppercase small tracking text.
-  - Page Title in bold white serif typography (`text-4xl md:text-6xl font-extrabold`).
+  - Page Title in bold white Montserrat (`text-4xl md:text-6xl font-extrabold`).
 
 ### B. Standard Component Patterns
 

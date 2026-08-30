@@ -15,8 +15,8 @@
  */
 
 @theme inline {
-  --font-display: "Merriweather", ui-serif, Georgia, serif;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -170,7 +170,7 @@
   h4 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
     line-height: 1.2;
     text-wrap: balance;
     color: var(--adf-charcoal);
@@ -562,7 +562,7 @@
   letter-spacing: 0.02em;
 }
 
-/* --- SPADRA portal — scoped brand overrides (blue + white theme, Montserrat font). --- */
+/* --- SPADRA portal — scoped brand overrides (blue + white theme). --- */
 .spadra-portal {
   --s-primary: #1d4ed8;
   --s-primary-hover: #1e40af;
