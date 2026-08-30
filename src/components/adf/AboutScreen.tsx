@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { AboutSubSection } from '@/types';
 import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '@/data/mockData';
+import { assetUrl } from '@/lib/assetUrl';
+import { PageBanner } from './ui';
 
 interface Props {
   subSection?: AboutSubSection;
@@ -19,7 +21,15 @@ export const AboutScreen: React.FC<Props> = ({ subSection = 'who', onOpenMembers
   }, [subSection]);
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-12 animate-fade-in">
+    <div className="animate-fade-in">
+      <PageBanner
+        title="About the African Disability Forum"
+        crumbs={[{ label: "Home" }, { label: "About" }]}
+        image={assetUrl("/images/adf-event-1.jpg")}
+        imageAlt="About the African Disability Forum"
+      />
+
+      <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-12">
       {/* Page Header */}
       <div className="bg-white dark:bg-[#0a1128]/95 rounded-none p-6 md:p-8 shadow-none border border-[#0f1b3d]/15">
         <span className="text-xs font-bold uppercase tracking-wider text-[#245a86] dark:text-[#a8c6e4]">
@@ -119,7 +129,7 @@ export const AboutScreen: React.FC<Props> = ({ subSection = 'who', onOpenMembers
 
             <div className="md:col-span-5 rounded-none overflow-hidden border-2 border-[#0f1b3d] shadow-lg relative h-80 md:h-[400px]">
               <img
-                src="/__l5e/assets-v1/c3cb9e62-06bc-4f39-8065-d855452b65f0/adf-photo-1.jpg"
+                src={assetUrl("/images/adf-event-1.jpg")}
                 alt="ADF Executive Council and continental assembly members gathered in Addis Ababa"
                 className="w-full h-full object-cover"
               />
@@ -276,6 +286,7 @@ export const AboutScreen: React.FC<Props> = ({ subSection = 'who', onOpenMembers
           </div>
         </section>
       )}
+      </div>
     </div>
   );
 };

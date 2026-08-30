@@ -1,9 +1,15 @@
 import React from "react";
+import { assetUrl } from "@/lib/assetUrl";
 import { PageBanner, SectionHeading } from "./ui";
 
 export const AccessibilityScreen: React.FC = () => (
   <div className="animate-fade-in">
-    <PageBanner title="Accessibility" crumbs={[{ label: "Home" }, { label: "Accessibility" }]} />
+    <PageBanner
+      title="Accessibility"
+      crumbs={[{ label: "Home" }, { label: "Accessibility" }]}
+      image={assetUrl("/images/adf-event-6.png")}
+      imageAlt="Accessible technology workshop"
+    />
 
     <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-16">
       <div className="grid md:grid-cols-2 gap-6">

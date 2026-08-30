@@ -7,6 +7,7 @@ import { CAREERS_DATA } from "@/data/mockData";
 import { findByTitleSlug, slugify } from "@/lib/slug";
 import { buildCanonical } from "@/lib/slug";
 import { Breadcrumbs, MetaRow, ShareRow, Prose } from "./ui-extra";
+import { assetUrl } from "@/lib/assetUrl";
 import { btnPrimary, btnGhost, PageBanner, SectionHeading } from "./ui";
 
 
@@ -161,7 +162,12 @@ export const CareerDetailScreen: React.FC<CareerDetailScreenProps> = ({
         ]}
       />
 
-      <PageBanner title={item.title} crumbs={[{ label: "Home" }, { label: "Careers", onClick: () => {} }, { label: item.title }]} />
+      <PageBanner
+        title={item.title}
+        crumbs={[{ label: "Home" }, { label: "Careers", onClick: () => {} }, { label: item.title }]}
+        image={assetUrl("/images/adf-event-6.png")}
+        imageAlt={item.title}
+      />
 
       <section className="bg-white">
         <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-12">

@@ -9,6 +9,7 @@ import {
 } from "@/data/mockData";
 import { KNOWLEDGE_ITEMS } from "@/data/extraData";
 import { slugify } from "@/lib/slug";
+import { assetUrl } from "@/lib/assetUrl";
 import { PageBanner } from "./ui";
 import { EmptyState } from "./ui-extra";
 interface ResultItem {
@@ -106,7 +107,12 @@ export const SearchScreen: React.FC<Props> = ({ query }) => {
 
   return (
     <div className="animate-fade-in">
-      <PageBanner title="Search" crumbs={[{ label: "Home" }, { label: "Search" }]} />
+      <PageBanner
+        title="Search"
+        crumbs={[{ label: "Home" }, { label: "Search" }]}
+        image={assetUrl("/images/adf-event-4.jpg")}
+        imageAlt="Search the ADF website"
+      />
 
       <section className="max-w-[900px] mx-auto px-4 md:px-10 py-12">
         <form

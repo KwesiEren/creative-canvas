@@ -1,9 +1,15 @@
 import React from "react";
+import { assetUrl } from "@/lib/assetUrl";
 import { PageBanner, SectionHeading } from "./ui";
 
 export const PrivacyScreen: React.FC = () => (
   <div className="animate-fade-in">
-    <PageBanner title="Privacy Policy" crumbs={[{ label: "Home" }, { label: "Privacy" }]} />
+    <PageBanner
+      title="Privacy Policy"
+      crumbs={[{ label: "Home" }, { label: "Privacy" }]}
+      image={assetUrl("/images/adf-event-4.jpg")}
+      imageAlt="ADF privacy and data protection"
+    />
 
     <section className="max-w-[900px] mx-auto px-4 md:px-10 py-16 space-y-16">
       {[

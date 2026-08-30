@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
 import { YOUTH_OPPORTUNITIES, YOUTH_STORIES, YOUTH_POLLS, KNOWLEDGE_ITEMS } from '@/data/extraData';
 import type { PollItem } from '@/types';
+import { assetUrl } from '@/lib/assetUrl';
 import { PageBanner, SectionHeading, btnPrimary, btnGhost } from './ui';
 import { FilterChips, Pagination } from './ui-extra';
 
@@ -117,7 +118,12 @@ export const YouthScreen: React.FC = () => {
 
   return (
     <div className="space-y-20 animate-fade-in">
-      <PageBanner title="Youth" crumbs={[{ label: "Home" }, { label: "Youth" }]} />
+      <PageBanner
+        title="Youth"
+        crumbs={[{ label: "Home" }, { label: "Youth" }]}
+        image={assetUrl("/images/adf-event-5.png")}
+        imageAlt="Youth disability advocates"
+      />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10">
         <SectionHeading

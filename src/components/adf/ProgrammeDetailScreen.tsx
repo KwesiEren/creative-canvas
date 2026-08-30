@@ -4,6 +4,7 @@ import { PROGRAMMES_DATA, NEWS_DATA, RESOURCES_DATA } from '@/data/mockData';
 import type { ProgrammeId } from '@/types';
 import { findByIdSlug, slugify } from '@/lib/slug';
 import { Breadcrumbs, ShareRow, FilterChips, EmptyState } from '@/components/adf/ui-extra';
+import { assetUrl } from '@/lib/assetUrl';
 import { PageBanner, SectionHeading, StatBand, btnDonate, btnGhost } from '@/components/adf/ui';
 
 interface ProgrammeDetailScreenProps {
@@ -11,9 +12,9 @@ interface ProgrammeDetailScreenProps {
 }
 
 const GALLERY_IMAGES = [
-  'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=African%20disability%20advocates%20in%20a%20meeting%20room%20discussing%20policy%20documents%2C%20diverse%20group%2C%20professional%20setting%2C%20warm%20lighting&image_size=square',
-  'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Community%20workshop%20with%20people%20with%20disabilities%20participating%20in%20agricultural%20training%2C%20outdoor%20setting%2C%20inclusive%20environment%2C%20natural%20light&image_size=square',
-  'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Young%20African%20professionals%20with%20disabilities%20in%20a%20modern%20tech%20hub%2C%20collaborating%20on%20laptops%2C%20inclusive%20workspace%2C%20vibrant%20atmosphere&image_size=square',
+  assetUrl('/images/adf-event-1.jpg'),
+  assetUrl('/images/adf-event-3.jpg'),
+  assetUrl('/images/adf-event-5.png'),
 ];
 
 export const ProgrammeDetailScreen: React.FC<ProgrammeDetailScreenProps> = ({ programmeId }) => {
@@ -46,7 +47,12 @@ export const ProgrammeDetailScreen: React.FC<ProgrammeDetailScreenProps> = ({ pr
         ]}
       />
 
-      <PageBanner title={item.name} crumbs={[{ label: "Home" }, { label: "Programmes", onClick: () => {} }, { label: item.name }]} />
+      <PageBanner
+        title={item.name}
+        crumbs={[{ label: "Home" }, { label: "Programmes", onClick: () => {} }, { label: item.name }]}
+        image={assetUrl("/images/adf-event-2.jpg")}
+        imageAlt={item.name}
+      />
 
       <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-20">
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-10">

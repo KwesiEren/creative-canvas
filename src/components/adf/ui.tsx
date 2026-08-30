@@ -17,35 +17,81 @@ export const btnGhostLight =
 interface PageBannerProps {
   title: string;
   crumbs?: { label: string; onClick?: () => void }[];
+  image?: string;
+  imageAlt?: string;
 }
 
-/** Inner-page title band (dark gradient, no watermark). */
-export const PageBanner: React.FC<PageBannerProps> = ({ title, crumbs }) => (
-  <section className="adf-page-banner">
-    <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+/** Inner-page title band with background photo + dark gradient scrim. */
+export const PageBanner: React.FC<PageBannerProps> = ({
+  title,
+  crumbs,
+  image,
+  imageAlt,
+}) => (
+  <section className="relative w-full min-h-[320px] md:min-h-[378px] flex items-center overflow-hidden bg-[var(--adf-main)]">
+    {image && (
+      <>
+        <img
+          src={image}
+          alt={imageAlt || title}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.7), rgba(0,0,0,0.45))",
+          }}
+        />
+      </>
+    )}
+    {!image && (
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.7), rgba(0,0,0,0.45))",
+        }}
+      />
+    )}
+    <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-6 py-16 md:py-24">
       {crumbs && crumbs.length > 0 && (
-        <nav aria-label="Breadcrumb" className="breadcrumb mb-3">
+        <nav aria-label="Breadcrumb" className="mb-4">
           <ol className="flex flex-wrap items-center gap-2">
             {crumbs.map((crumb, index) => (
-              <li key={`${crumb.label}-${index}`} className="flex items-center gap-2">
-                {index > 0 && <span aria-hidden="true">/</span>}
+              <li
+                key={`${crumb.label}-${index}`}
+                className="flex items-center gap-2"
+              >
+                {index > 0 && (
+                  <span aria-hidden="true" className="text-white/60">
+                    /
+                  </span>
+                )}
                 {crumb.onClick ? (
                   <button
                     type="button"
                     onClick={crumb.onClick}
-                    className="hover:text-white focus-ring rounded-sm"
+                    className="text-white/80 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors"
                   >
                     {crumb.label}
                   </button>
                 ) : (
-                  <span aria-current="page">{crumb.label}</span>
+                  <span
+                    aria-current="page"
+                    className="text-white text-xs font-bold uppercase tracking-widest"
+                  >
+                    {crumb.label}
+                  </span>
                 )}
               </li>
             ))}
           </ol>
         </nav>
       )}
-      <h1>{title}</h1>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white max-w-4xl leading-tight">
+        {title}
+      </h1>
     </div>
   </section>
 );

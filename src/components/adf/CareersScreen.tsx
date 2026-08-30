@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { CAREERS_DATA } from "@/data/mockData";
 import { CareerItem } from "@/types";
 import { slugify } from "@/lib/slug";
+import { assetUrl } from "@/lib/assetUrl";
+import { PageBanner } from "./ui";
 import { FilterChips, Pagination, EmptyState } from "./ui-extra";
 
 const ITEMS_PER_PAGE = 9;
@@ -35,23 +37,16 @@ export const CareersScreen: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-10 animate-fade-in">
-      {/* Header */}
-      <div className="bg-white dark:bg-[#0a1128]/95 rounded-none p-6 md:p-8 shadow-none border border-[#0f1b3d]/15">
-        <span className="text-xs font-bold uppercase tracking-wider text-[#245a86] dark:text-[#a8c6e4]">
-          Join Our Continental Secretariat
-        </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0f1b3d] dark:text-[#dbe6f2] mt-1">
-          Careers & Consultancy Opportunities
-        </h1>
-        <p className="text-[#33415c] dark:text-[#c4c6cf] text-base md:text-lg max-w-3xl leading-relaxed mt-2">
-          Work with a dynamic pan-African team dedicated to enforcing the rights of persons with
-          disabilities. We strongly encourage qualified candidates with lived experience of
-          disability to apply.
-        </p>
-      </div>
+    <div className="animate-fade-in">
+      <PageBanner
+        title="Careers & Consultancy Opportunities"
+        crumbs={[{ label: "Home" }, { label: "Careers" }]}
+        image={assetUrl("/images/adf-event-5.png")}
+        imageAlt="Join the ADF continental secretariat"
+      />
 
-      {/* Diversity & Equal Opportunity Statement */}
+      <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-10">
+        {/* Diversity & Equal Opportunity Statement */}
       <div className="bg-white dark:bg-[#0a1128]/95 border-l-4 border-[#245a86] p-6 rounded-none shadow-none border border-[#0f1b3d]/15 space-y-2">
         <h2 className="text-lg font-bold text-[#0f1b3d] dark:text-white flex items-center gap-2">
           <span className="material-symbols-outlined text-[#245a86]">diversity_3</span>
@@ -97,6 +92,7 @@ export const CareersScreen: React.FC = () => {
             />
           </>
         )}
+      </div>
       </div>
     </div>
   );

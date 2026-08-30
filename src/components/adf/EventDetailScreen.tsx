@@ -113,6 +113,8 @@ export const EventDetailScreen: React.FC<Props> = ({ slug }) => {
           { label: "Events", onClick: () => {} },
           { label: item.title },
         ]}
+        image={assetUrl(item.image)}
+        imageAlt={item.title}
       />
 
       <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-12 space-y-12">

@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { RESOURCES_DATA } from '@/data/mockData';
 import { ResourceItem } from '@/types';
+import { assetUrl } from '@/lib/assetUrl';
+import { PageBanner } from './ui';
 
 interface Props {
   initialCategory?: string;
@@ -44,16 +46,20 @@ export const ResourcesScreen: React.FC<Props> = ({ initialCategory }) => {
   };
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-8 animate-fade-in">
-      {/* Header */}
-      <div className="bg-white dark:bg-[#0a1128]/95 rounded-none p-6 md:p-8 shadow-none border border-[#0f1b3d]/15">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0f1b3d] dark:text-[#dbe6f2] mb-2">
-          Institutional Knowledge & Research
-        </h1>
-        <p className="text-[#33415c] dark:text-[#c4c6cf] text-base md:text-lg max-w-3xl leading-relaxed">
-          Access continental policy briefs, legal frameworks, disability monitoring research, and ADF annual reports advocating for inclusion across African states.
-        </p>
-      </div>
+    <div className="animate-fade-in">
+      <PageBanner
+        title="Institutional Knowledge & Research"
+        crumbs={[{ label: "Home" }, { label: "Resources" }]}
+        image={assetUrl("/images/adf-event-4.jpg")}
+        imageAlt="ADF research and publications"
+      />
+
+      <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-8">
+        <div>
+          <p className="text-[#33415c] text-base md:text-lg max-w-3xl leading-relaxed">
+            Access continental policy briefs, legal frameworks, disability monitoring research, and ADF annual reports advocating for inclusion across African states.
+          </p>
+        </div>
 
       {/* Controls: Search & Category Badges */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-[#0a1128]/95 p-6 rounded-none border border-[#0f1b3d]/15 shadow-none">
@@ -225,6 +231,7 @@ export const ResourcesScreen: React.FC<Props> = ({ initialCategory }) => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

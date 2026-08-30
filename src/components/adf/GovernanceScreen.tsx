@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { EXECUTIVE_COUNCIL, OPD_COUNTRIES } from '@/data/mockData';
 import { ExecutiveMember, OpdCountry } from '@/types';
+import { assetUrl } from '@/lib/assetUrl';
+import { PageBanner } from './ui';
 
 interface Props {
   onOpenMembership: () => void;
@@ -11,16 +13,20 @@ export const GovernanceScreen: React.FC<Props> = ({ onOpenMembership }) => {
   const [activeCountry, setActiveCountry] = useState<OpdCountry>(OPD_COUNTRIES[0]!);
 
   return (
-    <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-12 animate-fade-in">
-      {/* Header */}
-      <div className="border-b-2 border-[#5b6b85] pb-6">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#0f1b3d] mb-2">
-          Governance & Continental OPD Network
-        </h1>
-        <p className="text-[#33415c] text-base md:text-lg max-w-3xl leading-relaxed">
-          The African Disability Forum is governed by a democratically elected Executive Council of leaders representing national and regional Organizations of Persons with Disabilities (OPDs) across Africa.
-        </p>
-      </div>
+    <div className="animate-fade-in">
+      <PageBanner
+        title="Governance & Continental OPD Network"
+        crumbs={[{ label: "Home" }, { label: "Governance" }]}
+        image={assetUrl("/images/adf-event-6.png")}
+        imageAlt="ADF governance and executive council"
+      />
+
+      <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10 space-y-12">
+        <div>
+          <p className="text-[#33415c] text-base md:text-lg max-w-3xl leading-relaxed">
+            The African Disability Forum is governed by a democratically elected Executive Council of leaders representing national and regional Organizations of Persons with Disabilities (OPDs) across Africa.
+          </p>
+        </div>
 
       {/* Executive Council Section */}
       <section className="space-y-6">
@@ -228,6 +234,7 @@ export const GovernanceScreen: React.FC<Props> = ({ onOpenMembership }) => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

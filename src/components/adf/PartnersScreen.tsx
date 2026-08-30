@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
 import { PARTNERS } from '@/data/extraData';
 import { PartnerItem } from '@/types';
+import { assetUrl } from '@/lib/assetUrl';
 import { PageBanner, SectionHeading, btnDonate, btnGhost } from './ui';
 import { FilterChips } from './ui-extra';
 
@@ -42,7 +43,12 @@ export const PartnersScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageBanner title="Partners" crumbs={[{ label: "Home" }, { label: "Partners" }]} />
+      <PageBanner
+        title="Partners"
+        crumbs={[{ label: "Home" }, { label: "Partners" }]}
+        image={assetUrl("/images/adf-event-3.jpg")}
+        imageAlt="ADF partnership meeting"
+      />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-12">
         <div>

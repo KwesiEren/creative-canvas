@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { EVENTS_DATA } from '@/data/mockData';
 import { EventItem, NavTab } from '@/types';
+import { assetUrl } from '@/lib/assetUrl';
+import { PageBanner } from './ui';
 
 interface Props {
   onNavigate: (tab: NavTab) => void;
@@ -43,37 +45,15 @@ export const AdvocacyScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction }
   };
 
   return (
-    <div className="space-y-12 pb-16 animate-fade-in max-w-[1280px] mx-auto px-4 md:px-10">
-      {/* Advocacy Banner */}
-      <section className="bg-gradient-to-r from-[#0f1b3d] to-[#245a86] text-white rounded-none p-8 md:p-12 shadow-lg relative overflow-hidden">
-        <div className="relative z-10 max-w-3xl space-y-4">
-          <span className="inline-block bg-[#a8c6e4] text-[#0a1128] font-bold text-xs uppercase tracking-wider px-3.5 py-1 rounded-full">
-            Advocacy & Action
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-            Mobilizing Pan-African Policy Change & Regional Awareness
-          </h1>
-          <p className="text-lg md:text-xl text-[#dbe6f2] leading-relaxed">
-            Discover upcoming regional workshops, international summits, and awareness campaigns designed to advance disability rights and track UN CRPD domestication across African Union nations.
-          </p>
-          <div className="flex flex-wrap gap-4 pt-2">
-            <button
-              onClick={onOpenTakeAction}
-              className="bg-[#a8c6e4] text-[#0a1128] hover:bg-[#a8c6e4] font-bold px-6 py-3 rounded-none shadow transition-colors flex items-center gap-2 cursor-pointer"
-            >
-              <span className="material-symbols-outlined">campaign</span>
-              <span>Join Advocacy Network</span>
-            </button>
-            <button
-              onClick={() => onNavigate('resources')}
-              className="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-none border border-white/30 transition-colors flex items-center gap-2 cursor-pointer"
-            >
-              <span className="material-symbols-outlined">description</span>
-              <span>Policy Briefs</span>
-            </button>
-          </div>
-        </div>
-      </section>
+    <div className="animate-fade-in">
+      <PageBanner
+        title="Advocacy & Action"
+        crumbs={[{ label: "Home" }, { label: "Advocacy" }]}
+        image={assetUrl("/images/adf-event-3.jpg")}
+        imageAlt="Pan-African disability rights advocacy"
+      />
+
+      <div className="space-y-12 pb-16 max-w-[1280px] mx-auto px-4 md:px-10">
 
       {/* Dynamic Event Calendar Component */}
       <section className="bg-white dark:bg-[#0a1128] border-2 border-[#c4c6cf] dark:border-[#5b6b85] rounded-none p-6 md:p-8 shadow-sm">
@@ -403,6 +383,7 @@ export const AdvocacyScreen: React.FC<Props> = ({ onNavigate, onOpenTakeAction }
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

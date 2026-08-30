@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { assetUrl } from "@/lib/assetUrl";
 import { PageBanner, SectionHeading, btnPrimary } from "./ui";
 
 const inputBase =
@@ -13,7 +14,12 @@ export const GetInvolvedScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageBanner title="Get Involved" crumbs={[{ label: "Home" }, { label: "Get Involved" }]} />
+      <PageBanner
+        title="Get Involved"
+        crumbs={[{ label: "Home" }, { label: "Get Involved" }]}
+        image={assetUrl("/images/adf-event-5.png")}
+        imageAlt="ADF community volunteers"
+      />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-16">
         {/* Donate */}

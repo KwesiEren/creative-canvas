@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { Link } from "@tanstack/react-router";
 import { OPD_COUNTRIES } from "@/data/mockData";
 import { OpdCountry } from "@/types";
+import { assetUrl } from "@/lib/assetUrl";
 import { PageBanner, SectionHeading, btnPrimary, btnGhost, btnGhostLight } from "./ui";
 import { FilterChips, EmptyState } from "./ui-extra";
 
@@ -32,7 +33,12 @@ export const MembershipScreen: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <PageBanner title="Membership" crumbs={[{ label: "Home" }, { label: "Membership" }]} />
+      <PageBanner
+        title="Membership"
+        crumbs={[{ label: "Home" }, { label: "Membership" }]}
+        image={assetUrl("/images/adf-event-1.jpg")}
+        imageAlt="ADF membership continental gathering"
+      />
 
       <section className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
