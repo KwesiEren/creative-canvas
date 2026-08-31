@@ -210,41 +210,44 @@ export const HomeScreen: React.FC<Props> = ({
       {/* 1. HERO CAROUSEL / BANNER */}
       <HeroSlider onDonate={onOpenDonate} />
 
-      {/* 2. THREE FEATURE CARDS */}
-      <section className="relative -mt-16 z-20 max-w-[1200px] mx-auto px-4 md:px-6">
+      {/* 2. THREE FEATURE CARDS (FLOATING OVER HERO) */}
+      <section className="relative -mt-20 z-20 max-w-[1200px] mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-3 gap-6">
           {[
             {
-              tag: "Economic Empowerment",
-              title: "Give Economic Empowerment",
-              body: "Supporting livelihoods, employment, and financial independence for persons with disabilities across Africa.",
+              title: "ADF Professional Programmes",
+              body: "Get Involved In Our Continuous Professional Programmes",
               color: "cyan",
               border: "border-cyan-400",
+              gradient: "from-white to-cyan-50",
               btnHover: "hover:bg-cyan-500 hover:text-white",
+              action: "programmes",
             },
             {
-              tag: "Inclusive Education",
-              title: "Give Inclusive Education",
-              body: "Promoting accessible schooling, learning resources, and teacher training to ensure equal learning opportunities.",
+              title: "Technical Resources",
+              body: "Access All our Technical Reports and Other Documentations.",
               color: "amber",
               border: "border-amber-400",
+              gradient: "from-white to-amber-50",
               btnHover: "hover:bg-amber-500 hover:text-white",
+              action: "resources",
             },
             {
-              tag: "Equal Access",
-              title: "Give Equal Access",
-              body: "Advocating for physical, digital, and legal accessibility to ensure full participation in all spheres of life.",
+              title: "OPD Membership",
+              body: "Become A Member of our Prestigious Organisation",
               color: "red",
               border: "border-red-400",
+              gradient: "from-white to-red-50",
               btnHover: "hover:bg-red-500 hover:text-white",
+              action: "membership",
             },
           ].map((card) => (
             <div
-              key={card.tag}
-              className={`bg-white rounded-xl shadow-lg border-t-4 ${card.border} p-8 flex flex-col justify-between hover:shadow-xl transition-all duration-300 min-h-[260px]`}
+              key={card.title}
+              className={`bg-gradient-to-b ${card.gradient} rounded-2xl shadow-xl border-t-4 ${card.border} p-8 flex flex-col justify-between hover:shadow-2xl transition-all duration-300 min-h-[260px] relative overflow-hidden`}
             >
               <div>
-                <h3 className="text-xl font-bold text-[var(--adf-charcoal)] leading-snug">
+                <h3 className="text-xl font-extrabold text-[var(--adf-charcoal)] leading-snug">
                   {card.title}
                 </h3>
                 <p className="mt-3 text-sm text-[var(--adf-muted)] leading-relaxed">
@@ -254,11 +257,11 @@ export const HomeScreen: React.FC<Props> = ({
               <div className="mt-6 flex justify-end">
                 <button
                   type="button"
-                  onClick={() => onNavigate("programmes")}
-                  className={`h-10 w-10 rounded-full border border-slate-200 bg-slate-50 ${card.btnHover} flex items-center justify-center transition-colors shadow-sm`}
+                  onClick={() => onNavigate(card.action as NavTab)}
+                  className={`h-12 w-12 rounded-full border border-slate-200 bg-white ${card.btnHover} flex items-center justify-center transition-colors shadow-md group`}
                   aria-label={`Learn more about ${card.title}`}
                 >
-                  <span className="material-symbols-outlined text-base font-bold">
+                  <span className="material-symbols-outlined text-lg font-bold group-hover:translate-x-0.5 transition-transform">
                     arrow_forward
                   </span>
                 </button>
@@ -268,7 +271,7 @@ export const HomeScreen: React.FC<Props> = ({
         </div>
       </section>
 
-      {/* 3. WELCOME SECTION (WITH ROTATED VERTICAL WISHON TEXT & BLUE ACCENT SQUARE) */}
+      {/* 3. WELCOME SECTION (WITH ROTATED VERTICAL WISHON OVERLAY & ACCENT FRAME) */}
       <section className="py-24 max-w-[1200px] mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Side: Photo Frame with rotated background typography & accent square */}
         <div className="relative flex justify-center items-center min-h-[460px]">
@@ -296,26 +299,26 @@ export const HomeScreen: React.FC<Props> = ({
           <button
             type="button"
             onClick={onOpenTakeAction}
-            className="absolute top-6 right-6 sm:-right-4 h-12 w-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-xl transition-transform hover:scale-110 z-30"
+            className="absolute top-6 right-6 sm:-right-4 h-14 w-14 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-2xl transition-transform hover:scale-110 z-30"
             aria-label="Play ADF introductory video"
           >
-            <span className="material-symbols-outlined text-xl">play_arrow</span>
+            <span className="material-symbols-outlined text-2xl">play_arrow</span>
           </button>
         </div>
 
-        {/* Right Side Narrative */}
-        <div className="lg:pl-6">
+        {/* Right Side Narrative matching exact JSON content */}
+        <div className="lg:pl-6 space-y-4">
           <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] leading-tight">
             Welcome to The African Disability Forum
           </h2>
-          <p className="mt-6 text-gray-600 leading-relaxed text-sm md:text-base">
-            African Disability Forum (ADF) is the continental organization of Organizations of Persons with Disabilities (OPDs) in Africa. Formally established in 2014, ADF unifies and amplifies the representative voice of Africans with disabilities, their families, and member OPDs across the continent.
+          <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+            ADF is described as the continental membership organisation of Disabled Persons&apos; Organisations (DPOs/OPDs) in Africa. It was formally established in 2014. The organisation seeks to strengthen and unify representative voices of Africans with disabilities, their families and organisations.
           </p>
-          <p className="mt-4 text-gray-600 leading-relaxed text-sm md:text-base">
-            We work closely with continental and international partners to foster disability-inclusive development, promote human rights under the UN CRPD and the African Disability Protocol, and build grassroots capacity across 44+ member countries.
+          <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+            Africa&apos;s size and regional diversity make direct representation by one organisation difficult; ADF therefore builds on existing organisations, networks, capacities and successes and does not replace existing continental or sub-regional organisations. Governance: independent and democratic; representative DPOs are members and decision-makers. Particular attention is given to women and youth with disabilities.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="pt-4 flex flex-wrap gap-4">
             <button
               type="button"
               onClick={() => onNavigate("about")}
@@ -352,7 +355,7 @@ export const HomeScreen: React.FC<Props> = ({
           </div>
           <div className="bg-neutral-900 text-white px-8 py-4 rounded-xl text-center md:text-left flex-1 max-w-xl shadow-inner">
             <p className="font-bold text-sm md:text-base tracking-wide">
-              Amplifying the voice of over 80 Million Africans with disabilities.
+              Unifying the Voice of 10+ Million Africans with Disabilities
             </p>
           </div>
         </div>
