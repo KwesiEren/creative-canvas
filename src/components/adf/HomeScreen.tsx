@@ -180,6 +180,8 @@ export const HomeScreen: React.FC<Props> = ({
     amount: "",
   });
   const [donateSuccess, setDonateSuccess] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
   const handleDonateSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -192,236 +194,329 @@ export const HomeScreen: React.FC<Props> = ({
     }
   };
 
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newsletterEmail) {
+      setNewsletterSuccess(true);
+      setTimeout(() => {
+        setNewsletterSuccess(false);
+        setNewsletterEmail("");
+      }, 3000);
+    }
+  };
+
   return (
-    <div className="animate-fade-in font-sans">
-      {/* 1. HERO CAROUSEL */}
+    <div className="animate-fade-in font-sans text-slate-800 bg-white">
+      {/* 1. HERO CAROUSEL / BANNER */}
       <HeroSlider onDonate={onOpenDonate} />
 
-      {/* 2. THREE WHAT WE DO CARDS */}
+      {/* 2. THREE FEATURE CARDS */}
       <section className="relative -mt-16 z-20 max-w-[1200px] mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-3 gap-6">
-          {WHAT_WE_DO.map((card) => {
-            const borderClass =
-              card.color === "cyan"
-                ? "border-cyan-500"
-                : card.color === "amber"
-                  ? "border-amber-500"
-                  : "border-red-500";
-            const iconColor =
-              card.color === "cyan"
-                ? "text-cyan-600"
-                : card.color === "amber"
-                  ? "text-amber-600"
-                  : "text-red-600";
-            const hoverBg =
-              card.color === "cyan"
-                ? "hover:bg-cyan-500"
-                : card.color === "amber"
-                  ? "hover:bg-amber-500"
-                  : "hover:bg-red-500";
-
-            return (
-              <div
-                key={card.tag}
-                className={`bg-white rounded-2xl shadow-lg overflow-hidden border-t-4 ${borderClass} p-8 flex flex-col justify-between hover:shadow-xl transition-all duration-300 min-h-[280px]`}
-              >
-                <div>
-                  <span
-                    className={`text-xs uppercase tracking-wider ${iconColor} font-semibold`}
-                  >
-                    {card.tag}
-                  </span>
-                  <h3 className="text-2xl font-bold mt-2 text-[var(--adf-charcoal)]">
-                    {card.title}
-                  </h3>
-                  <p className="mt-3 text-sm text-[var(--adf-muted)] leading-relaxed">
-                    {card.body}
-                  </p>
-                </div>
-                <div className="mt-6 flex justify-between items-center">
-                  <button
-                    onClick={() => onNavigate("programmes")}
-                    className={`h-10 w-10 rounded-full bg-slate-100 ${hoverBg} hover:text-white flex items-center justify-center transition-colors`}
-                    aria-label={`View details about ${card.tag}`}
-                  >
-                    <span className="material-symbols-outlined text-sm font-bold">
-                      arrow_forward
-                    </span>
-                  </button>
-                </div>
+          {[
+            {
+              tag: "Economic Empowerment",
+              title: "Give Economic Empowerment",
+              body: "Supporting livelihoods, employment, and financial independence for persons with disabilities across Africa.",
+              color: "cyan",
+              border: "border-cyan-400",
+              btnHover: "hover:bg-cyan-500 hover:text-white",
+            },
+            {
+              tag: "Inclusive Education",
+              title: "Give Inclusive Education",
+              body: "Promoting accessible schooling, learning resources, and teacher training to ensure equal learning opportunities.",
+              color: "amber",
+              border: "border-amber-400",
+              btnHover: "hover:bg-amber-500 hover:text-white",
+            },
+            {
+              tag: "Equal Access",
+              title: "Give Equal Access",
+              body: "Advocating for physical, digital, and legal accessibility to ensure full participation in all spheres of life.",
+              color: "red",
+              border: "border-red-400",
+              btnHover: "hover:bg-red-500 hover:text-white",
+            },
+          ].map((card) => (
+            <div
+              key={card.tag}
+              className={`bg-white rounded-xl shadow-lg border-t-4 ${card.border} p-8 flex flex-col justify-between hover:shadow-xl transition-all duration-300 min-h-[260px]`}
+            >
+              <div>
+                <h3 className="text-xl font-bold text-[var(--adf-charcoal)] leading-snug">
+                  {card.title}
+                </h3>
+                <p className="mt-3 text-sm text-[var(--adf-muted)] leading-relaxed">
+                  {card.body}
+                </p>
               </div>
-            );
-          })}
+              <div className="mt-6 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => onNavigate("programmes")}
+                  className={`h-10 w-10 rounded-full border border-slate-200 bg-slate-50 ${card.btnHover} flex items-center justify-center transition-colors shadow-sm`}
+                  aria-label={`Learn more about ${card.title}`}
+                >
+                  <span className="material-symbols-outlined text-base font-bold">
+                    arrow_forward
+                  </span>
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* 3. NON-PROFIT INTRODUCTION */}
-      <section className="py-20 max-w-[1200px] mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center">
-        {/* Left Side: Circular images layout */}
-        <div className="relative flex justify-center items-center h-[570px]">
-          <div className="relative w-[380px] h-[380px] rounded-full overflow-hidden border-4 border-white shadow-2xl z-10">
+      {/* 3. WELCOME SECTION (WITH ROTATED VERTICAL WISHON TEXT & BLUE ACCENT SQUARE) */}
+      <section className="py-24 max-w-[1200px] mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center">
+        {/* Left Side: Photo Frame with rotated background typography & accent square */}
+        <div className="relative flex justify-center items-center min-h-[460px]">
+          {/* Rotated background overlay text 'WISHON' */}
+          <div className="absolute -left-6 top-1/2 -translate-y-1/2 select-none opacity-20 hidden md:block">
+            <span className="text-8xl font-black text-amber-500 tracking-widest uppercase origin-bottom-left -rotate-90 block">
+              WISHON
+            </span>
+          </div>
+
+          {/* Blue Accent Square */}
+          <div className="absolute top-4 right-12 w-6 h-6 bg-blue-600 z-20 shadow-md hidden sm:block" />
+
+          {/* Main Image Container */}
+          <div className="relative w-full max-w-[480px] h-[400px] rounded-2xl overflow-hidden shadow-2xl z-10 border-4 border-white">
             <img
               src={assetUrl("/images/adf-event-1.jpg")}
-              alt="Members of the African Disability Forum at a continental convening"
+              alt="Welcome to African Disability Forum"
               className="w-full h-full object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-[60%] -translate-y-[55%] w-[420px] h-[420px] rounded-full border-2 border-dashed border-amber-400 pointer-events-none" />
-          <div className="absolute top-[20%] right-[10%] w-[120px] h-[120px] rounded-full overflow-hidden shadow-sm z-0">
-            <img
-              src={assetUrl("/images/adf-event-5.png")}
-              alt="ADF community event"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="absolute bottom-[10%] left-[5%] w-[160px] h-[160px] rounded-full overflow-hidden shadow-sm z-20">
-            <img
-              src={assetUrl("/images/adf-event-6.png")}
-              alt="ADF workshop participants"
-              className="w-full h-full object-cover"
-            />
-          </div>
+
+          {/* Floating Blue Play / Video Badge */}
           <button
             type="button"
             onClick={onOpenTakeAction}
-            className="absolute top-[40%] left-[20%] h-14 w-14 rounded-md bg-blue-700 hover:bg-blue-800 text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 z-20"
-            aria-label="Play video or audio"
+            className="absolute top-6 right-6 sm:-right-4 h-12 w-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-xl transition-transform hover:scale-110 z-30"
+            aria-label="Play ADF introductory video"
           >
-            <span className="material-symbols-outlined text-2xl">
-              play_arrow
-            </span>
+            <span className="material-symbols-outlined text-xl">play_arrow</span>
           </button>
         </div>
 
-        {/* Right Side Details */}
-        <div>
+        {/* Right Side Narrative */}
+        <div className="lg:pl-6">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] leading-tight">
+            Welcome to The African Disability Forum
+          </h2>
+          <p className="mt-6 text-gray-600 leading-relaxed text-sm md:text-base">
+            African Disability Forum (ADF) is the continental organization of Organizations of Persons with Disabilities (OPDs) in Africa. Formally established in 2014, ADF unifies and amplifies the representative voice of Africans with disabilities, their families, and member OPDs across the continent.
+          </p>
+          <p className="mt-4 text-gray-600 leading-relaxed text-sm md:text-base">
+            We work closely with continental and international partners to foster disability-inclusive development, promote human rights under the UN CRPD and the African Disability Protocol, and build grassroots capacity across 44+ member countries.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <button
+              type="button"
+              onClick={() => onNavigate("about")}
+              className="px-8 py-3.5 bg-[var(--adf-gold)] hover:bg-[var(--adf-gold)]/90 text-white font-bold rounded-md transition-colors shadow-md text-sm"
+            >
+              Read More
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate("membership")}
+              className="px-8 py-3.5 bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-md transition-colors shadow-md text-sm"
+            >
+              Our Membership
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. ADF HIGHLIGHT BANNER */}
+      <section className="max-w-[1200px] mx-auto px-4 md:px-6 mb-20">
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="flex items-center gap-4">
+            <div className="h-16 w-16 bg-blue-700 text-white rounded-xl flex items-center justify-center font-extrabold text-2xl tracking-tighter shrink-0 shadow-md">
+              ADF
+            </div>
+            <div>
+              <h3 className="font-extrabold text-xl md:text-2xl text-[var(--adf-charcoal)]">
+                African Disability Forum
+              </h3>
+              <p className="text-xs text-gray-500 uppercase tracking-widest font-semibold mt-0.5">
+                Continental Network of OPDs
+              </p>
+            </div>
+          </div>
+          <div className="bg-neutral-900 text-white px-8 py-4 rounded-xl text-center md:text-left flex-1 max-w-xl shadow-inner">
+            <p className="font-bold text-sm md:text-base tracking-wide">
+              Amplifying the voice of over 80 Million Africans with disabilities.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. TESTIMONIALS / WHAT PARTNERS & DONORS SAY ABOUT US */}
+      <section className="py-20 bg-slate-50 border-y border-slate-200 relative overflow-hidden">
+        {/* Subtle Map / Grid Decorative Background */}
+        <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 grid lg:grid-cols-12 gap-10 items-center relative z-10">
+          <div className="lg:col-span-5">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--adf-charcoal)] leading-tight">
+              What Partners &amp; Donors Say About Us
+            </h2>
+            <p className="mt-4 text-gray-600 text-sm leading-relaxed">
+              Our partners and donors collaborate with ADF to build sustainable capacity, ensure inclusive policies, and support rights-based initiatives throughout Africa.
+            </p>
+          </div>
+
+          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+            {[
+              {
+                quote:
+                  "ADF's leadership in bringing together OPDs across 44 countries has transformed how disability rights are addressed at the continental level.",
+                author: "Amina Mensah",
+                role: "Regional OPD Network",
+              },
+              {
+                quote:
+                  "Partnering with ADF ensures our development initiatives are authentically guided by persons with disabilities themselves.",
+                author: "Development Partner",
+                role: "Multilateral Funder",
+              },
+            ].map((t, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl p-6 shadow-md border border-slate-100 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex gap-1 text-amber-400 mb-3">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <span key={s} className="material-symbols-outlined text-sm">
+                        star
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-gray-600 text-xs md:text-sm leading-relaxed italic">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-slate-100">
+                  <h4 className="font-bold text-slate-800 text-xs">{t.author}</h4>
+                  <p className="text-[11px] text-gray-500">{t.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. FIND POPULAR CAUSES */}
+      <section className="py-24 max-w-[1200px] mx-auto px-4 md:px-6">
+        <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-widest text-amber-500 font-bold">
-            WELCOME TO ADF
+            JOIN THE CAUSE
           </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] mt-2 leading-tight">
-            African Disability Forum
+          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] mt-2">
+            Find Popular Causes
           </h2>
-          <p className="mt-6 text-gray-600 leading-relaxed">
-            ADF is the continental membership organization of Disabled
-            Persons&apos; Organizations (DPOs) in Africa. Formally established
-            in 2014, ADF seeks to strengthen and unify the representative voices
-            of Africans with disabilities, their families and organizations.
-          </p>
+        </div>
 
-          <div className="mt-6 bg-slate-50 border-l-4 border-amber-500 p-4 rounded-r-lg font-medium text-slate-700">
-            &ldquo;We must break down the barriers that prevent people with
-            disabilities from participating fully in society.&rdquo;
-            <span className="block text-xs text-gray-500 mt-1">
-              — Thomas Sankara
-            </span>
-          </div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            {
+              title: "Grassroots OPD Capacity Building",
+              desc: "Providing organizational support, legal training, and governance workshops for local disability advocacy groups.",
+              image: assetUrl("/images/adf-event-2.jpg"),
+              tag: "Advocacy",
+              raised: "$45,200",
+              goal: "$60,000",
+              pct: "75%",
+            },
+            {
+              title: "Inclusive Youth & Women Leadership",
+              desc: "Empowering young women and men with disabilities with skills for employment, self-advocacy, and civic participation.",
+              image: assetUrl("/images/adf-event-3.jpg"),
+              tag: "Empowerment",
+              raised: "$32,800",
+              goal: "$50,000",
+              pct: "65%",
+            },
+            {
+              title: "African Disability Protocol Campaign",
+              desc: "Accelerating ratification and legal implementation of the African Disability Protocol across Member States.",
+              image: assetUrl("/images/adf-event-4.jpg"),
+              tag: "Rights",
+              raised: "$88,000",
+              goal: "$100,000",
+              pct: "88%",
+            },
+          ].map((cause) => (
+            <div
+              key={cause.title}
+              className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="relative h-[200px] overflow-hidden">
+                <img
+                  src={cause.image}
+                  alt={cause.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <span className="absolute top-4 right-4 bg-[var(--adf-gold)] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md shadow">
+                  {cause.tag}
+                </span>
+              </div>
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-800 leading-snug group-hover:text-blue-700 transition-colors">
+                    {cause.title}
+                  </h3>
+                  <p className="mt-2 text-xs text-gray-600 leading-relaxed">
+                    {cause.desc}
+                  </p>
+                </div>
 
-          <div className="grid sm:grid-cols-2 gap-6 mt-8">
-            <div className="flex gap-3">
-              <span className="material-symbols-outlined text-amber-500 text-2xl shrink-0">
-                check_circle
-              </span>
-              <div>
-                <h4 className="font-bold text-slate-800">Our Mission</h4>
-                <p className="text-xs text-gray-500 mt-1">
-                  Promote the rights and inclusion of persons with disabilities
-                  and their families in Africa through empowerment and
-                  participation.
-                </p>
+                <div className="mt-6">
+                  <div className="flex justify-between text-xs font-semibold mb-1">
+                    <span className="text-gray-500">Raised: <strong className="text-slate-800">{cause.raised}</strong></span>
+                    <span className="text-blue-600 font-bold">{cause.pct}</span>
+                  </div>
+                  <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-blue-600 rounded-full"
+                      style={{ width: cause.pct }}
+                    />
+                  </div>
+                  <div className="mt-6 text-center">
+                    <button
+                      type="button"
+                      onClick={onOpenDonate}
+                      className="w-full py-2.5 bg-slate-100 hover:bg-[var(--adf-gold)] hover:text-white text-slate-800 text-xs font-bold rounded-lg transition-colors uppercase tracking-wider"
+                    >
+                      Donate Now
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="flex gap-3">
-              <span className="material-symbols-outlined text-amber-500 text-2xl shrink-0">
-                check_circle
-              </span>
-              <div>
-                <h4 className="font-bold text-slate-800">Our Vision</h4>
-                <p className="text-xs text-gray-500 mt-1">
-                  An inclusive Africa where all persons with disabilities and
-                  their families have their rights and voices respected.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => onNavigate("about")}
-            className="mt-10 px-8 py-3.5 bg-[var(--adf-gold)] hover:bg-[var(--adf-gold)]/90 text-white font-bold rounded-lg transition-colors shadow-md"
-          >
-            Read More
-          </button>
+          ))}
         </div>
       </section>
 
-      {/* 4. STATS COUNTER BAND */}
-      <section className="bg-slate-100 border-y border-slate-200 py-16">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="text-center">
-            <span className="material-symbols-outlined text-blue-700 text-4xl mb-2">
-              savings
-            </span>
-            <div className="text-3xl md:text-5xl font-extrabold text-slate-800">
-              44+
-            </div>
-            <p className="text-xs text-gray-500 mt-1 font-semibold uppercase tracking-wider">
-              Member Countries
-            </p>
-          </div>
-          <div className="text-center">
-            <span className="material-symbols-outlined text-amber-500 text-4xl mb-2">
-              groups
-            </span>
-            <div className="text-3xl md:text-5xl font-extrabold text-slate-800">
-              8
-            </div>
-            <p className="text-xs text-gray-500 mt-1 font-semibold uppercase tracking-wider">
-              Continental DPOs
-            </p>
-          </div>
-          <div className="text-center">
-            <span className="material-symbols-outlined text-blue-700 text-4xl mb-2">
-              workspace_premium
-            </span>
-            <div className="text-3xl md:text-5xl font-extrabold text-slate-800">
-              4
-            </div>
-            <p className="text-xs text-gray-500 mt-1 font-semibold uppercase tracking-wider">
-              Sub-Regional Federations
-            </p>
-          </div>
-          <div className="text-center">
-            <span className="material-symbols-outlined text-amber-500 text-4xl mb-2">
-              public
-            </span>
-            <div className="text-3xl md:text-5xl font-extrabold text-slate-800">
-              5
-            </div>
-            <p className="text-xs text-gray-500 mt-1 font-semibold uppercase tracking-wider">
-              Regions Covered
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. MID-PAGE DARK CTA */}
-      <section className="bg-neutral-900 py-20 text-center">
+      {/* 7. DARK CALL TO ACTION BANNER */}
+      <section className="bg-neutral-900 py-16 text-center">
         <div className="max-w-[800px] mx-auto px-4 md:px-6">
-          <span className="text-xs uppercase tracking-widest text-[var(--adf-gold)] font-bold">
-            MAKE A DIFFERENCE
-          </span>
-          <h2 className="text-3xl md:text-5xl text-white font-extrabold mt-3 leading-tight">
-            Transform Lives Today By Donating
+          <h2 className="text-3xl md:text-4xl text-white font-extrabold leading-tight">
+            Let&apos;s Make a Difference in the Lives of Others
           </h2>
-          <p className="mt-4 text-white/70 max-w-xl mx-auto">
-            Your contribution directly powers grassroots OPD capacity building,
-            youth leadership workshops and continental legal advocacy.
-          </p>
           <div className="mt-8">
             <button
               type="button"
               onClick={onOpenDonate}
-              className="px-8 py-3.5 bg-[var(--adf-gold)] hover:bg-[var(--adf-gold)]/90 text-white font-bold rounded-lg transition-colors shadow-md"
+              className="px-10 py-4 bg-[var(--adf-gold)] hover:bg-[var(--adf-gold)]/90 text-white font-bold rounded-md transition-colors shadow-lg uppercase text-sm tracking-wider"
             >
               Donate Now
             </button>
@@ -429,375 +524,165 @@ export const HomeScreen: React.FC<Props> = ({
         </div>
       </section>
 
-      {/* 6. OUR PROJECTS */}
-      <section className="py-20 max-w-[1200px] mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
-          <span className="text-xs uppercase tracking-widest text-amber-500 font-bold">
-            OUR PROJECTS
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] mt-2">
-            What We Do
-          </h2>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {[
-            {
-              title: "We Are Able!",
-              body: "A programme that helps people with disabilities achieve a sustainable, fully-fledged place in their community, so that they have greater food security.",
-              countries: "Burundi, DR Congo, Ethiopia, South Sudan, Sudan, Uganda",
-              image: assetUrl("/images/adf-event-1.jpg"),
-            },
-            {
-              title: "SPADRA",
-              body: "Strengthening Partnerships to Advance Disability Rights in Africa — advancing gender and disability rights through strengthening OPD capacity.",
-              countries: "Ghana, Benin, Malawi, Zambia",
-              image: assetUrl("/images/adf-event-2.jpg"),
-            },
-            {
-              title: "We Can Work",
-              body: "Enabling young women and men with disabilities to access dignified and fulfilling work across seven countries in Africa by 2030.",
-              countries: "Ethiopia, Kenya, Uganda, Rwanda, Ghana, Nigeria, Senegal",
-              image: assetUrl("/images/adf-event-3.jpg"),
-            },
-          ].map((project) => (
-            <article
-              key={project.title}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-100 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group"
-            >
-              <div className="relative h-[200px] overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-[var(--adf-charcoal)]">
-                  {project.title}
-                </h3>
-                <p className="mt-3 text-sm text-[var(--adf-muted)] leading-relaxed flex-1">
-                  {project.body}
-                </p>
-                <div className="mt-4 flex items-center gap-2 text-xs text-amber-600 font-semibold">
-                  <span className="material-symbols-outlined text-sm">
-                    location_on
-                  </span>
-                  {project.countries}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => onNavigate("programmes")}
-                  className="mt-4 text-xs font-extrabold text-slate-500 hover:text-amber-500 transition-colors tracking-widest uppercase"
-                >
-                  READ MORE →
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* 7. UPCOMING EVENTS */}
-      <section className="py-20 max-w-[1200px] mx-auto px-4 md:px-6 grid lg:grid-cols-5 gap-12">
-        <div className="lg:col-span-2 flex flex-col justify-center">
-          <span className="text-xs uppercase tracking-widest text-amber-500 font-bold">
-            LATEST EVENTS
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] mt-2 leading-tight">
-            Upcoming Events
-          </h2>
-          <p className="mt-6 text-gray-600 leading-relaxed">
-            ADF is actively engaging African OPDs all over Africa, organizing
-            education programmes and assisting African OPDs with strengthening
-            their efforts on the ground.
-          </p>
-          <div className="mt-8">
-            <button
-              type="button"
-              onClick={() => onNavigate("events")}
-              className="px-8 py-3.5 bg-[var(--adf-gold)] hover:bg-[var(--adf-gold)]/90 text-white font-bold rounded-lg transition-colors shadow-md"
-            >
-              Learn More
-            </button>
-          </div>
-        </div>
-
-        <div className="lg:col-span-3 bg-red-500 rounded-2xl p-8 md:p-12 relative flex flex-col gap-6">
-          <div className="absolute left-[34px] md:left-[50px] top-12 bottom-12 w-0.5 bg-blue-600" />
-
-          {EVENTS_DATA.slice(0, 2).map((event) => {
-            const dateObj = new Date(event.date);
-            const day = dateObj.getDate();
-            const month = dateObj.toLocaleString("en-US", { month: "short" });
-            return (
-              <div key={event.id} className="relative flex gap-6 z-10">
-                <div className="flex flex-col items-center shrink-0">
-                  <div className="h-[60px] w-[60px] rounded-full bg-blue-600 text-white font-extrabold text-sm flex flex-col items-center justify-center shadow-lg">
-                    <span>{day}</span>
-                    <span className="uppercase text-[10px] tracking-wider leading-none mt-0.5">
-                      {month}
-                    </span>
-                  </div>
-                </div>
-                <div className="bg-white rounded-xl p-6 shadow-md flex-1">
-                  <div className="flex flex-wrap items-center gap-3 text-xs text-amber-600 font-semibold mb-2">
-                    <span className="flex items-center gap-1">
-                      <span className="material-symbols-outlined text-sm">
-                        schedule
-                      </span>
-                      {event.time}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <span className="material-symbols-outlined text-sm">
-                        location_on
-                      </span>
-                      {event.location.split(" &")[0]}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-800 leading-snug hover:text-blue-700 transition-colors">
-                    {event.title}
-                  </h3>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 8. FIND POPULAR CAUSES */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <span className="text-xs uppercase tracking-widest text-amber-500 font-bold">
-              SUPPORT US
-            </span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] mt-2">
-              Find Popular Causes
-            </h2>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Left Column: Interactive Donation Form */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-8 md:p-10">
-              <h3 className="text-2xl font-bold text-slate-800 mb-6">
-                Start Donating
-              </h3>
-              {donateSuccess ? (
-                <div className="bg-green-50 border border-green-200 text-green-700 p-4 rounded-lg text-center font-medium mb-6 animate-pulse">
-                  Thank you for your generous pledge!
-                </div>
-              ) : null}
-              <form onSubmit={handleDonateSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={donateForm.firstName}
-                      onChange={(e) =>
-                        setDonateForm({
-                          ...donateForm,
-                          firstName: e.target.value,
-                        })
-                      }
-                      placeholder="First Name"
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm bg-slate-50"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      value={donateForm.lastName}
-                      onChange={(e) =>
-                        setDonateForm({
-                          ...donateForm,
-                          lastName: e.target.value,
-                        })
-                      }
-                      placeholder="Last Name"
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm bg-slate-50"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={donateForm.email}
-                    onChange={(e) =>
-                      setDonateForm({ ...donateForm, email: e.target.value })
-                    }
-                    placeholder="Email Address"
-                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm bg-slate-50"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-                    Pledge Amount ($)
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    value={donateForm.amount}
-                    onChange={(e) =>
-                      setDonateForm({ ...donateForm, amount: e.target.value })
-                    }
-                    placeholder="Pledge Amount"
-                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm bg-slate-50"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full py-4 bg-blue-700 hover:bg-blue-800 text-white font-bold rounded-lg transition-colors shadow-md mt-4 uppercase tracking-wider text-sm"
-                >
-                  Start Donate
-                </button>
-              </form>
-            </div>
-
-            {/* Right Column: Featured image with yellow bottom check bar */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden flex flex-col justify-between">
-              <div className="relative h-[340px] md:h-[400px]">
-                <img
-                  src={assetUrl("/images/adf-event-3.jpg")}
-                  alt="Inclusive education workshop"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="bg-amber-400 p-6 flex flex-col sm:flex-row justify-around items-center text-white gap-4 font-bold">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-white text-2xl">
-                    check_circle
-                  </span>
-                  <span>Medical Help</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-white text-2xl">
-                    check_circle
-                  </span>
-                  <span>Clean Water</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. TESTIMONIALS */}
-      <section className="py-20 max-w-[1200px] mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
-          <span className="text-xs uppercase tracking-widest text-amber-500 font-bold">
-            TESTIMONIALS
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] mt-2">
-            What They&apos;re Talking About Us
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-8 flex flex-col justify-between min-h-[260px]">
+      {/* 8. UPCOMING EVENTS & GOLDEN STAT CARD */}
+      <section className="py-24 max-w-[1200px] mx-auto px-4 md:px-6">
+        <div className="grid lg:grid-cols-12 gap-10 items-stretch">
+          {/* Left Events List */}
+          <div className="lg:col-span-7 flex flex-col justify-between">
             <div>
-              <div className="flex gap-1 text-amber-500 mb-4">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <span
-                    key={s}
-                    className="material-symbols-outlined text-xl"
-                  >
-                    star
-                  </span>
-                ))}
-              </div>
-              <p className="text-gray-600 italic leading-relaxed">
-                &ldquo;ADF&apos;s support has been instrumental in strengthening
-                our local disability group. Their advocacy training has empowered
-                our members to demand rights and inclusion in our
-                communities.&rdquo;
-              </p>
-            </div>
-            <div className="flex items-center gap-4 mt-6 pt-4 border-t border-slate-100">
-              <div className="h-12 w-12 rounded-full bg-blue-700 flex items-center justify-center font-bold text-white text-sm">
-                AM
-              </div>
-              <div>
-                <h4 className="font-bold text-slate-800 text-sm">
-                  Amina Mensah
-                </h4>
-                <p className="text-xs text-gray-500">
-                  Regional OPD Network, East Africa
-                </p>
-              </div>
-            </div>
-          </div>
+              <span className="text-xs uppercase tracking-widest text-amber-500 font-bold">
+                LATEST UPDATES
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--adf-charcoal)] mt-1">
+                Upcoming Events
+              </h2>
 
-          <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-8 flex flex-col justify-between min-h-[260px]">
-            <div>
-              <div className="flex gap-1 text-amber-500 mb-4">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <span
-                    key={s}
-                    className="material-symbols-outlined text-xl"
-                  >
-                    star
-                  </span>
-                ))}
+              <div className="mt-8 space-y-4">
+                {EVENTS_DATA.slice(0, 2).map((event) => {
+                  const dateObj = new Date(event.date);
+                  const day = dateObj.getDate();
+                  const month = dateObj.toLocaleString("en-US", { month: "short" });
+                  return (
+                    <div
+                      key={event.id}
+                      className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex gap-5 items-center hover:bg-white hover:shadow-md transition-all"
+                    >
+                      <div className="h-14 w-14 rounded-lg bg-blue-700 text-white font-extrabold text-xs flex flex-col items-center justify-center shrink-0 shadow-sm">
+                        <span className="text-base leading-none">{day}</span>
+                        <span className="uppercase text-[9px] mt-0.5 tracking-wider">
+                          {month}
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 text-[11px] text-amber-600 font-semibold mb-1">
+                          <span>{event.time}</span>
+                          <span>•</span>
+                          <span>{event.location.split(" &")[0]}</span>
+                        </div>
+                        <h3 className="text-sm font-bold text-slate-800 truncate">
+                          {event.title}
+                        </h3>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-              <p className="text-gray-600 italic leading-relaxed">
-                &ldquo;Partnership with ADF has helped us align
-                disability-inclusive programming with the African Disability
-                Protocol ratification agenda.&rdquo;
-              </p>
             </div>
-            <div className="flex items-center gap-4 mt-6 pt-4 border-t border-slate-100">
-              <div className="h-12 w-12 rounded-full bg-amber-500 flex items-center justify-center font-bold text-white text-sm">
-                DP
-              </div>
-              <div>
-                <h4 className="font-bold text-slate-800 text-sm">
-                  Development Partner
-                </h4>
-                <p className="text-xs text-gray-500">Multilateral Funder</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* 10. PARTNERS / SPONSORS BAND */}
-      <section className="bg-gradient-to-r from-amber-500 to-amber-300 py-10">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-6">
-          <p className="text-center text-white/80 text-xs uppercase tracking-widest font-bold mb-6">
-            Our Partners &amp; Supporters
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {PARTNER_LOGOS.map((partner) => (
-              <div
-                key={partner.abbr}
-                className="bg-white/20 rounded-xl h-16 flex items-center justify-center backdrop-blur-sm"
+            <div className="mt-8">
+              <button
+                type="button"
+                onClick={() => onNavigate("events")}
+                className="px-6 py-3 border border-slate-300 hover:border-blue-600 hover:text-blue-600 font-bold text-xs rounded-lg transition-colors"
               >
-                <span className="text-white font-extrabold text-sm tracking-wider">
-                  {partner.abbr}
-                </span>
-              </div>
-            ))}
+                View All Events →
+              </button>
+            </div>
+          </div>
+
+          {/* Right Side Golden Card */}
+          <div className="lg:col-span-5 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-8 text-white relative overflow-hidden flex flex-col justify-between shadow-xl min-h-[320px]">
+            {/* Background Watermark 172 */}
+            <div className="absolute right-4 bottom-4 text-9xl font-black text-white/10 select-none pointer-events-none">
+              172
+            </div>
+
+            <div>
+              <span className="material-symbols-outlined text-4xl mb-4 text-amber-100">
+                volunteer_activism
+              </span>
+              <h3 className="text-2xl md:text-3xl font-extrabold leading-snug">
+                Let&apos;s Make A Difference In The Lives Of Other People
+              </h3>
+            </div>
+
+            <div className="mt-8 relative z-10">
+              <button
+                type="button"
+                onClick={onOpenDonate}
+                className="px-8 py-3 bg-white hover:bg-slate-100 text-amber-600 font-extrabold text-xs uppercase tracking-wider rounded-md shadow transition-colors"
+              >
+                Donate Now
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 11. NEWS & ARTICLES */}
-      <section className="py-20 max-w-[1200px] mx-auto px-4 md:px-6">
+      {/* 9. HELP EACH OTHER CAN CHANGE WORLD (STACKED VERTICAL IMAGE CARDS) */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 grid lg:grid-cols-12 gap-12 items-center">
+          {/* Left Side: 2 Vertical Rectangular Cards */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+            <div className="h-[340px] rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+              <img
+                src={assetUrl("/images/adf-event-5.png")}
+                alt="Support OPDs"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="h-[340px] rounded-2xl overflow-hidden shadow-lg border border-slate-200 mt-8">
+              <img
+                src={assetUrl("/images/adf-event-6.png")}
+                alt="Empowerment workshop"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Right Side: Narrative and 3 feature rows */}
+          <div className="lg:col-span-7">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] leading-tight">
+              Help Each Other Can Change World
+            </h2>
+            <p className="mt-4 text-gray-600 text-sm leading-relaxed">
+              Together with our continental partners, member OPDs, and local champions, we build systemic solutions that empower persons with disabilities to lead dignified, independent, and full lives.
+            </p>
+
+            <div className="mt-8 space-y-6">
+              {[
+                {
+                  title: "We Support Persons with Disability",
+                  desc: "Providing advocacy tools, assistive resources, and direct community outreach programs.",
+                  icon: "volunteer_activism",
+                },
+                {
+                  title: "We Empower OPDs Across Africa",
+                  desc: "Strengthening local leadership, legal frameworks, and organizational resilience.",
+                  icon: "groups",
+                },
+                {
+                  title: "We Promote Rights and Inclusion",
+                  desc: "Driving continental treaty implementation, accessible policy creation, and equal rights enforcement.",
+                  icon: "gavel",
+                },
+              ].map((item) => (
+                <div key={item.title} className="flex gap-4 items-start">
+                  <div className="h-12 w-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 shadow-sm">
+                    <span className="material-symbols-outlined text-2xl">
+                      {item.icon}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-800 text-base">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. NEWS & ARTICLES */}
+      <section className="py-24 max-w-[1200px] mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-widest text-amber-500 font-bold">
-            LATEST UPDATES
+            OUR BLOG
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--adf-charcoal)] mt-2">
             News &amp; Articles
@@ -805,85 +690,80 @@ export const HomeScreen: React.FC<Props> = ({
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {NEWS_DATA.slice(0, 3).map((item) => {
-            const dateObj = new Date(item.date);
-            const day = dateObj.getDate();
-            const month = dateObj.toLocaleString("en-US", { month: "short" });
-            return (
-              <article
-                key={item.id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-100 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group"
-              >
-                <div className="relative h-[220px] overflow-hidden">
-                  <img
-                    src={assetUrl(item.image)}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 right-4 bg-blue-700 text-white font-extrabold text-xs py-2 px-3.5 rounded-lg text-center shadow-md">
-                    <span className="block text-sm leading-none">{day}</span>
-                    <span className="block text-[10px] uppercase leading-none mt-0.5 tracking-wider">
-                      {month}
-                    </span>
+          {NEWS_DATA.slice(0, 3).map((item) => (
+            <article
+              key={item.id}
+              className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="relative h-[200px] overflow-hidden">
+                <img
+                  src={assetUrl(item.image)}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 text-xs text-amber-600 font-semibold mb-2">
+                    <span>ADF Editor</span>
+                    <span>•</span>
+                    <span>{item.category}</span>
                   </div>
+                  <h3 className="text-base font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-blue-700 transition-colors">
+                    {item.title}
+                  </h3>
                 </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-3 text-xs font-semibold text-amber-500 mb-2">
-                      <span className="flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[15px]">
-                          person
-                        </span>
-                        ADF Editor
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[15px]">
-                          folder
-                        </span>
-                        {item.category}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-800 mt-2 line-clamp-2 leading-snug group-hover:text-blue-700 transition-colors">
-                      {item.title}
-                    </h3>
-                  </div>
+
+                <div className="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center">
+                  <span className="text-[11px] text-gray-500">{item.date}</span>
                   <button
                     type="button"
                     onClick={() => onNavigate("news")}
-                    className="mt-6 text-xs font-extrabold text-slate-500 hover:text-amber-500 transition-colors tracking-widest uppercase"
+                    className="text-xs font-bold text-blue-700 hover:text-amber-500 transition-colors"
                   >
-                    <span className="text-amber-500 text-sm font-bold">
-                      &rsaquo;
-                    </span>{" "}
-                    READ MORE
+                    Read More →
                   </button>
                 </div>
-              </article>
-            );
-          })}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* 12. GALLERY BANNER */}
-      <section className="grid grid-cols-2 md:grid-cols-5 gap-2 px-2 py-4 bg-slate-50 border-t border-slate-200">
-        {GALLERY_IMAGES.map((img, i) => (
-          <div
-            key={i}
-            className="aspect-square rounded-lg overflow-hidden relative group cursor-pointer shadow-sm"
-          >
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
-              <span className="material-symbols-outlined text-white text-3xl">
-                image
-              </span>
-            </div>
-            <img
-              src={img}
-              alt={`Gallery thumbnail ${i + 1}`}
-              className="w-full h-full object-cover transition-transform group-hover:scale-110"
-            />
+      {/* 11. BLUE NEWSLETTER BAR */}
+      <section className="bg-blue-700 text-white py-12">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+              Give a Helping Hand
+            </h3>
+            <p className="text-xs md:text-sm text-blue-100 mt-1">
+              Subscribe to the ADF newsletter for continental disability updates and news.
+            </p>
           </div>
-        ))}
+
+          <form
+            onSubmit={handleNewsletterSubmit}
+            className="flex w-full md:w-auto gap-2 max-w-md"
+          >
+            <input
+              type="email"
+              required
+              placeholder="Your Email Address..."
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              className="px-4 py-3 rounded-lg bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 flex-1 md:w-72"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 bg-[var(--adf-gold)] hover:bg-[var(--adf-gold)]/90 text-white font-bold rounded-lg text-xs uppercase tracking-wider shadow transition-colors shrink-0"
+            >
+              {newsletterSuccess ? "Joined!" : "Submit"}
+            </button>
+          </form>
+        </div>
       </section>
     </div>
   );
 };
+

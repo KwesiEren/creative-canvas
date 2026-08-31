@@ -156,18 +156,38 @@ export const Header: React.FC<Props> = ({
                 <span className="material-symbols-outlined text-sm">expand_more</span>
               </button>
               {openDropdown === "about" && (
-                <div onMouseLeave={() => setOpenDropdown(null)} className={dropdownPanel}>
-                  <button type="button" onClick={() => handleNavClick("about", { subSection: "who" })} className={dropdownItem}>
+                <div onMouseLeave={() => setOpenDropdown(null)} className="absolute left-0 top-full mt-0 min-w-[14rem] bg-white shadow-xl rounded-b-lg py-2 z-50 animate-fade-in border border-black/5">
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick("about", { subSection: "who" })}
+                    className="w-full text-left px-5 py-3 text-sm font-medium text-slate-700 hover:bg-blue-700 hover:text-white transition-colors flex items-center justify-between"
+                  >
                     About Us
                   </button>
-                  <button type="button" onClick={() => handleNavClick("membership")} className={dropdownItem}>
-                    OPD Membership
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onOpenDonate();
+                      setOpenDropdown(null);
+                    }}
+                    className="w-full text-left px-5 py-3 text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center justify-between shadow-sm"
+                  >
+                    <span>Donations</span>
+                    <span className="material-symbols-outlined text-base">chevron_right</span>
                   </button>
-                  <button type="button" onClick={() => handleNavClick("get-involved")} className={dropdownItem}>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick("get-involved")}
+                    className="w-full text-left px-5 py-3 text-sm font-medium text-slate-700 hover:bg-blue-700 hover:text-white transition-colors flex items-center justify-between"
+                  >
                     Volunteers
                   </button>
-                  <button type="button" onClick={() => handleNavClick("governance")} className={dropdownItem}>
-                    Governance
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick("get-involved")}
+                    className="w-full text-left px-5 py-3 text-sm font-medium text-slate-700 hover:bg-blue-700 hover:text-white transition-colors flex items-center justify-between"
+                  >
+                    Become A Volunteer
                   </button>
                 </div>
               )}
